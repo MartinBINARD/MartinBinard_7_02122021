@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #3**
+**Main branch - Commit #4**
 
 # Description
 
@@ -19,8 +19,9 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Update nodemon to 2.0.15.
-* Add dbConfig.js to manage SQL with sequelize.
+* Add sequelize connection database with index.js.
+* Add table models.
+* Add .env.example as instruction variables.
 
 # How to run this application
 
