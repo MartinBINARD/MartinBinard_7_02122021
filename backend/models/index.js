@@ -1,4 +1,4 @@
-const db = require('../config/dbConfig');
+const dbConfig = require('../config/dbConfig');
 
 const { Sequelize, DataTypes } = require('sequelize');
 
@@ -30,11 +30,11 @@ sequelize.authenticate()
 const db = {};
 
 db.Sequelize = Sequelize;
-db.sequelize = sequilize;
+db.sequelize = sequelize;
 
 db.users = require('./userModel')(sequelize, DataTypes);
 db.posts = require('./postModel')(sequelize, DataTypes);
-db.comments = require('./commentModel')(Sequelize, DataTypes);
+db.comments = require('./commentModel')(sequelize, DataTypes);
 
 // SYNCHRNOIZE DATABASE WITHOUT OVERWRITING
 db.sequelize.sync({ force: false })

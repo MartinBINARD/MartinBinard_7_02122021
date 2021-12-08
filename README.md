@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #4**
+**Main branch - Commit #5**
 
 # Description
 
@@ -19,9 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add sequelize connection database with index.js.
-* Add table models.
-* Add .env.example as instruction variables.
+* Remove syntax errors in index.js.
+* Rewrite dotenv variable in dbConfig.js.
 
 # How to run this application
 
