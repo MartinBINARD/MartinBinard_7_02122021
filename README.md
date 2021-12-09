@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #5**
+**Main branch - Commit #6**
 
 # Description
 
@@ -19,8 +19,27 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Remove syntax errors in index.js.
-* Rewrite dotenv variable in dbConfig.js.
+* Rewrite sequelize code.
+* Add overrite database and admin user.
+* Add dotenv file absolute path.
+
+# Before to run this server
+
+* Rename .env.example into .env file loacted in backend folder.
+* Then insert your parameters:
+```
+DB_NAME = INSERT DATABASE NAME
+DB_USER = INSERT DATABASE USER
+DB_USER_PASSWORD = INSERT DATABASE USER PASSWORD
+DB_PORT = 3006
+DB_HOST = INSERT DATABASE HOST
+DB_DIALECT = mysql
+
+ADMIN_FIRSTNAME = INSERT ADMIN FIRST NAME
+ADMIN_LASTNAME = INSERT ADMIN LASTNAME
+ADMIN_EMAIL = INSERT ADMIN EMAIL
+ADMIN_PASS = INSERT ADMIN PASSWORD
+```
 
 # How to run this application
 
@@ -32,3 +51,4 @@ npm install
 ```
 npm run start
 ```
+* :warning: In order to prevent from port collisions, the API code port value is 3000 and the data base port value is 3006 by default.

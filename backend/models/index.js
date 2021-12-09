@@ -1,45 +1,40 @@
-const dbConfig = require('../config/dbConfig');
-
-const { Sequelize, DataTypes } = require('sequelize');
-
-const sequelize = new Sequelize(
-    dbConfig.database,
-    dbConfig.user,
-    dbConfig.password, {
-        host: dbConfig.host,
-        dialect: dbConfig.dialect,
-        operatorsAliases: false,
-
-        pool: {
-            max: dbConfig.pool.max,
-            min: dbConfig.pool.min,
-            acquire: dbConfig.pool.acquire,
-            idle: dbConfig.pool.idle
-        }
-    }
-);
-
-sequelize.authenticate()
-    .then(() => {
-        console.log('Connected to database');
-    })
-    .catch( error => {
-        console.log('Error' + error);
-    })
-
+const sequelize = require("../config/dbConfig");
 const db = {};
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
+// IMPORT TABLES
+const User = require("./userModel");
+const Post = require("./postModel");
+const Comment = require("./commentModel");
 
-db.users = require('./userModel')(sequelize, DataTypes);
-db.posts = require('./postModel')(sequelize, DataTypes);
-db.comments = require('./commentModel')(sequelize, DataTypes);
-
-// SYNCHRNOIZE DATABASE WITHOUT OVERWRITING
-db.sequelize.sync({ force: false })
+//CHECK DATABASE CONNECTION
+sequelize.authenticate()
     .then(() => {
-        console.log('Database synchronized!');
+        console.log("Database connected !");
     })
+    .catch((error) => {
+        console.log("Unable to connect to database !", error );
+    })
+
+// SYNCHRONIZE DATA
+sequelize
+    .sync({ force: true })
+    .then((result) => {
+        return User.create({
+            firstname : process.env.ADMIN_FIRSTNAME,
+            lastname: process.env.ADMIN_LASTNAME,
+            email: process.env.ADMIN_EMAIL,
+            password: process.env.ADMIN_PASS, 
+            avatar: null,
+            admin: "1" });
+        console.log(result, "Database Synchronized !");
+    })
+    .then(user => {
+        console.log("Admin user created !", user);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
+
+db.sequelize = sequelize;
 
 module.exports = db;
