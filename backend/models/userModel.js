@@ -1,39 +1,38 @@
-const sequelize = require("../config/dbConfig");
-const Sequelize = require("sequelize");
+module.exports = (sequelize, Datatypes) => {
+    const User = sequelize.define("user", {
+        user_id: {
+            type: Datatypes.INTEGER,
+            autoIncrement: true,
+            allowNull: false,
+            primaryKey: true
+        },
+        firstname: {
+            type: Datatypes.STRING(20),
+            allowNull: false
+        },
+        lastname: {
+            type: Datatypes.STRING(20),
+            allowNull: false
+        },
+        email: {
+            type: Datatypes.STRING(45),
+            allowNull: false,
+            unique: true
+        },
+        password: {
+            type: Datatypes.STRING(500),
+            allowNull: false
+        },
+        avatar: {
+            type: Datatypes.STRING(45),
+            allowNull: true
+        },
+        admin: {
+            type: Datatypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        }
+    })
 
-const User = sequelize.define("user", {
-    user_id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
-    firstname: {
-        type: Sequelize.STRING(20),
-        allowNull: false
-    },
-    lastname: {
-        type: Sequelize.STRING(20),
-        allowNull: false
-    },
-    email: {
-        type: Sequelize.STRING(45),
-        allowNull: false,
-        unique: true
-    },
-    password: {
-        type: Sequelize.STRING(500),
-        allowNull: false
-    },
-    avatar: {
-        type: Sequelize.STRING(45),
-        allowNull: true
-    },
-    admin: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: '0'
-    }
-})
-
-module.exports = User;
+    return User;
+}

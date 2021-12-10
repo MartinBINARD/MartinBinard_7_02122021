@@ -1,52 +1,51 @@
-const sequelize = require("../config/dbConfig");
-const Sequelize = require("sequelize");
+module.exports = (sequelize, Datatypes) => {
+    const Comment = sequelize.define("comment", {
+        comment_id: {
+            type: Datatypes.INTEGER,
+            autoIncrement: true,
+            allowNull: false,
+            primaryKey: true
+        },
+        text: {
+            type: Datatypes.TEXT,
+            allowNull: false
+        },
+        comment_like: {
+            type: Datatypes.INTEGER,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        comment_dislike: {
+            type: Datatypes.INTEGER,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        comment_love: {
+            type: Datatypes.INTEGER,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        comment_celebrate: {
+            type: Datatypes.INTEGER,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        comment_support: {
+            type: Datatypes.INTEGER,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        comment_insighful: {
+            type: Datatypes.INTEGER,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        comment_curious: {
+            type: Datatypes.INTEGER,
+            allowNull: false,
+            defaultValue: '0'
+        }
+    })
 
-const Comment = sequelize.define("comment", {
-    comment_id: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
-    },
-    text: {
-        type: Sequelize.TEXT,
-        allowNull: false
-    },
-    comment_like: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: '0'
-    },
-    comment_dislike: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: '0'
-    },
-    comment_love: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: '0'
-    },
-    comment_celebrate: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: '0'
-    },
-    comment_support: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: '0'
-    },
-    comment_insighful: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: '0'
-    },
-    comment_curious: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: '0'
-    }
-})
-
-module.exports = Comment;
+    return Comment;
+};

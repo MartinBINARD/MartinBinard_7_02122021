@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #6**
+**Main branch - Commit #7**
 
 # Description
 
@@ -19,9 +19,9 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Rewrite sequelize code.
-* Add overrite database and admin user.
-* Add dotenv file absolute path.
+* Add config Database index.js.
+* Add new models syntax.
+* Remove dbConfig.js file.
 
 # Before to run this server
 
