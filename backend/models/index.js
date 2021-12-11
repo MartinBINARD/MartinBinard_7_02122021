@@ -47,12 +47,9 @@ let adminParam = {
 
 // SYNCHRONIZE DATA
 sequelize
-    .sync({ force: true })
+    .sync({ force: false })
     .then(() => {
-        return admin = User.create(adminParam);        
-    })
-    .then(admin => {
-        console.log(admin, "Admin user created !");
+        return admin = User.create(adminParam);
     })
     .catch((error) => {
         console.log(error);

@@ -3,10 +3,12 @@ const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
 
+// IMPORT ROUTES
+const usersRoutes = require('./routes/auth.route');
+
 const app = express();
 
-app.use(helmet());
-
+// CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -14,6 +16,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(helmet());
 app.use(express.json());
+
+// ROUTING
+app.use('/api/auth', usersRoutes);
 
 module.exports = app;
