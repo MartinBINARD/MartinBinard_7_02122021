@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #8**
+**Main branch - Commit #9**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add data persistence and auth routes to app.js
-* Install brcrypt and crypto-js npm packages.
+* Add data SQL active boolean to userModel.js.
+* Add APP_PORT and DB_PORT in .env file.
 
 # Before to run this server
 
