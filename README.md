@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #9**
+**Main branch - Commit #10**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add data SQL active boolean to userModel.js.
-* Add APP_PORT and DB_PORT in .env file.
+* Add one to many relations of database tables in index.js.
+* Add additional instruction for database creation in README.md.
 
 # Before to run this server
 
@@ -39,6 +39,7 @@ ADMIN_LASTNAME = INSERT ADMIN LASTNAME
 ADMIN_EMAIL = INSERT ADMIN EMAIL
 ADMIN_PASS = INSERT ADMIN PASSWORD
 ```
+* Then create your own local database (named groupomania by default with root user).
 
 # How to run this application
 

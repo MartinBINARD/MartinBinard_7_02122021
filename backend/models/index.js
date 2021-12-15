@@ -56,4 +56,20 @@ sequelize
         console.log(error);
     })
 
+// 1 TO MANY RELATION
+db.users.hasMany(db.posts, {
+    foreignKey: 'user_id_fk1',
+    as: 'post'
+});
+
+db.users.hasMany(db.comments, {
+    foreignKey: 'user_id_fk2',
+    as: 'comment_user'
+});
+
+db.posts.hasMany(db.comments, {
+    foreignKey: 'post_id_fk1',
+    as: 'comment_post'
+});
+
 module.exports = db;
