@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #10**
+**Main branch - Commit #11**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add one to many relations of database tables in index.js.
-* Add additional instruction for database creation in README.md.
+* Add auth.route.js & auth.controller.js code.
+* Rewrite package.json file & add depedencies (bcrypt, jsonwebtoken, multer, crypto-js, password-validator).
 
 # Before to run this server
 

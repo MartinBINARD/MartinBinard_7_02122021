@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "crypto-js": "^4.1.1"
-  }
-}
