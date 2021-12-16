@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #11**
+**Main branch - Commit #12**
 
 # Description
 
@@ -19,8 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add auth.route.js & auth.controller.js code.
-* Rewrite package.json file & add depedencies (bcrypt, jsonwebtoken, multer, crypto-js, password-validator).
+* Add signup async function in auth.controller.js.
 
 # Before to run this server
 
