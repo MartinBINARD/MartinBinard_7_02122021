@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #12**
+**Main branch - Commit #13**
 
 # Description
 
@@ -19,7 +19,9 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add signup async function in auth.controller.js.
+* Modify signup async function in auth.controller.js.
+* Set https into http.
+* Increase values string number in userModel.js.
 
 # Before to run this server
 

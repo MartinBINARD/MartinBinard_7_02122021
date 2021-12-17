@@ -15,7 +15,7 @@ module.exports = (sequelize, Datatypes) => {
             allowNull: false
         },
         email: {
-            type: Datatypes.STRING(100),
+            type: Datatypes.STRING(500),
             allowNull: false,
             unique: true
         },
@@ -25,7 +25,8 @@ module.exports = (sequelize, Datatypes) => {
         },
         avatar: {
             type: Datatypes.STRING(45),
-            allowNull: true
+            allowNull: true,
+            defaultValue: "linktomyavatar"
         },
         admin: {
             type: Datatypes.BOOLEAN,

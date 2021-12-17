@@ -1,5 +1,5 @@
 const dotenv = require('dotenv').config({ path: `./.env` });
-const https = require('https');
+const http = require('http');
 const app = require('./app');
 
 const normalizePort = val => {
@@ -13,7 +13,7 @@ const normalizePort = val => {
   }
   return false;
 };
-const port = normalizePort(process.env.APP_PORT || '3000');
+const port = normalizePort(process.env.APP_PORT || '3001');
 app.set('port', port);
 
 const errorHandler = error => {
@@ -36,7 +36,7 @@ const errorHandler = error => {
   }
 };
 
-const server = https.createServer(app);
+const server = http.createServer(app);
 
 server.on('error', errorHandler);
 server.on('listening', () => {
