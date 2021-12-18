@@ -7,11 +7,11 @@ module.exports = (sequelize, Datatypes) => {
             primaryKey: true
         },
         firstname: {
-            type: Datatypes.STRING(45),
+            type: Datatypes.STRING(500),
             allowNull: false
         },
         lastname: {
-            type: Datatypes.STRING(45),
+            type: Datatypes.STRING(500),
             allowNull: false
         },
         email: {
