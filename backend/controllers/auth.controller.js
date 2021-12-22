@@ -10,24 +10,27 @@ async function signup (req, res, next) {
     try{
         // ENCRYPTED SENSITIVE USER INFO IN DATABASE
         const cryptoMail = cryptojs.HmacSHA512(req.body.email, `${process.USER_CRYPTOJS_KEY}`).toString();
-        const cryptoFirstname = cryptojs.HmacSHA512(req.body.firstname, `${process.USER_CRYPTOJS_KEY}`).toString();
-        const cryptoLastname = cryptojs.HmacSHA512(req.body.lastname, `${process.USER_CRYPTOJS_KEY}`).toString();
 
         // ENCRYPTED PASSWORD
         const bcryptPass = await bcrypt.hash(req.body.password, 10);
 
-        let userInfo = {
-            firstname: cryptoFirstname,
-            lastname: cryptoLastname,
-            email: cryptoMail,
-            password: bcryptPass,
-            avatar: req.body.avatar,
-            admin: req.body.admin,
-            active: req.body.active
-        };
+        // CHECK IF EMAIL IS ALREADY USED BEFORE ENCRYPTING
+        const emailTaken = await User.findOne({ where: { email: cryptoMail }});
+        
+        if (emailTaken) {
+            res.status(401).send({ message: 'Email already exist !'})
+        } else {
 
-        const user = await User.create( userInfo )
-            res.status(201).send({ message: 'User created !'})
+            let userInfo = {
+                ...req.body,
+                email: cryptoMail,
+                password: bcryptPass,
+                // avatar: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+            };
+    
+            const user = await User.create( userInfo )
+                res.status(201).send({ message: 'User created !'});
+        }
 
     } catch (error) {
         res.status(500).json({ message: error.message })

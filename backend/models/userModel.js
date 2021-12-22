@@ -26,7 +26,7 @@ module.exports = (sequelize, Datatypes) => {
         avatar: {
             type: Datatypes.STRING(45),
             allowNull: true,
-            defaultValue: "linktomyavatar"
+            defaultValue: "default-avatar.png"
         },
         admin: {
             type: Datatypes.BOOLEAN,

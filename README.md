@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #14**
+**Main branch - Commit #15**
 
 # Description
 
@@ -19,12 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Debug signup function.
-* Add encrypted firstname, lastname, email with crypto-js signup async function.
-* Remove save() in signup.
-* Rename & add dotenv variables.
-* Update README.md.
-
+* Add email checking before singup.
+* Add multer midddleware.
 
 # Before to run this server
 
