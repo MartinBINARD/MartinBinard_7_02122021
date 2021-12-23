@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #15**
+**Main branch - Commit #16**
 
 # Description
 
@@ -19,8 +19,9 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add email checking before singup.
-* Add multer midddleware.
+* Add login function.
+* Add post & user controllers/routers.
+* Update env.example.
 
 # Before to run this server
 
@@ -44,6 +45,7 @@ ADMIN_LASTNAME = INSERT ADMIN LASTNAME
 ADMIN_EMAIL = INSERT ADMIN EMAIL
 ADMIN_PASS = INSERT ADMIN PASSWORD
 USER_CRYPTOJS_KEY = INSERT RADOM ASCII CHARACTER
+SECRET_TOKEN = INSERT RANDOM ASCII CHARACTER
 ```
 * Then create your own local database (named groupomania by default with root user).
 

@@ -5,6 +5,8 @@ const path = require('path');
 
 // IMPORT ROUTES
 const authRoutes = require('./routes/auth.route');
+const userRoutes = require('./routes/user.route');
+const postRoutes = require('./routes/post.route');
 
 const app = express();
 
@@ -21,5 +23,7 @@ app.use(express.json());
 
 // ROUTING
 app.use('/api/auth', authRoutes);
+app.use('/api/user', userRoutes);
+app.use('/api/post', postRoutes);
 
 module.exports = app;
