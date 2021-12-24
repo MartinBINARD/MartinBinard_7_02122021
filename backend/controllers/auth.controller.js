@@ -49,11 +49,11 @@ async function login (req, res, next) {
         // JWT TOKEN
         let token = {
             userId: User._id,
-                        token: jwt.sign(
-                            { userId: User._id },
-                            process.env.SECRET_TOKEN,
-                            { expiresIn: '24h' }
-                        )
+            token: jwt.sign(
+                { userId: User._id },
+                process.env.SECRET_TOKEN,
+                { expiresIn: '24h' }
+            )
         };
 
         if (!userLogin) { res.status(401).send({ message: 'User not found !'}) }

@@ -21,6 +21,8 @@ app.use((req, res, next) => {
 app.use(helmet());
 app.use(express.json());
 
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
 // ROUTING
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
