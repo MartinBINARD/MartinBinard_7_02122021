@@ -11,7 +11,7 @@ async function createPost (req, res, next) {
         }
 
         const newPost = await Post.create(infoPost)
-            res.status(201).send(newPost, { message: 'New post created !' })
+            res.status(201).send(newPost)
     } catch (error) {
         res.status(500).json({ message : error.message })
         next();
@@ -27,7 +27,7 @@ async function modifyPost (req, res, next) {
             } : { ...req.body };
 
         const updatePost = await Post.udpateOne({ post_id : req.params.id }, { ...postObject, post_id: req.params.id })
-            res.status(201).send(updatePost, { message: 'Post modified !' })
+            res.status(201).send(updatePost)
     } catch (error) {
         res.status(500).json({ message : error.message })
         next();
@@ -36,9 +36,16 @@ async function modifyPost (req, res, next) {
 
 async function deletePost (req, res, next) {
     try{
-        // TO FILL IN
-        const deletePost = await Post.findOne({ where : { post_id: req.params.id } })
-            res.status(200).send({ message: 'Post deleted !' })
+        const postObject = await Post.findOne({ where : { post_id: req.params.id } })
+
+        if(postObject) {
+            const filename = postObject.imageUrl.split('/images')[1];
+            fs.unlink(`images/${filename}`, (error) => {
+                console.log(error);
+            })
+            const deletePost = await Post.destroy( { where: { post_id: req.params.id } })
+                res.status(200).send({ message: 'Post deleted !' })
+        }
     } catch (error) {
         res.status(500).json({ message : error.message })
         next();
