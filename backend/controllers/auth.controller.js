@@ -45,7 +45,7 @@ async function login (req, res, next) {
         const cryptoMail = cryptojs.HmacSHA512(req.body.email, `${process.USER_CRYPTOJS_KEY}`).toString();
         const userLogin = await User.findOne({ where: { email: cryptoMail }});
         // CHECK PASSWORD
-        const bcryptPassValid = await bcrypt.compare(req.body.password, User.password);
+        const bcryptPassValid = await bcrypt.compare(req.body.password, userLogin.password);
         // JWT TOKEN
         let token = {
             userId: User._id,

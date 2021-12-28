@@ -52,6 +52,41 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
+        },
+        userId_post_like: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_post_dislike: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_post_love: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_post_celebrate: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_post_support: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_post_insighful: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_post_curious: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
         }
     })
 

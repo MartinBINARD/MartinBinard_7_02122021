@@ -7,6 +7,7 @@ const path = require('path');
 const authRoutes = require('./routes/auth.route');
 const userRoutes = require('./routes/user.route');
 const postRoutes = require('./routes/post.route');
+const reactPostRoutes = require('./routes/reactPost.route');
 
 const app = express();
 
@@ -27,5 +28,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
+app.use('/api/post', reactPostRoutes);
 
 module.exports = app;

@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #18**
+**Main branch - Commit #19**
 
 # Description
 
@@ -19,7 +19,9 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add fs unlink to delete post function.
+* Add postLike function in reactPost controller.
+* Add userId reaction in post model.
+* Resolve token issue during login.
 
 # Before to run this server
 
