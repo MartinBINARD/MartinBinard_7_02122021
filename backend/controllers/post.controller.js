@@ -1,5 +1,6 @@
 const db = require('../models');
 const fs = require('fs');
+const { posts } = require("../models");
 
 const Post = db.posts;
 
@@ -8,7 +9,7 @@ async function createPost (req, res, next) {
         let infoPost = {
             ...req.body,
             imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        }
+        };
 
         const newPost = await Post.create(infoPost)
             res.status(201).send(newPost)
@@ -37,8 +38,12 @@ async function modifyPost (req, res, next) {
 async function deletePost (req, res, next) {
     try{
         const postObject = await Post.findOne({ where : { post_id: req.params.id } })
-
-        if(postObject) {
+        
+        if(!postObject) {
+            res.status(404).send({ message: 'No such Post !'})
+        } else if (postObject.userId !== req.auth.userId) {
+            res.status(400).send({ message: 'Unauthorized request !'})
+        } else {
             const filename = postObject.imageUrl.split('/images')[1];
             fs.unlink(`images/${filename}`, (error) => {
                 console.log(error);

@@ -1,5 +1,7 @@
 const db = require('../models');
 
+const Post = db.posts;
+
 async function likePost (req, res, next) {
     try {
         const alreadyLiked = await Post.findOne({ where: { userId_post_like : req.params.userId_post_like }})

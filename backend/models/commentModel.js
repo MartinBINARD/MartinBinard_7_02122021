@@ -1,47 +1,82 @@
-module.exports = (sequelize, Datatypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Comment = sequelize.define('comment', {
         comment_id: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
         text: {
-            type: Datatypes.TEXT,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         comment_like: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         comment_dislike: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         comment_love: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         comment_celebrate: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         comment_support: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         comment_insighful: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         comment_curious: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_comment_like: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_comment_dislike: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_comment_love: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_post_celebrate: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_comment_support: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_comment_insighful: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: '0'
+        },
+        userId_comment_curious: {
+            type: DataTypes.JSON,
             allowNull: false,
             defaultValue: '0'
         }

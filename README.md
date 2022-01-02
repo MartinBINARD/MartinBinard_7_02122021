@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #20**
+**Main branch - Commit #21**
 
 # Description
 
@@ -19,8 +19,9 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add remove like in likePost function.
-* Add auth.middleware.js.
+* Add reactComment.controller.js & reactComment.route.js.
+* Add comment.controller.js, comment.route.js.
+* Add deletPost route & correct security access to delete function.
 
 # Before to run this server
 

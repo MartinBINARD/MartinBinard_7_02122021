@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const reactPost = require('../controllers/react-post.controller');
+const reactPost = require('../controllers/reactPost.controller');
 
 router.put('/:id/like', reactPost.likePost);
 

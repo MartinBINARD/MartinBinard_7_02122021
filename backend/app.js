@@ -8,6 +8,8 @@ const authRoutes = require('./routes/auth.route');
 const userRoutes = require('./routes/user.route');
 const postRoutes = require('./routes/post.route');
 const reactPostRoutes = require('./routes/reactPost.route');
+const commentRoutes = require('./routes/comment.route');
+const reactCommentRoutes = require('./routes/reactComment.route');
 
 const app = express();
 
@@ -29,5 +31,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/post', postRoutes);
 app.use('/api/post', reactPostRoutes);
+app.use('/api/comment', commentRoutes);
+app.use('/api/comment', reactCommentRoutes);
 
 module.exports = app;
