@@ -33,12 +33,14 @@ async function deleteComment (req, res, next) {
 
         if(!commentObject) {
             res.status(404).send({ message: 'No such Comment !'})
-        } else if (commentObject.userId !== req.auth.userId) {
-            res.status(400).send({ message: 'Unauthorized request !'})
-        } else {
-            const discardComment = await Comment.destroy({ where: { comment_id: req.params.id }})
-                res.status(200).send({ message: 'Comment deleted !'})
         }
+        
+        if (commentObject.userId !== req.auth.userId) {
+            res.status(400).send({ message: 'Unauthorized request !'})
+        }
+        
+        const discardComment = await Comment.destroy({ where: { comment_id: req.params.id }})
+            res.status(200).send({ message: 'Comment deleted !'})
     } catch (error) {
         res.status(500).json({ message: error.message })
         next();

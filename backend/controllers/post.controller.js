@@ -41,16 +41,21 @@ async function deletePost (req, res, next) {
         
         if(!postObject) {
             res.status(404).send({ message: 'No such Post !'})
-        } else if (postObject.userId !== req.auth.userId) {
+        }
+        if (postObject.userId !== req.auth.userId) {
             res.status(400).send({ message: 'Unauthorized request !'})
-        } else {
+        }
+
+        if( postObject.imageUrl != null) {
             const filename = postObject.imageUrl.split('/images')[1];
             fs.unlink(`images/${filename}`, (error) => {
                 console.log(error);
             })
-            const deletePost = await Post.destroy( { where: { post_id: req.params.id } })
-                res.status(200).send({ message: 'Post deleted !' })
         }
+        
+        const deletePost = await Post.destroy( { where: { post_id: req.params.id } })
+            res.status(200).send({ message: 'Post deleted !' })
+        
     } catch (error) {
         res.status(500).json({ message : error.message })
         next();
