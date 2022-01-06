@@ -3,14 +3,14 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #22**
+**Main branch - Commit #23**
 
 # Description
 
 * This website is a project to web developer course teached by [Openclassroom](https://openclassrooms.com/en/paths/141-web-developer)
 
 * The entire project is made from scratch, only logos are delivered.
-* I choose VueJS 
+* I choose VueJS 3 for this project.
 
 # Main goals
 
@@ -19,7 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Correct fs bug in delete post function.
+* Update like/dislike reactPost function.
+* Add frontend VueJS 3 with Vue CLI with dart-sass.
 
 # Before to run this server
 
