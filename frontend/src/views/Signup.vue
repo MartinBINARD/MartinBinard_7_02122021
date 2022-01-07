@@ -9,18 +9,22 @@
 
     <div class="user__form">
       
-      <form class="login__form">
-        <div class="tabs__login">
-          <div class="login__form__field">
-            <input class="form-control" type="text" placeholder="Email" required/>
-          </div>
-          <div class="login__form__field">
-            <input class="form-control" type="text" placeholder="Password" required/>
-          </div>
-          <button class="login__form__button" type="submit">Login</button>
-        </div>
-      </form>
-      <button class="signup__form__button">Create an account</button>
+        <form class="signup__form">
+            <div class="signup__form__field">
+              <input class="form-control" type="text" placeholder="Firstname" required/>
+            </div>
+            <div class="signup__form__field">
+              <input class="form-control" type="text" placeholder="Lastname" required/>
+            </div>
+            <div class="signup__form__field">
+              <input class="form-control" type="text" placeholder="Email" required/>
+            </div>
+            <div class="signup__form__field">
+              <input class="form-control" type="text" placeholder="Password" required/>
+            </div>
+            <button class="signup__form__button" type="submit">Signup</button>
+        </form>
+        <button class="login__form__button">Login</button>
 
     </div>
   </body>
@@ -49,13 +53,12 @@
   background-color: #f6f6f6;
   border-radius: 1.5rem;
   width: 40rem;
-  height: 22rem;
+  height: 28rem;
   padding: 2rem;
-  margin: 2rem;
 }
 
-.login__form {
-  &__field {
+.signup__form {
+    &__field {
     padding: 15px;
   }
 
@@ -71,7 +74,7 @@
   }
 }
 
-.signup__form__button {
+.login__form__button {
   background-color: white;
   color: #1daba7;
   height: 3rem;

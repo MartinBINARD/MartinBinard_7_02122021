@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #23**
+**Main branch - Commit #24**
 
 # Description
 
@@ -19,8 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Update like/dislike reactPost function.
-* Add frontend VueJS 3 with Vue CLI with dart-sass.
+* Add Login.vue & Signup.vue.
 
 # Before to run this server
 
