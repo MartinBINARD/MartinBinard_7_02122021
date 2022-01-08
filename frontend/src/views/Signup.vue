@@ -1,11 +1,6 @@
 <template>
-  <body id="login">
-    <div class="login__logo">
-      <img
-        src="../assets/icon-left-font-monochrome-white.svg"
-        alt="groupomania-logo"
-      />
-    </div>
+  <div id="submit">
+    <Submit-logo/>
 
     <div class="user__form">
       
@@ -24,26 +19,28 @@
             </div>
             <button class="signup__form__button" type="submit">Signup</button>
         </form>
-        <button class="login__form__button">Login</button>
+        
+        <router-link class="login__form__button" to="/login">Login</router-link>
 
     </div>
-  </body>
+  </div>
 </template>
 
-<script></script>
+<script>
+import SubmitLogo from "@/components/Submit-logo.vue";
+
+export default {
+  components: {SubmitLogo}
+}
+</script>
 
 <style scoped lang="scss">
-
-#login {
+#submit {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   padding: 10%;
-}
-
-.login__logo {
-  padding-bottom: 1rem;
 }
 
 .user__form {
@@ -78,10 +75,13 @@
   background-color: white;
   color: #1daba7;
   height: 3rem;
-  width: 15rem;
+  width: 10rem;
   margin: 1rem;
   padding: 0.8rem;
   font-weight: bold;
+  border: 2px black solid;
+  border-radius: 10px;
+  text-align: center;
   &:hover {
     filter: brightness(85%);
   }

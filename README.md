@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #24**
+**Main branch - Commit #25**
 
 # Description
 
@@ -19,7 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add Login.vue & Signup.vue.
+* Add Submit-logo.vue component for login/signup page.
 
 # Before to run this server
 
