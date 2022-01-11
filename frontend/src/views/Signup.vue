@@ -6,18 +6,18 @@
       
         <form class="signup__form">
             <div class="signup__form__field">
-              <input class="form-control" type="text" placeholder="Firstname" required/>
+              <input v-model="firstname" class="form-control" type="text" placeholder="Firstname" required/>
             </div>
             <div class="signup__form__field">
-              <input class="form-control" type="text" placeholder="Lastname" required/>
+              <input v-model="lastname" class="form-control" type="text" placeholder="Lastname" required/>
             </div>
             <div class="signup__form__field">
-              <input class="form-control" type="text" placeholder="Email" required/>
+              <input v-model="email" class="form-control" type="text" placeholder="Email" required/>
             </div>
             <div class="signup__form__field">
-              <input class="form-control" type="text" placeholder="Password" required/>
+              <input v-model="password" class="form-control" type="text" placeholder="Password" required/>
             </div>
-            <button class="signup__form__button" type="submit">Signup</button>
+            <button @click="signUp()" class="signup__form__button" type="submit">Signup</button>
         </form>
         
         <router-link class="login__form__button" to="/login">Login</router-link>
@@ -30,19 +30,30 @@
 import SubmitLogo from "@/components/Submit-logo.vue";
 
 export default {
+  name: 'Signup',
+  data : function() {
+    return {
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    signUp: function () {
+      this.$store.dispatch('singUp', {
+        firstname: this.firstname,
+        lastname: this.lastname,
+        email: this.email,
+        password: this.password
+      })
+    }
+  },
   components: {SubmitLogo}
 }
 </script>
 
 <style scoped lang="scss">
-#submit {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10%;
-}
-
 .user__form {
   display: flex;
   flex-wrap: wrap;

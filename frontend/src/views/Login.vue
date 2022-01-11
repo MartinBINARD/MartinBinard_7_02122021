@@ -31,14 +31,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-#submit {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10%;
-}
-
 .user__form {
   display: flex;
   flex-wrap: wrap;
