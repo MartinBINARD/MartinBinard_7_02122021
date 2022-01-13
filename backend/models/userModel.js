@@ -23,11 +23,6 @@ module.exports = (sequelize, Datatypes) => {
             type: Datatypes.STRING(500),
             allowNull: false
         },
-        avatar: {
-            type: Datatypes.STRING(45),
-            allowNull: true,
-            defaultValue: "default-avatar.png"
-        },
         admin: {
             type: Datatypes.BOOLEAN,
             allowNull: false,

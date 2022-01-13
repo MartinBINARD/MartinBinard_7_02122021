@@ -12,26 +12,26 @@
               <input v-model="lastname" class="form-control" type="text" placeholder="Lastname" required/>
             </div>
             <div class="signup__form__field">
-              <input v-model="email" class="form-control" type="text" placeholder="Email" required/>
+              <input v-model="email" class="form-control" type="email" placeholder="Email" required/>
             </div>
             <div class="signup__form__field">
-              <input v-model="password" class="form-control" type="text" placeholder="Password" required/>
+              <input v-model="password" class="form-control" type="password" placeholder="Password" required/>
             </div>
-            <button @click="signUp()" class="signup__form__button" type="submit">Signup</button>
+            <button @click="signUp()" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Signup</button>
         </form>
         
-        <router-link class="login__form__button" to="/login">Login</router-link>
+        <router-link class="link__button" to="/login">Login</router-link>
 
     </div>
   </div>
 </template>
 
 <script>
-import SubmitLogo from "@/components/Submit-logo.vue";
+import SubmitLogo from '@/components/Submit-logo.vue';
+// import axios from 'axios';
 
 export default {
-  name: 'Signup',
-  data : function() {
+  data () {
     return {
       firstname: '',
       lastname: '',
@@ -39,9 +39,34 @@ export default {
       password: ''
     }
   },
+  computed: {
+    correctForm: function () {
+      if (this.firstname!='' && this.lastname!='' && this.email!='' && this.password!='') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
   methods: {
+    // async signUp () {
+    //   const data = {
+    //     firstname: this.firstname,
+    //     lastname: this.lastname,
+    //     email: this.email,
+    //     password: this.password
+    //   };
+    
+    //   await axios.post('http://localhost:3001/api/auth/signup', data)
+    //     .then(response => {
+    //       console.log(response);
+    //     })
+    //     .catch(error => {
+    //     console.log(error);
+    //     })
+    // }
     signUp: function () {
-      this.$store.dispatch('singUp', {
+      this.$store.dispatch('signUp', {
         firstname: this.firstname,
         lastname: this.lastname,
         email: this.email,
@@ -65,24 +90,11 @@ export default {
   padding: 2rem;
 }
 
-.signup__form {
-    &__field {
+.signup__form__field {
     padding: 15px;
-  }
-
-  &__button {
-    padding: 0.8rem 2.5rem;
-    margin-left: 1rem;
-    background-color: #1daba7;
-    color: white;
-    font-weight: bold;
-    &:hover {
-      filter: brightness(90%);
-    }
-  }
 }
 
-.login__form__button {
+.link__button {
   background-color: white;
   color: #1daba7;
   height: 3rem;

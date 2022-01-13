@@ -3,11 +3,17 @@ import { createStore } from 'vuex'
 const axios = require('axios');
 
 const instance = axios.create({
-  baseURL: 'https://localhost:3000/api/auth'
+  baseURL: 'http://localhost:3001/api/auth/'
 });
 
 export default createStore({
   state: {
+    userData: {
+      fisrtname: '',
+      lastname: '',
+      email: '',
+      password: ''
+    }
   },
   mutations: {
   },
@@ -20,7 +26,7 @@ export default createStore({
       })
       .catch(function (error) {
         console.log(error);
-      });
+      })
     }
   },
   modules: {

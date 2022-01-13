@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #26**
+**Main branch - Commit #27**
 
 # Description
 
@@ -19,7 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add signUp function in Vue Store with axios library.
+* Add login function in Login.view & try to debug signUp function in store.
+* Add disabled button for incorrectly completed form.
 
 # Before to run this server
 

@@ -7,16 +7,16 @@
       <form class="login__form">
         <div class="tabs__login">
           <div class="login__form__field">
-            <input class="form-control" type="text" placeholder="Email" required/>
+            <input v-model="email" class="form-control" type="email" placeholder="Email" required/>
           </div>
           <div class="login__form__field">
-            <input class="form-control" type="text" placeholder="Password" required/>
+            <input v-model="password" class="form-control" type="password" placeholder="Password" required/>
           </div>
-          <button class="login__form__button" type="submit">Login</button>
+          <button class="button" :class="{'button--disabled' : !correctForm}" type="submit">Login</button>
         </div>
       </form>
       
-      <router-link class="signup__form__button" to="/signup">Create an account</router-link>
+      <router-link class="link__button" to="/signup">Create an account</router-link>
 
     </div>
   </div>
@@ -24,8 +24,40 @@
 
 <script>
 import SubmitLogo from "@/components/Submit-logo.vue";
+import axios from 'axios';
 
 export default {
+    data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  computed: {
+    correctForm: function () {
+      if (this.email!='' && this.password!='') {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  },
+  methods: {
+    async login () {
+      const data = {
+        email: this.email,
+        password: this.password
+      };
+    
+      await axios.post('http://localhost:3001/api/auth/login', data)
+        .then(response => {
+          console.log(response);
+        })
+        .catch(error => {
+        console.log(error);
+        })
+    }
+  },
   components: {SubmitLogo}
 }
 </script>
@@ -43,24 +75,11 @@ export default {
   margin: 2rem;
 }
 
-.login__form {
-  &__field {
+.login__form__field {
     padding: 15px;
-  }
-
-  &__button {
-    padding: 0.8rem 2.5rem;
-    margin-left: 1rem;
-    background-color: #1daba7;
-    color: white;
-    font-weight: bold;
-    &:hover {
-      filter: brightness(90%);
-    }
-  }
 }
 
-.signup__form__button {
+.link__button {
   background-color: white;
   color: #1daba7;
   height: 3rem;

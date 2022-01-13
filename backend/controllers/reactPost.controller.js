@@ -14,6 +14,7 @@ async function likePost (req, res, next) {
                 }
                 if(!userLikedList.include(req.body.user_id)){
                     userLikedList.push(req.body.user_id);
+                    console.log(userLikedList);
                     const likePost = await Post.updateOne({ post_id : req.params.id }, { post_like: (postToUpdate.post_like + 1), userId_post_like: JSON.stringify(userLikedList)});
                     res.status(200).send(likePost)
                 }else{

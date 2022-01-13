@@ -33,12 +33,34 @@ button, input {
   font-size: 20px;
 }
 
-input:focus {
-  outline: none !important;
-  border: 2px solid #1daba7;
+input {
+  border-radius: 5px;
+  &:focus {
+    outline: none !important;
+    border: 2px solid #1daba7;
+  }
 }
 
 button {
   border-radius: 10px;
+}
+
+.button {
+    padding: 0.8rem 2.5rem;
+    margin-left: 1rem;
+    background-color: #1daba7;
+    color: white;
+    font-weight: bold;
+    &:hover {
+      filter: brightness(90%);
+    }
+}
+
+.button--disabled {
+  filter: brightness(60%);
+  &:hover {
+    cursor: not-allowed;
+    filter: brightness(60%);
+  }
 }
 </style>
