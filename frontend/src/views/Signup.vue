@@ -28,7 +28,7 @@
 
 <script>
 import SubmitLogo from '@/components/Submit-logo.vue';
-// import axios from 'axios';
+import Axios from 'axios';
 
 export default {
   data () {
@@ -49,30 +49,33 @@ export default {
     }
   },
   methods: {
-    // async signUp () {
-    //   const data = {
-    //     firstname: this.firstname,
-    //     lastname: this.lastname,
-    //     email: this.email,
-    //     password: this.password
-    //   };
-    
-    //   await axios.post('http://localhost:3001/api/auth/signup', data)
-    //     .then(response => {
-    //       console.log(response);
-    //     })
-    //     .catch(error => {
-    //     console.log(error);
-    //     })
-    // }
-    signUp: function () {
-      this.$store.dispatch('signUp', {
+    async signUp () {
+      const data = {
         firstname: this.firstname,
         lastname: this.lastname,
         email: this.email,
         password: this.password
-      })
+      };
+      
+      if (this.firstname!='' && this.lastname!='' && this.email!='' && this.password!='') {        
+        await Axios.post('http://localhost:3001/api/auth/signup', data)
+          .then(response => {
+            console.log(response);
+          })
+          .catch(error => {
+          console.log(error);
+          })
+      }
+      this.$router.push('/login');
     }
+    // signUp: function () {
+    //   this.$store.dispatch('signUp', {
+    //     firstname: this.firstname,
+    //     lastname: this.lastname,
+    //     email: this.email,
+    //     password: this.password
+    //   })
+    // }
   },
   components: {SubmitLogo}
 }

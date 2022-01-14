@@ -19,72 +19,72 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         post_like: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         post_dislike: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         post_love: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         post_celebrate: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         post_support: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         post_insighful: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         post_curious: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_post_like: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_post_dislike: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_post_love: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_post_celebrate: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_post_support: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_post_insighful: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_post_curious: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         }

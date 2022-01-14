@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #27**
+**Main branch - Commit #28**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add login function in Login.view & try to debug signUp function in store.
-* Add disabled button for incorrectly completed form.
+* Add new reactPost function in backend.
+* Add conditions to prevent sending empty signup form.
 
 # Before to run this server
 

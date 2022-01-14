@@ -12,7 +12,7 @@
           <div class="login__form__field">
             <input v-model="password" class="form-control" type="password" placeholder="Password" required/>
           </div>
-          <button class="button" :class="{'button--disabled' : !correctForm}" type="submit">Login</button>
+          <button @click="login()" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Login</button>
         </div>
       </form>
       
