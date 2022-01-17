@@ -2,12 +2,17 @@ const db = require('../models');
 
 const Post = db.posts;
 
+
 async function likePost (req, res, next) {
     try {
         let postToUpdate = await Post.findOne({ where: { post_id : req.params.id }});
-		let userId = req.body.user_id;
+		let userId = req.user;
+        console.log('userId:');
+        console.log(userId);
 		let userLikedList = postToUpdate.userId_post_like.split(",");
 		let userDislikedList = postToUpdate.userId_post_dislike.split(",");
+        console.log("likeChoice:");
+        console.log(req.params.likeChoice);
         switch(req.params.likeChoice){
             case "1": // User like
                 if(!userLikedList.includes(""+userId)){

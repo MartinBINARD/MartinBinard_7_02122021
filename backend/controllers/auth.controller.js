@@ -48,9 +48,9 @@ async function login (req, res, next) {
         const bcryptPassValid = await bcrypt.compare(req.body.password, userLogin.password);
         // JWT TOKEN
         let token = {
-            userId: User._id,
+            userId: userLogin.user_id,
             token: jwt.sign(
-                { userId: User._id },
+                { userId: userLogin.user_id },
                 process.env.SECRET_TOKEN,
                 { expiresIn: '24h' }
             )

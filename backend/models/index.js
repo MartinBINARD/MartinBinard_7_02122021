@@ -37,24 +37,24 @@ db.comments = require('./commentModel')(sequelize, DataTypes);
 
 // CREATE ADMIN USER BY DEFAULT
 const User = db.users;
-let adminParam = {
-    firstname : process.env.ADMIN_FIRSTNAME,
-    lastname: process.env.ADMIN_LASTNAME,
-    email: process.env.ADMIN_EMAIL,
-    password: process.env.ADMIN_PASS, 
-    avatar: null,
-    admin: true
-};
+// let adminParam = {
+//     firstname : process.env.ADMIN_FIRSTNAME,
+//     lastname: process.env.ADMIN_LASTNAME,
+//     email: process.env.ADMIN_EMAIL,
+//     password: process.env.ADMIN_PASS, 
+//     avatar: null,
+//     admin: true
+// };
 
 // SYNCHRONIZE DATA
-sequelize
-    .sync({ force: true })
-    .then(() => {
-        return admin = User.create(adminParam);
-    })
-    .catch((error) => {
-        console.log(error);
-    })
+// sequelize
+//     .sync({ force: false })
+//     .then(() => {
+//         // return admin = User.create(adminParam);
+//     })
+//     .catch((error) => {
+//         console.log(error);
+//     })
 
 // 1 TO MANY RELATION
 db.users.hasMany(db.posts, {

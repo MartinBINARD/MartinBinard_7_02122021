@@ -19,37 +19,37 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         post_like: {
-            type: DataTypes.STRING(200),
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         post_dislike: {
-            type: DataTypes.STRING(200),
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         post_love: {
-            type: DataTypes.STRING(200),
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         post_celebrate: {
-            type: DataTypes.STRING(200),
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         post_support: {
-            type: DataTypes.STRING(200),
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         post_insighful: {
-            type: DataTypes.STRING(200),
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
         post_curious: {
-            type: DataTypes.STRING(200),
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: '0'
         },
