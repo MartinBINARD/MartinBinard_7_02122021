@@ -46,16 +46,19 @@ export default {
     async login () {
       const data = {
         email: this.email,
-        password: this.password
+        password: this.password,
+        token: this.token
       };
     
       await axios.post('http://localhost:3001/api/auth/login', data)
         .then(response => {
           console.log(response);
+          localStorage.setItem('token', JSON.stringify(response.data));
         })
         .catch(error => {
         console.log(error);
         })
+
     }
   },
   components: {SubmitLogo}
