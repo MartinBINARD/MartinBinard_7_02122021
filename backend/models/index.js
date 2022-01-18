@@ -47,14 +47,14 @@ const User = db.users;
 // };
 
 // SYNCHRONIZE DATA
-// sequelize
-//     .sync({ force: false })
-//     .then(() => {
-//         // return admin = User.create(adminParam);
-//     })
-//     .catch((error) => {
-//         console.log(error);
-//     })
+sequelize
+    .sync({ force: false })
+    .then(() => {
+        // return admin = User.create(adminParam);
+    })
+    .catch((error) => {
+        console.log(error);
+    })
 
 // 1 TO MANY RELATION
 db.users.hasMany(db.posts, {

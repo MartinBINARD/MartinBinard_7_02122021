@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #30**
+**Main branch - Commit #31**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add new auth.middleware.
-* Change User.id into user_id.
+* Try to save token in local storage.
+* Add sync sequelize database.
 
 # Before to run this server
 
