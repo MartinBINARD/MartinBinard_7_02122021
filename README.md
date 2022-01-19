@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #31**
+**Main branch - Commit #32**
 
 # Description
 
@@ -19,8 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Try to save token in local storage.
-* Add sync sequelize database.
+* Update run application instructions.
 
 # Before to run this server
 
@@ -50,12 +49,14 @@ SECRET_TOKEN = INSERT RANDOM ASCII CHARACTER
 
 # How to run this application
 
-* Open the backend repo in a terminal and run :
+* Open terminal in both frontend and backend repos, then run the following commands :
+
+* Install depedencies :
 ```
 npm install
 ```
-* then : 
+* Launch the 2 servers :
 ```
 npm run start
 ```
-* :warning: In order to prevent from port collisions, the API code port value is 3001 and the data base port value is 3306 by default.
+* :warning: In order to prevent from port collisions, the API code port value is 3001, the data base port value is 3306 by default and the frontend port value is 8080.

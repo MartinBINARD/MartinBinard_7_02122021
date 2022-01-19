@@ -57,13 +57,13 @@ export default {
       //   .catch((error) => alert(error))
 
       let options = {
-           method: "POST",
+           method: 'POST',
            body: JSON.stringify(data),
            headers: { 'Content-Type': 'application/json' }
         }
       
       await fetch('http://localhost:3001/api/auth/login', options)
-        .then((res) => {if(res.ok) { return response.json(); })
+        .then((res) => {if(res.ok) { return res.json(); }})
         .then((res) => { localStorage.setItem('token', res.token); })
         .catch((error) => console.log(error))
 
