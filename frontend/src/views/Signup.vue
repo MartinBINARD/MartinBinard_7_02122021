@@ -17,7 +17,7 @@
             <div class="signup__form__field">
               <input v-model="password" class="form-control" type="password" placeholder="Password" required/>
             </div>
-            <button @click="signUp()" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Signup</button>
+            <button @click="signUp" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Signup</button>
         </form>
         
         <router-link class="link__button" to="/login">Login</router-link>
@@ -49,7 +49,9 @@ export default {
     }
   },
   methods: {
-    async signUp () {
+    async signUp (e) {
+      e.preventDefault();
+      
       const data = {
         firstname: this.firstname,
         lastname: this.lastname,
@@ -58,15 +60,9 @@ export default {
       };
       
       if (this.firstname!='' && this.lastname!='' && this.email!='' && this.password!='') {        
-        await Axios.post('http://localhost:3001/api/auth/signup', data)
-          .then(response => {
-            console.log(response);
-          })
-          .catch(error => {
-          console.log(error);
-          })
+        await Axios.post('http://localhost:3001/api/auth/signup', data);
       }
-      this.$router.push('/login');
+      // this.$router.push('/login');
     }
     // signUp: function () {
     //   this.$store.dispatch('signUp', {

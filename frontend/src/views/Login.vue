@@ -12,7 +12,7 @@
           <div class="login__form__field">
             <input v-model="password" class="form-control" type="password" placeholder="Password" required/>
           </div>
-          <button @click="login()" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Login</button>
+          <button @click="login" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Login</button>
         </div>
       </form>
       
@@ -24,7 +24,7 @@
 
 <script>
 import SubmitLogo from "@/components/Submit-logo.vue";
-// import axios from 'axios';
+import Axios from 'axios';
 
 export default {
     data () {
@@ -43,29 +43,20 @@ export default {
     }
   },
   methods: {
-    async login () {
-      const data = {
-        email: this.email,
-        password: this.password
-      };
-    
-      // await axios.post('http://localhost:3001/api/auth/login', data)
-      //   .then(response => {
-      //     // console.log(response.data);
-      //     localStorage.setItem('token', response.data.token);
-      //   })
-      //   .catch((error) => alert(error))
+    async login (e) {
+      e.preventDefault();
 
-      let options = {
-           method: 'POST',
-           body: JSON.stringify(data),
-           headers: { 'Content-Type': 'application/json' }
-        }
-      
-      await fetch('http://localhost:3001/api/auth/login', options)
-        .then((res) => {if(res.ok) { return res.json(); }})
-        .then((res) => { localStorage.setItem('token', res.token); })
-        .catch((error) => console.log(error))
+      try {
+        const data = {
+          email: this.email,
+          password: this.password
+        };
+
+        const res = await Axios.post('http://localhost:3001/api/auth/login', data);
+        localStorage.setItem('token', res.data.token)
+      } catch (error) {
+        console.error(error);
+      }
 
       }
   },

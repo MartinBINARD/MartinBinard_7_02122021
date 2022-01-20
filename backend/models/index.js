@@ -48,7 +48,7 @@ const User = db.users;
 
 // SYNCHRONIZE DATA
 sequelize
-    .sync({ force: true })
+    .sync({ force: true})
     .then(() => {
         // return admin = User.create(adminParam);
     })
