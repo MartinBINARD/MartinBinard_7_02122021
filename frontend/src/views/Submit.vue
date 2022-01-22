@@ -77,11 +77,10 @@ export default {
       
       if (this.firstname!='' && this.lastname!='' && this.email!='' && this.password!='') {        
         await Axios.post('http://localhost:3001/api/auth/signup', data);
+        this.switchToLogin();
       }
-      // this.$router.push('/login');
     },
     async login () {
-
       try {
         const data = {
           email: this.email,
@@ -90,27 +89,33 @@ export default {
 
         const res = await Axios.post('http://localhost:3001/api/auth/login', data);
         localStorage.setItem('token', res.data.token)
+        await this.$router.push('/');
       } catch (error) {
         console.error(error);
       }
 
       }
-
   },
   components: {SubmitLogo}
 }
 </script>
 
 <style scoped lang="scss">
+$color-primary: #1daba7;
+$color-secondary: #f6f6f6;
+%shadow-card {
+    box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
+};
+
 .user__card {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  background-color: #f6f6f6;
+  background-color: $color-secondary;
+  margin: 1rem;
   border-radius: 1.5rem;
-  width: 40rem;
-  height: 30rem;
-  padding: 2rem;
+  padding: 1rem 0;
+  @extend %shadow-card;
   &__title {
   text-align: center;
   }
@@ -122,8 +127,7 @@ export default {
 
 .link__button {
   background-color: white;
-  color: #1daba7;
-  // height: 3rem;
+  color: $color-primary;
   width: 12rem;
   margin: 1rem;
   padding: 0.8rem;

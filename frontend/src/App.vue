@@ -5,6 +5,9 @@
 </template>
 
 <style lang="scss">
+$color-primary: #1daba7;
+$color-secondary: #f6f6f6;
+
 * {
   padding: 0;
   margin: 0;
@@ -13,12 +16,14 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #1daba7;
+  background-color: $color-primary;
   max-width: 100%;
   overflow: hidden;
 }
 
 a, li {
+  font-size: 16px;
+  font-weight: bold;
   list-style: none;
   color: initial;
   text-decoration: none;
@@ -37,7 +42,7 @@ input {
   border-radius: 5px;
   &:focus {
     outline: none !important;
-    border: 2px solid #1daba7;
+    border: 2px solid $color-primary;
   }
 }
 
@@ -48,8 +53,8 @@ button {
 .button {
     padding: 0.8rem 2.5rem;
     margin-left: 1rem;
-    background-color: #1daba7;
-    color: white;
+    background-color: $color-primary;
+    color: $color-secondary;
     font-weight: bold;
     &:hover {
       filter: brightness(90%);

@@ -1,19 +1,18 @@
 <template>
   <div class="home">
-    <h1>Welcome to Groupomania</h1>
+    <Navbar/>
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue';
 
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {Navbar}
 }
 </script>
 
 <style scoped>
-h1 {
-  color: white;
-  text-align: center;
-}
+
 </style>
