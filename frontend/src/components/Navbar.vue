@@ -6,31 +6,52 @@
           <img class="groupomania-style__icon" src="../assets/icon.svg" alt="Orinoco logo" />
         </li>
         <li>
-          <button @click="toggleMenu" class="setting-button"><i class="far fa-user"></i></button>
+          <button @click="toggleMenu" class="setting-button" :class="{'setting-button--active' : clicked}"><i class="far fa-user"></i></button>
         </li>
       </ul>
     </nav>
-      <ul v-if="visible" class="menu-list">
-        <li class="menu-list__select"><i class="fas fa-cog"></i><div class="menu-list__select__name">Profile</div></li>
-        <li class="menu-list__select"><i class="fas fa-sign-out-alt"></i><div class="menu-list__select__name">Log out</div></li>
-      </ul>
+    <ul v-if="visibleMenu" class="menu-list">
+      <li @click="toggleModal" class="menu-list__select"><i class="fas fa-cog"></i><div class="menu-list__select__name">Profile</div></li>
+      <li  @click.prevent="logOut" class="menu-list__select"><i class="fas fa-sign-out-alt"></i><div class="menu-list__select__name">Log out</div></li>
+    </ul>
+    <modal :visibleModal="visibleModal" :toggleModal="toggleModal"></modal>
   </header>
 </template>
 
 <script>
+import Modal from './Modal.vue';
+
 export default {
   name: "Navbar",
+  components: { Modal },
   data () {
     return {
-        visible: false    
+      visibleMenu: false,
+      visibleModal: false    
+    }
+  },
+  computed: {
+    clicked () {
+      if(this.visibleMenu == true) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   methods: {
     toggleMenu () {
-        this.visible = !this.visible;
+      this.visibleMenu = !this.visibleMenu;
+    },
+    toggleModal () {
+      this.visibleModal = !this.visibleModal;
+    },
+    async logOut () {
+      localStorage.removeItem('token');
+      await this.$router.push('/submit');
     }
   }
-};
+}
 </script>
 
 <style scoped lang="scss">
@@ -41,6 +62,10 @@ $border-card: 25px;
 
 %shadow-card {
     box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
+}
+
+%shadow-button {
+    box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.5);
 }
 
 .navbar {
@@ -74,6 +99,11 @@ $border-card: 25px;
     cursor: pointer;
     overflow: hidden;
     outline: none;
+    &:hover, &--active {
+      background-color: $color-primary;
+      color: $color-secondary;
+      @extend %shadow-button;
+    }
 }
 
 .fa-user {
@@ -104,6 +134,7 @@ $border-card: 25px;
             background-color: $color-primary;
             border-radius: 5px;
             color: $color-tertiary;
+            cursor: pointer;
         }
      }
 }

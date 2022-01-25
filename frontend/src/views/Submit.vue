@@ -42,8 +42,9 @@ export default {
       password: ''
     }
   },
+  components: {SubmitLogo},
   computed: {
-    correctForm: function () {
+    correctForm () {
       if(this.mode == 'createAccount') {
         if (this.firstname!='' && this.lastname!='' && this.email!='' && this.password!='') {
           return true;
@@ -95,8 +96,7 @@ export default {
       }
 
       }
-  },
-  components: {SubmitLogo}
+  }
 }
 </script>
 

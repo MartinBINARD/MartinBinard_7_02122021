@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #35**
+**Main branch - Commit #36**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add Navbar component in home and toggle Menu.
-* Add switching to login form after sign up.
+* Add user profile modal window. 
+* Add logOut button.
 
 # Before to run this server
 
