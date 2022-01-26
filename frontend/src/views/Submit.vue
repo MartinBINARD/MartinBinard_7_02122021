@@ -89,7 +89,8 @@ export default {
         };
 
         const res = await Axios.post('http://localhost:3001/api/auth/login', data);
-        localStorage.setItem('token', res.data.token)
+        localStorage.setItem('token', JSON.stringify(res.data.token))
+        localStorage.setItem('userId', JSON.stringify(res.data.userId))
         await this.$router.push('/');
       } catch (error) {
         console.error(error);

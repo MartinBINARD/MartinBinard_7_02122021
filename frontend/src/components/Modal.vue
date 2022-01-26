@@ -6,9 +6,12 @@
       <div @click="toggleModal" class="modal__card__button">X</div>
       <div class="modal__card__content">
         <h2>User profile</h2>
-        <p>Firstname: </p><p>{{ user.firstname }}</p>
-        <p>Lastname: </p><p>{{ user.lastname }}</p>
-        <p>Email: </p><p>{{ user.email }}</p>
+        <div v-if="userInfo">
+          <p>Firstname: </p><p>{{ userInfo.firstname }}</p>
+          <p>Lastname: </p><p>{{ userInfo.lastname }}</p>
+          <p>Created at: </p><p>{{ userInfo.createdAt }}</p>
+          <p>Updated at: </p><p>{{ userInfo.updatedAt }}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -21,13 +24,24 @@ export default {
   name: 'Modal',
   data () {
     return {
-      user: ''
+      userInfo: null
     }
-  }, 
+  },
   props: ['visibleModal', 'toggleModal'],
   methods: {
     async getUserProfile () {
-      await Axios.get('user')
+      try {
+        let userInfo = this.userInfo;
+
+        let userId = localStorage.getItem(JSON.parse('userId'));
+        console.log(userId);
+        const res = await Axios.get(`http://localhost:3001/api/user/${userId}`);
+        userInfo = JSON.parse(res.data);
+        console.log(userInfo);
+
+      } catch(error) {
+        console.error(error);
+      }
     }
   }
 }

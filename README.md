@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #36**
+**Main branch - Commit #37**
 
 # Description
 
@@ -19,8 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add user profile modal window. 
-* Add logOut button.
+* Try to dsiplay user logged info.
 
 # Before to run this server
 

@@ -48,6 +48,7 @@ export default {
     },
     async logOut () {
       localStorage.removeItem('token');
+      localStorage.removeItem('userId');
       await this.$router.push('/submit');
     }
   }
