@@ -6,11 +6,13 @@
       <div @click="toggleModal" class="modal__card__button">X</div>
       <div class="modal__card__content">
         <h2>User profile</h2>
-        <div v-if="userInfo">
-          <p>Firstname: </p><p>{{ userInfo.firstname }}</p>
-          <p>Lastname: </p><p>{{ userInfo.lastname }}</p>
-          <p>Created at: </p><p>{{ userInfo.createdAt }}</p>
-          <p>Updated at: </p><p>{{ userInfo.updatedAt }}</p>
+        <div class="user-info" v-if="userInfo">
+          <div><p>Firstname:</p><span>{{ userInfo.firstname }}</span></div>
+          <div><p>Lastname:</p> <span>{{ userInfo.lastname }}</span></div>
+          <div><p>Created at:</p><span>{{ userInfo.createdAt }}</span></div>
+          <div><p>Updated at:</p><span>{{ userInfo.updatedAt }}</span></div>
+          <div><p>Admin:</p><span>{{ userInfo.admin }}</span></div>
+          <div><p>Active:</p><span>{{ userInfo.active }}</span></div>
         </div>
       </div>
     </div>
@@ -28,21 +30,12 @@ export default {
     }
   },
   props: ['visibleModal', 'toggleModal'],
-  methods: {
-    async getUserProfile () {
-      try {
-        let userInfo = this.userInfo;
+  mounted () {
+    let userId = localStorage.getItem('userId');
 
-        let userId = localStorage.getItem(JSON.parse('userId'));
-        console.log(userId);
-        const res = await Axios.get(`http://localhost:3001/api/user/${userId}`);
-        userInfo = JSON.parse(res.data);
-        console.log(userInfo);
-
-      } catch(error) {
-        console.error(error);
-      }
-    }
+    Axios.get(`http://localhost:3001/api/user/${userId}`)
+      .then(res => (this.userInfo = res.data))
+      .catch(error => console.log(error.message))
   }
 }
 </script>
@@ -80,6 +73,7 @@ $border-card: 25px;
   &__card {
     background-color: $color-secondary;
     padding: 2rem;
+    margin: 0.5rem;
     border-radius: $border-card;
     @extend %shadow-card;
     position: relative;
@@ -99,6 +93,18 @@ $border-card: 25px;
     }
     &__content {
       margin: 0.5rem 1.5rem 0 0;
+    }
+  }
+}
+
+.user-info {
+  margin: 0.5rem 0;
+  div {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.2rem 0;
+    span {
+    font-weight: bold;
     }
   }
 }
