@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #38**
+**Main branch - Commit #39**
 
 # Description
 
@@ -19,7 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add user info in modal window.
+* Add post input area.
 
 # Before to run this server
 

@@ -123,7 +123,7 @@ $color-secondary: #f6f6f6;
 }
 
 .submit-form__field {
-    padding: 15px;
+  padding: 15px;
 }
 
 .link__button {

@@ -22,7 +22,7 @@
 import Modal from './Modal.vue';
 
 export default {
-  name: "Navbar",
+  name: 'Navbar',
   components: { Modal },
   data () {
     return {
@@ -117,7 +117,9 @@ $border-card: 25px;
 
 .menu-list {
     z-index: 3;
-    float: right;
+    position: absolute;
+    top: 4.5rem;
+    right: 0;
     background-color: $color-tertiary;
     height: 5rem;
     width: 10rem;

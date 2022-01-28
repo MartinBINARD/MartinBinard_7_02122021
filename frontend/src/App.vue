@@ -19,6 +19,10 @@ body {
   overflow: hidden;
 }
 
+header {
+  position: relative;
+}
+
 a, li {
   font-size: 16px;
   font-weight: bold;
@@ -37,7 +41,8 @@ button, input {
 }
 
 input {
-  border-radius: 5px;
+  border-radius: 10px;
+  padding-left: 0.5rem;
   &:focus {
     outline: none !important;
     border: 2px solid $color-primary;

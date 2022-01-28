@@ -107,5 +107,5 @@ $border-card: 25px;
     font-weight: bold;
     }
   }
-}
+};
 </style>
