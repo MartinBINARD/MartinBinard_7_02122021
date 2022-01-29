@@ -4,17 +4,30 @@
       <div class="post__card">
         <div class="post__card__avatar"><i class="far fa-user"></i></div>
         <div class="post__card__content">
-          <p>Insert your post...</p>
+          <p @click="togglePost">Insert your post...</p>
         </div>
       </div>
     </div>
+    <postwindow :visiblePost="visiblePost" :togglePost="togglePost"></postwindow>
   </div>
 </template>
 
 <script>
+import Postwindow from './Postwindow.vue';
 
 export default {
-  name: "Post"
+  name: "Post",
+  components: { Postwindow },
+  data () {
+    return {
+      visiblePost: false
+    }
+  },
+  methods: {
+    togglePost () {
+      this.visiblePost = !this.visiblePost;
+    }
+  }
 };
 </script>
 
@@ -23,6 +36,10 @@ $color-primary: #1daba7;
 $color-secondary: #f6f6f6;
 $color-quaternary: #dadada;
 $border-card: 25px;
+
+%shadow-card {
+    box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
+}
 
 .post {
   z-index: 1;
@@ -37,6 +54,7 @@ $border-card: 25px;
     height: 4rem;
     width: 50%;
     border-radius: $border-card;
+    @extend %shadow-card;
     &__content {
       width: 100%;
       display: flex;
@@ -67,6 +85,18 @@ $border-card: 25px;
       border-radius: 1000px;
       border: 1px solid black;
     }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .post__card {
+    width: 65%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .post__card {
+    width: 93%;
   }
 }
 </style>

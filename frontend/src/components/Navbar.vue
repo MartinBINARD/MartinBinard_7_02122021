@@ -10,6 +10,7 @@
         </li>
       </ul>
     </nav>
+    <div v-if="visibleMenu" @click="toggleMenu" class="overlay-menu"></div>
     <ul v-if="visibleMenu" class="menu-list">
       <li @click="toggleModal" class="menu-list__select"><i class="fas fa-cog"></i><div class="menu-list__select__name">Profile</div></li>
       <li  @click.prevent="logOut" class="menu-list__select"><i class="fas fa-sign-out-alt"></i><div class="menu-list__select__name">Log out</div></li>

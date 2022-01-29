@@ -40,12 +40,12 @@ button, input {
   font-size: 20px;
 }
 
-input {
+input, textarea {
   border-radius: 10px;
   padding-left: 0.5rem;
   &:focus {
     outline: none !important;
-    border: 2px solid $color-primary;
+    border: 3px solid $color-primary;
   }
 }
 

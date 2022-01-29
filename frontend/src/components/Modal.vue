@@ -1,12 +1,12 @@
 <template>
-  <div class="modal" v-if="visibleModal">
-    <div class="overlay" @click="toggleModal"></div>
+  <div v-if="visibleModal" class="modal">
+    <div @click="toggleModal" class="overlay"></div>
 
     <div class="modal__card">
       <div @click="toggleModal" class="modal__card__button">X</div>
       <div class="modal__card__content">
         <h2>User profile</h2>
-        <div class="user-info" v-if="userInfo">
+        <div v-if="userInfo" class="user-info">
           <div><p>Firstname:</p><span>{{ userInfo.firstname }}</span></div>
           <div><p>Lastname:</p> <span>{{ userInfo.lastname }}</span></div>
           <div><p>Created at:</p><span>{{ userInfo.createdAt }}</span></div>
@@ -40,7 +40,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+// setting modal & post modal style
 $color-primary: #1daba7;
 $color-secondary: #f6f6f6;
 $color-tertiary: white;
@@ -54,7 +55,7 @@ $border-card: 25px;
     box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.5);
 }
 
-.modal, .overlay {
+.modal, .post-window, .overlay, .overlay-menu {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -66,7 +67,7 @@ $border-card: 25px;
   background: rgba(0, 0, 0, 0.3);
 }
 
-.modal {
+.modal, .post-window {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,7 +93,7 @@ $border-card: 25px;
         }
     }
     &__content {
-      margin: 0.5rem 1.5rem 0 0;
+      margin: 0.5rem 0.5rem 0 0;
     }
   }
 }
