@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <section>
+    <!-- Start of post bar -->
     <div class="post">
       <div class="post__card">
         <div class="post__card__avatar"><i class="far fa-user"></i></div>
@@ -9,7 +10,29 @@
       </div>
     </div>
     <postwindow :visiblePost="visiblePost" :togglePost="togglePost"></postwindow>
-  </div>
+    <!-- End of post bar -->
+    <!-- Start of social stream -->
+    <div class="stream">
+      <div class="stream__card">
+        <div class="stream__card__header">
+          <div class="avatar"><i class="far fa-user"></i></div>
+          <div class="user-name"></div>
+          <div class="time-stamp"></div>
+        </div>
+        <div class="stream__card__content">
+          <div class="title"></div>
+          <div class="image"></div>
+          <div class="text"></div>
+        </div>
+        <div class="stream__card__footer">
+          <div class="like"></div>
+          <div class="dislike"></div>
+          <div class="comment"></div>
+        </div>
+      </div>
+    </div>
+    <!-- End of social stream -->
+  </section>
 </template>
 
 <script>
@@ -41,6 +64,7 @@ $border-card: 25px;
     box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
 }
 
+// start of styling post bar
 .post {
   z-index: 1;
   display: flex;
@@ -99,4 +123,6 @@ $border-card: 25px;
     width: 93%;
   }
 }
+// End of styling post bar
+
 </style>

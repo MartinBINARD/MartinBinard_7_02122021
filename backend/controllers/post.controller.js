@@ -6,9 +6,15 @@ const Post = db.posts;
 
 async function createPost (req, res, next) {
     try{
+        let img = null;
+
+        if(req.file) {
+            img = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        }
+
         let infoPost = {
             ...req.body,
-            imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+            imageUrl: img
         };
 
         const newPost = await Post.create(infoPost)

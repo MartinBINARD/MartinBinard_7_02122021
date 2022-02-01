@@ -18,6 +18,7 @@ module.exports = (req, res, next) => {
         }
 
     } catch (error) {
+        console.log(error);
         res.status(403).json({ error: error | 'unauthenticated request !' })
     }
 };

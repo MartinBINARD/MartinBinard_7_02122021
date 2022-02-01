@@ -32,8 +32,12 @@ export default {
   props: ['visibleModal', 'toggleModal'],
   mounted () {
     let userId = localStorage.getItem('userId');
+    let headers = {
+      'content-type': 'application/json',
+      'authorization': 'bearer ' + localStorage.getItem('token')
+    };
 
-    Axios.get(`http://localhost:3001/api/user/${userId}`)
+    Axios.get(`http://localhost:3001/api/user/${userId}`, { headers })
       .then(res => (this.userInfo = res.data))
       .catch(error => console.log(error.message))
   }

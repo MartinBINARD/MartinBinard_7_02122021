@@ -5,7 +5,7 @@ const User = db.users;
 
 async function getOneUser (req, res, next) {
     try{
-        const oneUser = await User.findOne({ where : { user_id: req.params.id } })
+        const oneUser = await User.findOne({ where : { user_id: req.user } })
             res.status(200).send(oneUser)
     } catch (error) {
         res.status(500).json({ message: error.message })

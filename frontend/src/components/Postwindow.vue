@@ -11,7 +11,7 @@
           <textarea v-model="text" class="post-form__text" type="text" placeholder="What do you want to talk about ?" required />
         </form>
         <div class="footer">
-          <button class="button" :class="{'button--disabled' : !correctForm}" type="submit">Post</button>
+          <button @click.prevent="createPost" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Post</button>
           <button class="attachment-button"><i class="fas fa-paperclip"></i></button>
         </div>
       </div>
@@ -20,24 +20,49 @@
 </template>
 
 <script>
+import Axios from 'axios';
+
 export default {
-    name: 'Postwindow',
-    props: ['visiblePost', 'togglePost'],
-    data () {
-      return {
-        title: '',
-        text: ''
-      }
-    },
-    computed: {
-      correctForm () {
-        if(this.title!='' && this.text!=''){
-          return true;
-        } else {
-          return false
-        }
+  name: 'Postwindow',
+  props: ['visiblePost', 'togglePost'],
+  data () {
+    return {
+      title: '',
+      text: '',
+      image: ''
+    }
+  },
+  computed: {
+    correctForm () {
+      if(this.title!='' && this.text!=''){
+        return true;
+      } else {
+        return false
       }
     }
+  },
+  methods: {
+    async createPost () {
+      try {
+        const data = {
+          title: this.title,
+          text: this.text,
+          image: this.image
+        };
+        let headers = {
+          'content-type': 'application/json',
+          'authorization': 'bearer ' + localStorage.getItem('token')
+        };
+        
+        if (this.title != '' && this.text != '') {
+          await Axios.post(`http://localhost:3001/api/post`, data, { headers });
+          this.togglePost();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 }
 </script>
 
