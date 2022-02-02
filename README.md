@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #41**
+**Main branch - Commit #42**
 
 # Description
 
@@ -19,11 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add sending post data function.
-* Add empty image file case in post controller.
-* Add auth middleware to user routes.
-* Remove stringify token & id due to headers issues.
-* Remove sync force: true.
+* Add postflow template.
+* Add empty post stream message.
 
 # Before to run this server
 

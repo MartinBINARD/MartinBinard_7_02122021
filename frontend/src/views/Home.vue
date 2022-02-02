@@ -1,17 +1,17 @@
 <template>
   <div class="home">
     <Navbar/>
-    <Post/>
+    <Postbar/>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue';
-import Post from '@/components/Post.vue';
+import Postbar from '@/components/Postbar.vue';
 
 export default {
   name: 'Home',
-  components: {Navbar, Post}
+  components: {Navbar, Postbar}
 }
 </script>
 
