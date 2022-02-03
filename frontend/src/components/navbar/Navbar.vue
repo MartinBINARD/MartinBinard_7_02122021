@@ -3,7 +3,7 @@
     <nav class="navbar">
       <ul class="navbar__list">
         <li class="groupomania-style"> 
-          <img class="groupomania-style__icon" src="../assets/icon.svg" alt="Orinoco logo" />
+          <img class="groupomania-style__icon" src="../../assets/icon.svg" alt="Orinoco logo" />
         </li>
         <li>
           <button @click="toggleMenu" class="setting-button" :class="{'setting-button--active' : clicked}"><i class="far fa-user"></i></button>

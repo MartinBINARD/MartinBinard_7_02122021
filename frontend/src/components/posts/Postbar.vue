@@ -5,23 +5,23 @@
       <div class="postbar__card">
         <div class="postbar__card__avatar"><i class="far fa-user"></i></div>
         <div class="postbar__card__content">
-          <p @click="togglePost">Insert your post...</p>
+          <p @click="togglePost">Start your post...</p>
         </div>
       </div>
     </div>
     <!-- End of post bar -->
+    <postthread></postthread>
     <postwindow :visiblePost="visiblePost" :togglePost="togglePost"></postwindow>
-    <postflow></postflow>
   </section>
 </template>
 
 <script>
-import Postflow from './Postflow.vue';
+import Postthread from './Postthread.vue';
 import Postwindow from './Postwindow.vue';
 
 export default {
   name: 'Postbar',
-  components: { Postwindow, Postflow },
+  components: { Postwindow, Postthread },
   data () {
     return {
       visiblePost: false
@@ -46,11 +46,11 @@ $border-card: 25px;
 }
 
 // start of styling post bar
-.postbar, .stream {
+.postbar {
   z-index: 1;
   display: flex;
   justify-content: center;
-  align-content: center;
+  padding-top: 5rem;
   &__card {
     display: flex;
     justify-content: center;
@@ -93,13 +93,13 @@ $border-card: 25px;
 // End of styling post bar
 
 @media screen and (max-width: 768px) {
-  .postbar__card, .stream__card, .message-stream {
+  .postbar__card, .thread__card, .message-thread {
     width: 65%;
   }
 }
 
 @media screen and (max-width: 425px) {
-  .postbar__card, .stream__card, .message-stream {
+  .postbar__card, .thread__card, .message-thread {
     width: 93%;
   }
 }

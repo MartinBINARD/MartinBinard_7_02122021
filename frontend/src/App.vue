@@ -16,11 +16,12 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: $color-primary;
   max-width: 100%;
-  overflow: hidden;
 }
 
 header {
-  position: relative;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 a, li {

@@ -11,7 +11,7 @@
           <textarea v-model="text" class="post-form__text" type="text" placeholder="What do you want to talk about ?" required />
         </form>
         <div class="footer">
-          <button @click.prevent="createPost" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Post</button>
+          <button @click="createPost" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Post</button>
           <button class="attachment-button"><i class="fas fa-paperclip"></i></button>
         </div>
       </div>
