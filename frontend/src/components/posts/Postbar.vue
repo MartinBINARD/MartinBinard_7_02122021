@@ -5,13 +5,13 @@
       <div class="postbar__card">
         <div class="postbar__card__avatar"><i class="far fa-user"></i></div>
         <div class="postbar__card__content">
-          <p @click="togglePost">Start your post...</p>
+          <p @click="togglePost()">Start your post...</p>
         </div>
       </div>
     </div>
     <!-- End of post bar -->
-    <postthread></postthread>
-    <postwindow :visiblePost="visiblePost" :togglePost="togglePost"></postwindow>
+    <postthread :key="reloadPostThread"></postthread>
+    <postwindow :reloadThread="reloadThread" :visiblePost="visiblePost" :togglePost="togglePost"></postwindow>
   </section>
 </template>
 
@@ -24,12 +24,16 @@ export default {
   components: { Postwindow, Postthread },
   data () {
     return {
-      visiblePost: false
+      visiblePost: false,
+      reloadPostThread: 0
     }
   },
   methods: {
     togglePost () {
       this.visiblePost = !this.visiblePost;
+    },
+    reloadThread () {
+      this.reloadPostThread++;
     }
   }
 };

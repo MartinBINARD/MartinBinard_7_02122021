@@ -5,8 +5,8 @@
         <div class="thread__card__header">
           <div class="avatar"><i class="far fa-user"></i></div>
           <div class="user">
-            <div class="user__name">user name</div>
-            <div class="user__time-stamp">time stamp</div>
+            <div class="user__name">{{ userInfo.user_id }}</div>
+            <div class="user__time-stamp">{{ postInfos.createdAt }}</div>
           </div>
         </div>
         <div class="thread__card__content">
@@ -33,17 +33,22 @@ export default {
   name: "Postthread",
   data() {
     return {
-      postInfos: null,
+      postInfos: null
     };
   },
-  mounted() {
-    let headers = {
-      "content-type": "application/json",
-      authorization: "bearer " + localStorage.getItem("token"),
-    };
-    Axios.get(`http://localhost:3001/api/post`, { headers })
-      .then(res => (this.postInfos = res.data))
-      .catch(error => console.error(error))
+  props: ['userInfo'],
+  async mounted() {
+    try {
+      let headers = {
+        "content-type": "application/json",
+        authorization: "bearer " + localStorage.getItem("token"),
+      };
+      
+      let getPostContent = await Axios.get(`http://localhost:3001/api/post`, { headers });
+      this.postInfos = getPostContent.data;
+    } catch(error) {
+      console.error(error);
+    }
   }
 };
 </script>

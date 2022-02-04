@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #43**
+**Main branch - Commit #44**
 
 # Description
 
@@ -19,10 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add post thread display.
-* Add top fixed header.
-* Rename all stream variables or words into thread.
-* Store components in folders.
+* Add refresh post thread component.
+* Add user_id during post creation.
 
 # Before to run this server
 

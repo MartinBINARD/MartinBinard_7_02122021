@@ -18,11 +18,11 @@
         <div class="submit-form__field">
           <input v-model="password" class="form-control" type="password" placeholder="Password" required/>
         </div>
-        <button v-if="mode == 'createAccount'" @click.prevent="signUp" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Sign up</button>
-        <button v-else  @click.prevent="login" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Log in</button>
+        <button v-if="mode == 'createAccount'" @click.prevent="signUp()" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Sign up</button>
+        <button v-else  @click.prevent="login()" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Log in</button>
       </form>
       <div v-if="mode == 'createAccount'" @click.prevent="switchToLogin" class="link__button">Log in</div>
-      <div v-else @click.prevent="switchToSignup" class="link__button">Create an account</div>
+      <div v-else @click.prevent="switchToSignup()" class="link__button">Create an account</div>
     </div>
 
   </div>

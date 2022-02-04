@@ -1,9 +1,9 @@
 <template>
   <div v-if="visibleModal" class="modal">
-    <div @click="toggleModal" class="overlay"></div>
+    <div @click="toggleModal()" class="overlay"></div>
 
     <div class="modal__card">
-      <div @click="toggleModal" class="modal__card__button">X</div>
+      <div @click="toggleModal()" class="modal__card__button">X</div>
       <div class="modal__card__content">
         <h2>User profile</h2>
         <div v-if="userInfo" class="user-info">

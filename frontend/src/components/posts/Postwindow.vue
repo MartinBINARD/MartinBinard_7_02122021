@@ -1,9 +1,9 @@
 <template>
   <div v-if="visiblePost" class="post-window">
-    <div @click="togglePost" class="overlay"></div>
+    <div @click="togglePost()" class="overlay"></div>
 
     <div class="post-window__card">
-      <div @click="togglePost" class="post-window__card__button" >X</div>
+      <div @click="togglePost()" class="post-window__card__button" >X</div>
       <div class="post-window__card__content">
         <h2>Create a post</h2>
         <form class="post-form">
@@ -11,7 +11,7 @@
           <textarea v-model="text" class="post-form__text" type="text" placeholder="What do you want to talk about ?" required />
         </form>
         <div class="footer">
-          <button @click="createPost" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Post</button>
+          <button @click="createPost(); reloadThread();" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Post</button>
           <button class="attachment-button"><i class="fas fa-paperclip"></i></button>
         </div>
       </div>
@@ -24,12 +24,13 @@ import Axios from 'axios';
 
 export default {
   name: 'Postwindow',
-  props: ['visiblePost', 'togglePost'],
+  props: ['visiblePost', 'togglePost', 'reloadThread'],
   data () {
     return {
       title: '',
       text: '',
-      image: ''
+      image: '',
+      user_id: '',
     }
   },
   computed: {
@@ -47,16 +48,21 @@ export default {
         const data = {
           title: this.title,
           text: this.text,
-          image: this.image
+          image: this.image,
+          user_id: this.user_id
         };
+        data.user_id = localStorage.getItem('userId');
+        console.log(data.user_id);
+
         let headers = {
           'content-type': 'application/json',
           'authorization': 'bearer ' + localStorage.getItem('token')
         };
         
-        if (this.title != '' && this.text != '') {
+        if (this.title != '' && this.text != '' && this.user_id != '') {
           await Axios.post(`http://localhost:3001/api/post`, data, { headers });
           this.togglePost();
+          this.reloadThread();
         }
       } catch (error) {
         console.error(error);
