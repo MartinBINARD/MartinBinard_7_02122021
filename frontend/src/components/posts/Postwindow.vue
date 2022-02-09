@@ -28,9 +28,7 @@ export default {
   data () {
     return {
       title: '',
-      text: '',
-      image: '',
-      user_id: '',
+      text: ''
     }
   },
   computed: {
@@ -47,12 +45,10 @@ export default {
       try {
         const data = {
           title: this.title,
-          text: this.text,
-          image: this.image,
-          user_id: this.user_id
+          text: this.text
         };
-        data.user_id = localStorage.getItem('userId');
-        console.log(data.user_id);
+        // data.user_id = localStorage.getItem('userId');
+        // console.log(data.user_id);
 
         let headers = {
           'content-type': 'application/json',

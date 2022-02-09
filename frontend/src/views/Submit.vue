@@ -138,7 +138,7 @@ $color-secondary: #f6f6f6;
   text-align: center;
   cursor: pointer;
   &:hover {
-    filter: brightness(85%);
+    filter: brightness(90%);
   }
 } 
 

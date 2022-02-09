@@ -46,6 +46,40 @@ const User = db.users;
 //     admin: true
 // };
 
+// 1 TO MANY RELATION
+// USER/POST FOREIGN KEY
+db.users.hasMany(db.posts, {
+    foreignKey: 'userId_post_fk1',
+    as: 'userId_post'
+});
+
+db.posts.belongsTo(db.users, {
+    foreignKey: 'userId_post_fk1',
+    as: 'post_userId'
+});
+
+// USER/COMMENT FOREIGN KEY
+db.users.hasMany(db.comments, {
+    foreignKey: 'userId_comment_fk2',
+    as: 'userId_comment'
+});
+
+db.comments.belongsTo(db.users, {
+    foreignKey: 'userId_comment_fk2',
+    as: 'comment_userId'
+});
+
+// POST/COMMENT FOREIGN KEY
+db.posts.hasMany(db.comments, {
+    foreignKey: 'postId_comment_fk3',
+    as: 'postId_comment'
+});
+
+db.comments.belongsTo(db.posts, {
+    foreignKey: 'postId_comment_fk3',
+    as: 'comment_postId'
+});
+
 // SYNCHRONIZE DATA
 sequelize
     .sync()
@@ -55,21 +89,5 @@ sequelize
     .catch((error) => {
         console.log(error);
     })
-
-// 1 TO MANY RELATION
-db.users.hasMany(db.posts, {
-    foreignKey: 'user_id_fk1',
-    as: 'post'
-});
-
-db.users.hasMany(db.comments, {
-    foreignKey: 'user_id_fk2',
-    as: 'comment_user'
-});
-
-db.posts.hasMany(db.comments, {
-    foreignKey: 'post_id_fk1',
-    as: 'comment_post'
-});
 
 module.exports = db;

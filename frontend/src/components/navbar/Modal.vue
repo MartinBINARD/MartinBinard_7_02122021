@@ -96,7 +96,7 @@ $border-card: 25px;
       &:hover {
           color: $color-tertiary;
           cursor: pointer;
-          filter: brightness(85%);
+          filter: brightness(90%);
         }
     }
     &__content {

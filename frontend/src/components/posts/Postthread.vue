@@ -5,8 +5,8 @@
         <div class="thread__card__header">
           <div class="avatar"><i class="far fa-user"></i></div>
           <div class="user">
-            <div class="user__name">{{ userInfo.user_id }}</div>
-            <div class="user__time-stamp">{{ postInfos.createdAt }}</div>
+            <div class="user__name">user name</div>
+            <div class="user__time-stamp">time stamp</div>
           </div>
         </div>
         <div class="thread__card__content">
@@ -16,8 +16,8 @@
         </div>
         <div class="thread__card__footer">
           <div class="react"><i class="far fa-thumbs-up"></i></div>
-          <div class="comment"></div>
         </div>
+          <comments></comments>
       </div>
     </div>
     <div v-else class="message-thread">
@@ -28,8 +28,10 @@
 
 <script>
 import Axios from "axios";
+import Comments from '../comments/comments.vue';
 
 export default {
+  components: { Comments },
   name: "Postthread",
   data() {
     return {
@@ -80,17 +82,18 @@ $border-card: 25px;
     &__header {
       display: flex;
       align-items: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 0.5rem 0 0.5rem;
       .avatar {
-        font-size: 25px;
-        width: 31px;
-        height: 31px;
+        font-size: 48px;
+        margin: 0 0.5rem;
       }
       .user__name {
         font-weight: bold;
       }
     }
     &__content {
-      margin: 0 0.5rem;
+      margin: 1rem 0.5rem;
       .text {
         margin: 0.5rem 0;
       }
@@ -99,9 +102,10 @@ $border-card: 25px;
       border-top: 1px solid rgba(0, 0, 0, 0.2);
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
       padding: 0.5rem 0 0.5rem;
+      margin: 1.5rem 0;
       .fa-thumbs-up {
         font-size: 30px;
-        margin: 0 1rem;
+        margin: 0 1.5rem;
       }
     }
   }

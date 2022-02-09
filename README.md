@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #44**
+**Main branch - Commit #45**
 
 # Description
 
@@ -14,8 +14,8 @@ MartinBinard_7_02122021
 
 # Main goals
 
-* Use a front-end javascript framework of my choice: VueJS
-* Use SQL database manager : MySQL with Sequelize.
+* CSS style comments in post.
+* Update README.md database instructions.
 
 # Change done
 
@@ -24,7 +24,9 @@ MartinBinard_7_02122021
 
 # Before to run this server
 
-* Create a mySQL database called groupomania by default:
+* Create a mysql root user with password as : azerty or change it in the .env.example file.
+
+* Then create a mySQL database called groupomania by default:
 ```
 CREATE DATABASE groupomania;
 ```
@@ -46,7 +48,7 @@ ADMIN_PASS = INSERT ADMIN PASSWORD
 USER_CRYPTOJS_KEY = INSERT RADOM ASCII CHARACTER
 SECRET_TOKEN = INSERT RANDOM ASCII CHARACTER
 ```
-* Then create your own local database (named groupomania by default with root user).
+* Then create your own local database (named groupomania by default with root user & azerty password).
 
 # How to run this application
 
@@ -56,8 +58,10 @@ SECRET_TOKEN = INSERT RANDOM ASCII CHARACTER
 ```
 npm install
 ```
-* Launch the 2 servers :
+* Launch the 2 servers in each terminal (frontend & backend):
 ```
 npm run start
 ```
+* Then open this link: [http://localhost:8080/submit](http://localhost:8080/submit) in your favorite browser.
+
 * :warning: In order to prevent from port collisions, the API code port value is 3001, the data base port value is 3306 by default and the frontend port value is 8080.

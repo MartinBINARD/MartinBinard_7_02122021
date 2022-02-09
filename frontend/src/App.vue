@@ -67,10 +67,10 @@ button {
 }
 
 .button--disabled {
-  filter: brightness(60%);
+  filter: brightness(80%);
   &:hover {
     cursor: not-allowed;
-    filter: brightness(60%);
+    filter: brightness(70%);
   }
 }
 </style>

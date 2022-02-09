@@ -67,9 +67,11 @@ $border-card: 25px;
       width: 100%;
       p {
         width: 100%;
-        padding: 0.7rem 1rem;
+        padding: 1.3rem;
+        font-size: 20px;
         border-radius: 100px;
         border: 2px solid black;
+        background: white;
         &:hover {
           background-color: $color-quaternary;
           cursor: pointer;
@@ -80,9 +82,9 @@ $border-card: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 35px;
-      width: 50px;
-      height: 50px;
+      font-size: 48px;
+      width: 4.4rem;
+      height: 4rem;
       margin: 0.4rem;
       border-radius: 1000px;
       border: 1px solid black;
