@@ -64,9 +64,13 @@ export default {
       this.visibleModal = !this.visibleModal;
     },
     async logOut() {
-      localStorage.removeItem("token");
-      localStorage.removeItem("userId");
-      await this.$router.push("/submit");
+      try {
+        localStorage.removeItem("token");
+        localStorage.removeItem("userId");
+        await this.$router.push("/submit");
+      } catch (error) {
+        console.error(error);
+      }
     },
   },
 };

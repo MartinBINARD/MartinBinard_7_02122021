@@ -33,12 +33,12 @@ import Comments from '../comments/comments.vue';
 export default {
   components: { Comments },
   name: "Postthread",
+  props: ['userInfo'],
   data() {
     return {
       postInfos: null
     };
   },
-  props: ['userInfo'],
   async mounted() {
     try {
       let headers = {

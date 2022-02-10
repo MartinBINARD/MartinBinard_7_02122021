@@ -1,10 +1,12 @@
 <template>
+<!-- start of comment bar -->
   <div class="comment">
     <div class="comment__bar">
       <div class="comment__bar__content">
         <div class="avatar"><i class="far fa-user"></i></div>
         <form>
           <input
+            v-model="comment"
             class="comment-input"
             type="text"
             placeholder="Add a comment..."
@@ -13,38 +15,77 @@
         </form>
       </div>
       <div class="comment__bar__footer">
-        <div class="post-button">Post</div>
+        <div v-if="comment" @click="createComment()" class="post-button">Post</div>
       </div>
     </div>
-
-    <div class="comment__thread">
-      <div class="avatar"><i class="far fa-user"></i></div>
-      <div class="container">
-        <div class="container__content">
-          <div class="user">
-            <div class="user__name">user name</div>
-            <div class="user__time-stamp">time stamp</div>
+<!-- end of comment bar -->
+<!-- start of comment thread -->
+    <div v-if="commentInfos" class="comment-area">
+      <div v-for="commentInfo in commentInfos" :key="commentInfo.comment_id" class="comment__thread">
+        <div class="avatar"><i class="far fa-user"></i></div>
+        <div class="container">
+          <div class="container__content">
+            <div class="user">
+              <div class="user__name">user name</div>
+              <div class="user__time-stamp">time stamp</div>
+            </div>
+            <p class="text">{{ commentInfo.text }}</p>
           </div>
-          <p class="text">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia
-            eveniet voluptate ex blanditiis sequi laudantium cum assumenda!
-            Quod, ducimus? Numquam incidunt commodi quia tempora! Odio soluta
-            iste consectetur minus facilis.
-          </p>
-        </div>
-        <div class="container__footer">
-          <div class="like-button">Like</div>
-          <div class="like"><i class="far fa-thumbs-up"></i>0</div>
-          <div class="dislike"><i class="far fa-thumbs-down"></i>0</div>
+          <div class="container__footer">
+            <div class="like-button">Like</div>
+            <div class="like"><i class="far fa-thumbs-up"></i>0</div>
+            <div class="dislike"><i class="far fa-thumbs-down"></i>0</div>
+          </div>
         </div>
       </div>
     </div>
+<!-- end of comment thread -->
   </div>
 </template>
 
 <script>
+import Axios from 'axios';
+
 export default {
   name: "Comments",
+  data() {
+    return {
+      userId: '',
+      postId: '',
+      comment: '',
+      commentInfos: null,
+    };
+  },
+  computed: {
+    commentInputFilled() {
+      if (this.comment != "") {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+  methods: {
+    async createComment () {
+      try {
+        const data = {
+          userId: localStorage.getItem('userId'),
+          comment: this.comment
+        };
+
+        let headers = {
+          'content-type': 'application/json',
+          'authorization': 'bearer ' + localStorage.getItem('token')
+        };
+
+        if(this.comment != '') {
+          await Axios.post(`http://localhost:3001/api/comment`, data, { headers });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
 };
 </script>
 
@@ -131,7 +172,7 @@ $border-card: 25px;
 }
 
 .container__footer {
-  margin: 0.5rem 1rem;
+  margin: 0.3rem 1rem;
   align-items: center;
   .like-button,
   .like,

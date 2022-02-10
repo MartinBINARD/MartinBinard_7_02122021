@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #45**
+**Main branch - Commit #46**
 
 # Description
 
@@ -19,8 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add refresh post thread component.
-* Add user_id during post creation.
+* Add comment display functions in comment.controller.js.
 
 # Before to run this server
 
