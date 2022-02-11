@@ -3,16 +3,40 @@
     <div @click="togglePost()" class="overlay"></div>
 
     <div class="post-window__card">
-      <div @click="togglePost()" class="post-window__card__button" >X</div>
+      <div @click="togglePost()" class="post-window__card__button">X</div>
       <div class="post-window__card__content">
         <h2>Create a post</h2>
         <form class="post-form">
-          <input v-model="title" class="post-form__title" type="text" placeholder="Title">
-          <textarea v-model="text" class="post-form__text" type="text" placeholder="What do you want to talk about ?" required />
+          <input
+            v-model="title"
+            class="post-form__title"
+            type="text"
+            placeholder="Title"
+          />
+          <textarea
+            v-model="text"
+            class="post-form__text"
+            type="text"
+            placeholder="What do you want to talk about ?"
+            required
+          />
         </form>
         <div class="footer">
-          <button @click="createPost(); reloadThread();" class="button" :class="{'button--disabled' : !correctForm}" type="submit">Post</button>
-          <button class="attachment-button"><i class="fas fa-paperclip"></i></button>
+          <button
+            @click="
+              createPost();
+              reloadThread();
+            "
+            class="button"
+            :class="{ 'button--disabled': !correctForm }"
+            type="submit"
+          >
+            Post
+          </button>
+          <label class="attachment-button" for="file-image">
+            <i class="fas fa-paperclip"></i>
+            <input @change="onImageSelected()" id="file-image" type="file" ref="image"/>
+          </label>
         </div>
       </div>
     </div>
@@ -20,42 +44,44 @@
 </template>
 
 <script>
-import Axios from 'axios';
+import Axios from "axios";
 
 export default {
-  name: 'Postwindow',
-  props: ['visiblePost', 'togglePost', 'reloadThread'],
-  data () {
+  name: "Postwindow",
+  props: ["visiblePost", "togglePost", "reloadThread"],
+  data() {
     return {
       title: '',
-      text: ''
-    }
+      text: '',
+      image: '',
+    };
   },
   computed: {
-    correctForm () {
-      if(this.title!='' && this.text!=''){
+    correctForm() {
+      if (this.title != "" && this.text != "") {
         return true;
       } else {
-        return false
+        return false;
       }
-    }
+    },
   },
   methods: {
-    async createPost () {
+    onImageSelected() {
+      this.image = this.$refs.image.files[0];
+    },
+    async createPost() {
       try {
-        const data = {
-          title: this.title,
-          text: this.text
-        };
-        // data.user_id = localStorage.getItem('userId');
-        // console.log(data.user_id);
+        let data = new FormData();
+        data.append("title", this.title);
+        data.append("text", this.text);
+        data.append("image", this.image);
 
         let headers = {
-          'content-type': 'application/json',
-          'authorization': 'bearer ' + localStorage.getItem('token')
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
         };
-        
-        if (this.title != '' && this.text != '' && this.user_id != '') {
+
+        if (this.title != "" && this.text != "" && this.user_id != "") {
           await Axios.post(`http://localhost:3001/api/post`, data, { headers });
           this.togglePost();
           this.reloadThread();
@@ -63,9 +89,9 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">
@@ -74,7 +100,8 @@ $color-tertiary: white;
 
 .post-form {
   margin: 1rem 0;
-  &__title, textarea {
+  &__title,
+  textarea {
     font-size: 20px;
     width: 100%;
   }
@@ -99,13 +126,15 @@ $color-tertiary: white;
     font-size: 30px;
     background-color: transparent;
     background-repeat: no-repeat;
-    border: none;
     cursor: pointer;
     overflow: hidden;
     outline: none;
     &:hover {
       background-color: $color-primary;
       color: $color-tertiary;
+    }
+    input {
+      display: none;
     }
     .fa-paperclip {
       font-size: 25px;
