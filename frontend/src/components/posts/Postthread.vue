@@ -11,7 +11,7 @@
         </div>
         <div class="thread__card__content">
           <h2 class="title">{{ postInfo.title }}</h2>
-          <div v-if="postInfo.image" class="image">{{ postInfo.image }}</div>
+          <div v-if="postInfo.image" class="image"><img :src="postInfo.image" alt="post image"></div>
           <div class="text">{{ postInfo.text }}</div>
         </div>
         <div class="thread__card__footer">
@@ -98,8 +98,8 @@ $border-card: 25px;
         margin: 0.5rem 0;
       }
       .image {
-        width: 100%;
-        height: 20rem;
+        margin: 1rem 0;
+        border-radius: $border-card;
       }
     }
     &__footer {

@@ -11,7 +11,7 @@
     </div>
     <!-- End of post bar -->
     <postthread :key="reloadPostThread"></postthread>
-    <postwindow :reloadThread="reloadThread" :visiblePost="visiblePost" :togglePost="togglePost"></postwindow>
+    <postwindow :key="resetPostForm" :resetForm="resetForm"  :reloadThread="reloadThread" :visiblePost="visiblePost" :togglePost="togglePost"></postwindow>
   </section>
 </template>
 
@@ -25,7 +25,8 @@ export default {
   data () {
     return {
       visiblePost: false,
-      reloadPostThread: 0
+      reloadPostThread: 0,
+      resetPostForm: 0
     }
   },
   methods: {
@@ -34,6 +35,9 @@ export default {
     },
     reloadThread () {
       this.reloadPostThread++;
+    },
+    resetForm() {
+      this.resetPostForm++;
     }
   }
 };

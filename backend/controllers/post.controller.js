@@ -14,7 +14,7 @@ async function createPost (req, res, next) {
 
         let infoPost = {
             ...req.body,
-            imageUrl: img
+            image: img
         };
 
         const newPost = await Post.create(infoPost)

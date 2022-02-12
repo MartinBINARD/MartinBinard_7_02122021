@@ -20,12 +20,15 @@
             placeholder="What do you want to talk about ?"
             required
           />
+          <label for="file-image" class="attachment-button" >
+            <i class="fas fa-paperclip"></i>
+            <input @change="onImageSelected()" id="file-image" type="file" ref="image"/>
+          </label>
         </form>
         <div class="footer">
           <button
-            @click="
-              createPost();
-              reloadThread();
+            @click.prevent="
+              createPost()
             "
             class="button"
             :class="{ 'button--disabled': !correctForm }"
@@ -33,10 +36,6 @@
           >
             Post
           </button>
-          <label class="attachment-button" for="file-image">
-            <i class="fas fa-paperclip"></i>
-            <input @change="onImageSelected()" id="file-image" type="file" ref="image"/>
-          </label>
         </div>
       </div>
     </div>
@@ -48,12 +47,12 @@ import Axios from "axios";
 
 export default {
   name: "Postwindow",
-  props: ["visiblePost", "togglePost", "reloadThread"],
+  props: ["visiblePost", "togglePost", "reloadThread", "resetForm"],
   data() {
     return {
       title: '',
       text: '',
-      image: '',
+      image: null,
     };
   },
   computed: {
@@ -85,6 +84,7 @@ export default {
           await Axios.post(`http://localhost:3001/api/post`, data, { headers });
           this.togglePost();
           this.reloadThread();
+          this.resetForm();
         }
       } catch (error) {
         console.error(error);
@@ -100,6 +100,7 @@ $color-tertiary: white;
 
 .post-form {
   margin: 1rem 0;
+  position: relative;
   &__title,
   textarea {
     font-size: 20px;
@@ -109,26 +110,18 @@ $color-tertiary: white;
     height: 10rem;
     margin-top: 1rem;
   }
-}
-
-.footer {
-  position: relative;
   .attachment-button {
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 0;
+    bottom: -2.5rem;
     right: 1rem;
     height: 2.3rem;
     width: 2.3rem;
     border-radius: 500px;
     font-size: 30px;
-    background-color: transparent;
-    background-repeat: no-repeat;
     cursor: pointer;
-    overflow: hidden;
-    outline: none;
     &:hover {
       background-color: $color-primary;
       color: $color-tertiary;

@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #47**
+**Main branch - Commit #48**
 
 # Description
 
@@ -19,7 +19,9 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add image select function in post window.
+* Add post image displaying in post thread.
+* Add clearing post form method.
+* Add keeping file original name in multer middleware.
 
 # Before to run this server
 
