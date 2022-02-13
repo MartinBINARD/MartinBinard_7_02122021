@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #48**
+**Main branch - Commit #49**
 
 # Description
 
@@ -19,9 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add post image displaying in post thread.
-* Add clearing post form method.
-* Add keeping file original name in multer middleware.
+* Add foreign key to link post creation and user id.
+* Add post thread access restriction without logging.
 
 # Before to run this server
 

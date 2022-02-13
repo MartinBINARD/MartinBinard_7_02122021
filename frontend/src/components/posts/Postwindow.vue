@@ -71,9 +71,11 @@ export default {
     async createPost() {
       try {
         let data = new FormData();
-        data.append("title", this.title);
-        data.append("text", this.text);
-        data.append("image", this.image);
+
+        data.append('userUserId', localStorage.getItem('userId'));
+        data.append('title', this.title);
+        data.append('text', this.text);
+        data.append('image', this.image);
 
         let headers = {
           "content-type": "application/json",

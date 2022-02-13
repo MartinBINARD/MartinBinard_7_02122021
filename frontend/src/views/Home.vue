@@ -11,7 +11,13 @@ import Postbar from '@/components/posts/Postbar.vue';
 
 export default {
   name: 'Home',
-  components: {Navbar, Postbar}
+  components: {Navbar, Postbar},
+  mounted () {
+    let token = localStorage.getItem('token');
+    if(!token) {
+      this.$router.push('/submit');
+    }
+  }
 }
 </script>
 

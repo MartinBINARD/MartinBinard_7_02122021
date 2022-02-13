@@ -5,8 +5,8 @@
         <div class="thread__card__header">
           <div class="avatar"><i class="far fa-user"></i></div>
           <div class="user">
-            <div class="user__name">user name</div>
-            <div class="user__time-stamp">time stamp</div>
+            <div class="user__name">{{ postInfo.user.firstname }} {{ postInfo.user.lastname }}</div>
+            <div class="user__time-stamp">{{ postInfo.createdAt }}</div>
           </div>
         </div>
         <div class="thread__card__content">
@@ -98,6 +98,8 @@ $border-card: 25px;
         margin: 0.5rem 0;
       }
       .image {
+        display: flex;
+        justify-content: center;
         margin: 1rem 0;
         border-radius: $border-card;
       }

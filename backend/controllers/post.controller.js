@@ -1,8 +1,7 @@
 const db = require('../models');
-const fs = require('fs');
-const { posts } = require("../models");
 
 const Post = db.posts;
+const User = db.users;
 
 async function createPost (req, res, next) {
     try{
@@ -13,6 +12,7 @@ async function createPost (req, res, next) {
         }
 
         let infoPost = {
+            user_id: req.body.user_id,
             ...req.body,
             image: img
         };
@@ -70,7 +70,7 @@ async function deletePost (req, res, next) {
 
 async function getOnePost (req, res, next) {
     try{
-        const onePost = await Post.findOne({ where : { post_id: req.params.id } })
+        const onePost = await Post.findOne({ where : { post_id: req.params.id }, include: [User] })
             res.status(200).send(onePost)
     } catch (error) {
         res.status(500).json({ message : error.message })
@@ -80,7 +80,7 @@ async function getOnePost (req, res, next) {
 
 async function getAllPost (req, res, next) {
     try{
-        const allPost = await Post.findAll({ })
+        const allPost = await Post.findAll({ include: [User] });
             res.status(200).send(allPost)
     } catch (error) {
         res.status(500).json({ message : error.message })
