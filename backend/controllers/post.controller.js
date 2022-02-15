@@ -12,7 +12,7 @@ async function createPost (req, res, next) {
         }
 
         let infoPost = {
-            user_id: req.body.user_id,
+            user_id: req.user,
             ...req.body,
             image: img
         };
@@ -43,12 +43,12 @@ async function modifyPost (req, res, next) {
 
 async function deletePost (req, res, next) {
     try{
-        const postObject = await Post.findOne({ where : { post_id: req.params.id } })
+        const postObject = await Post.findOne({ where : { post_id: req.params.id }, include: [User] });
         
         if(!postObject) {
             res.status(404).send({ message: 'No such Post !'})
         }
-        if (postObject.userId !== req.auth.userId) {
+        if (postObject.user.user_id !== req.auth.userId) {
             res.status(400).send({ message: 'Unauthorized request !'})
         }
 
@@ -60,7 +60,7 @@ async function deletePost (req, res, next) {
         }
         
         const deletePost = await Post.destroy( { where: { post_id: req.params.id } })
-            res.status(200).send({ message: 'Post deleted !' })
+            res.status(200).send({ message: 'Post deleted !'})
         
     } catch (error) {
         res.status(500).json({ message : error.message })

@@ -1,23 +1,34 @@
 <template>
   <div class="thread">
-    <div v-if="postInfos" class="container">
-      <div v-for="postInfo in postInfos" :key="postInfo.post_id" class="thread__card">
+    <div v-if="postInfos != null" class="container">
+      <div
+        v-for="postInfo in postInfos"
+        :key="postInfo.post_id"
+        class="thread__card"
+      >
         <div class="thread__card__header">
-          <div class="avatar"><i class="far fa-user"></i></div>
-          <div class="user">
-            <div class="user__name">{{ postInfo.user.firstname }} {{ postInfo.user.lastname }}</div>
-            <div class="user__time-stamp">{{ postInfo.createdAt }}</div>
+          <div class="id-card">
+            <div class="avatar"><i class="far fa-user"></i></div>
+            <div class="user">
+              <div class="user__name">
+                {{ postInfo.user.firstname }} {{ postInfo.user.lastname }}
+              </div>
+              <div class="user__time-stamp">{{ postInfo.createdAt }}</div>
+            </div>
           </div>
+          <div @click="deletePost()" class="delete-post">Delete</div>
         </div>
         <div class="thread__card__content">
           <h2 class="title">{{ postInfo.title }}</h2>
-          <div v-if="postInfo.image" class="image"><img :src="postInfo.image" alt="post image"></div>
+          <div v-if="postInfo.image" class="image">
+            <img :src="postInfo.image" alt="post image" />
+          </div>
           <div class="text">{{ postInfo.text }}</div>
         </div>
         <div class="thread__card__footer">
           <div class="react"><i class="far fa-thumbs-up"></i></div>
         </div>
-          <comments></comments>
+        <comments></comments>
       </div>
     </div>
     <div v-else class="message-thread">
@@ -28,15 +39,15 @@
 
 <script>
 import Axios from "axios";
-import Comments from '../comments/comments.vue';
+import Comments from "../comments/comments.vue";
 
 export default {
   components: { Comments },
   name: "Postthread",
-  props: ['userInfo'],
+  props: ["userInfo"],
   data() {
     return {
-      postInfos: null
+      postInfos: null,
     };
   },
   async mounted() {
@@ -45,18 +56,45 @@ export default {
         "content-type": "application/json",
         authorization: "bearer " + localStorage.getItem("token"),
       };
-      
-      let getPostContent = await Axios.get(`http://localhost:3001/api/post`, { headers });
+
+      let getPostContent = await Axios.get(`http://localhost:3001/api/post`, {
+        headers,
+      });
       this.postInfos = getPostContent.data;
-    } catch(error) {
+    } catch (error) {
       console.error(error);
     }
-  }
+  },
+  methods: {
+    async deletePost() {
+      try {
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+
+        let getPostContent = await Axios.get(`http://localhost:3001/api/post`, {
+          headers,
+        });
+        this.postInfos = getPostContent.data;
+
+        // await Axios.delete(
+        //   `http://localhost:3001/api/post/${this.postInfos.post_id}`,
+        //   { headers }
+        // );
+        console.log(this.postInfos);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
+$color-primary: #1daba7;
 $color-secondary: #f6f6f6;
+$color-tertiary: white;
 $border-card: 25px;
 
 %shadow-card {
@@ -81,15 +119,33 @@ $border-card: 25px;
     @extend %shadow-card;
     &__header {
       display: flex;
-      align-items: center;
+      justify-content: space-between;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
       padding: 0.5rem 0 0.5rem;
-      .avatar {
-        font-size: 48px;
-        margin: 0 0.5rem;
+      .id-card {
+        display: flex;
+        align-items: center;
+        .avatar {
+          font-size: 48px;
+          margin: 0 0.5rem;
+        }
+        .user__name {
+          font-weight: bold;
+        }
       }
-      .user__name {
+      .delete-post {
+        font-size: 16px;
         font-weight: bold;
+        height: 2rem;
+        padding: 0.5rem;
+        line-height: 1rem;
+        color: black;
+        &:hover {
+          background-color: $color-primary;
+          border-radius: 5px;
+          color: $color-tertiary;
+          cursor: pointer;
+        }
       }
     }
     &__content {

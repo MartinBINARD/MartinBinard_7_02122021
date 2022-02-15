@@ -33,9 +33,7 @@
             class="button"
             :class="{ 'button--disabled': !correctForm }"
             type="submit"
-          >
-            Post
-          </button>
+          >Post</button>
         </div>
       </div>
     </div>
@@ -52,7 +50,7 @@ export default {
     return {
       title: '',
       text: '',
-      image: null,
+      image: null
     };
   },
   computed: {
@@ -91,7 +89,7 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    },
+    }
   },
 };
 </script>

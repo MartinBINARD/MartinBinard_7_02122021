@@ -1,10 +1,16 @@
 const db = require("../models");
 
 const Comment = db.comments;
+const User = db.users;
+const Post = db.posts;
 
 async function createComment(req, res, next) {
   try {
-    let infoComment = { ...req.body };
+    let infoComment = {
+      user_id: req.user,
+      post_id: req.param.post_id,
+      ...req.body
+    };
 
     const newComment = await Comment.create(infoComment);
     res.status(201).send(newComment);
@@ -58,7 +64,7 @@ async function deleteComment(req, res, next) {
 async function getOneComment(req, res, next) {
   try {
     const oneComment = await Comment.findOne({
-      where: { comment_id: req.params.id },
+      where: { comment_id: req.params.id }, include: [User, Post]
     });
     res.status(200).send(oneComment);
   } catch (error) {
@@ -68,7 +74,7 @@ async function getOneComment(req, res, next) {
 
 async function getAllComment(req, res, next) {
   try {
-    const allComment = await Comment.findAll({});
+    const allComment = await Comment.findAll({ include: [User, Post] });
     res.status(200).send(allComment);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #49**
+**Main branch - Commit #50**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add foreign key to link post creation and user id.
-* Add post thread access restriction without logging.
+* Debug delete post function in post.controller.js.
+* Add foreign keys to link comment creation, post-id and user id.
 
 # Before to run this server
 
