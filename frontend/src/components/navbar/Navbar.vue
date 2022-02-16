@@ -83,7 +83,7 @@ $color-tertiary: white;
 $border-card: 25px;
 
 %shadow-card {
-  box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
+  box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.4);
 }
 
 %shadow-button {

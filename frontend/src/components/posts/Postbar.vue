@@ -10,7 +10,7 @@
       </div>
     </div>
     <!-- End of post bar -->
-    <postthread :key="reloadPostThread"></postthread>
+    <postthread :key="reloadPostThread" :reloadThread="reloadThread"></postthread>
     <postwindow :key="resetPostForm" :resetForm="resetForm"  :reloadThread="reloadThread" :visiblePost="visiblePost" :togglePost="togglePost"></postwindow>
   </section>
 </template>

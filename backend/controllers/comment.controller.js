@@ -8,7 +8,7 @@ async function createComment(req, res, next) {
   try {
     let infoComment = {
       user_id: req.user,
-      post_id: req.param.post_id,
+      post_id: req.post,
       ...req.body
     };
 

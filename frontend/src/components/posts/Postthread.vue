@@ -16,7 +16,26 @@
               <div class="user__time-stamp">{{ postInfo.createdAt }}</div>
             </div>
           </div>
-          <div @click="deletePost()" class="delete-post">Delete</div>
+          <!-- start of post menu -->
+          <div class="menu-post">
+            <div @click="togglePostMenu(postInfo.post_id)" class="menu-post__button" :class="{ 'menu-post__button--active': clicked }">=</div>
+            <div
+              v-if="visiblePostMenu"
+              @click="togglePostMenu()"
+              class="overlay-menu"
+            ></div>
+            <ul v-if="visiblePostMenu" class="menu-post__list">
+              <li class="menu-post__list__select">
+                <div class="name">Modify</div>
+              </li>
+              <li class="menu-list__select">
+                <div @click="deletePost(postInfo.post_id)" class="name">
+                  Delete
+                </div>
+              </li>
+            </ul>
+          </div>
+          <!-- end of post menu -->
         </div>
         <div class="thread__card__content">
           <h2 class="title">{{ postInfo.title }}</h2>
@@ -44,11 +63,21 @@ import Comments from "../comments/comments.vue";
 export default {
   components: { Comments },
   name: "Postthread",
-  props: ["userInfo"],
+  props: ["userInfo", "reloadThread"],
   data() {
     return {
       postInfos: null,
+      visiblePostMenu: false
     };
+  },
+  computed: {
+    clicked() {
+      if (this.visiblePostMenu == true) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   async mounted() {
     try {
@@ -58,7 +87,7 @@ export default {
       };
 
       let getPostContent = await Axios.get(`http://localhost:3001/api/post`, {
-        headers,
+        headers
       });
       this.postInfos = getPostContent.data;
     } catch (error) {
@@ -66,23 +95,20 @@ export default {
     }
   },
   methods: {
-    async deletePost() {
+    togglePostMenu() {
+      this.visiblePostMenu = !this.visiblePostMenu;
+    },
+    async deletePost(post_id) {
       try {
         let headers = {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
 
-        let getPostContent = await Axios.get(`http://localhost:3001/api/post`, {
+        await Axios.delete(`http://localhost:3001/api/post/${post_id}`, {
           headers,
         });
-        this.postInfos = getPostContent.data;
-
-        // await Axios.delete(
-        //   `http://localhost:3001/api/post/${this.postInfos.post_id}`,
-        //   { headers }
-        // );
-        console.log(this.postInfos);
+        this.reloadThread();
       } catch (error) {
         console.error(error);
       }
@@ -98,7 +124,7 @@ $color-tertiary: white;
 $border-card: 25px;
 
 %shadow-card {
-  box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
+  box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.4);
 }
 
 .container {
@@ -187,5 +213,43 @@ $border-card: 25px;
   margin: 1rem auto;
   border-radius: $border-card;
   @extend %shadow-card;
+}
+
+// Styling menu post
+.menu-post {
+  position: relative;
+  &__button {
+    font-size: 30px;
+    font-weight: bold;
+    height: 2rem;
+    line-height: 1.5rem;
+    padding: 0.2rem 0.3rem;
+    border-radius: 5px;
+    &:hover, &--active {
+      background-color: $color-primary;
+      color: $color-tertiary;
+      cursor: pointer;
+    }
+  }
+
+  &__list {
+    position: absolute;
+    z-index: 3;
+    top: 2.5rem;
+    right: 0;
+    padding: 0.5rem;
+    background-color: $color-tertiary;
+    border-radius: 15px;
+    @extend %shadow-card;
+    .name {
+      padding: 0.5rem;
+      border-radius: 5px;
+      &:hover {
+        background-color: $color-primary;
+        color: $color-tertiary;
+        cursor: pointer;
+      }
+    }
+  }
 }
 </style>
