@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #51**
+**Main branch - Commit #52**
 
 # Description
 
@@ -19,8 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add delete function in post thread view.
-* Prepare comment creation and display.
+* Add control form in submit view and server response for log in and sign up.
 
 # Before to run this server
 
