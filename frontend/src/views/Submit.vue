@@ -173,13 +173,13 @@ export default {
       let emailRegexp = new RegExp(
         "^(([^<>()[].,;:s@]+(.[^<>()[].,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$"
       );
-      let passwordRegexp = new RegExp(
-        "^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*.]).{8,}$"
-      );
+      // let passwordRegexp = new RegExp(
+      //   "^(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+      // );
       let validFirstname = firstnameRegexp.test(this.firstname);
       let validLastname = lastnameRegexp.test(this.lastname);
       let validEmail = emailRegexp.test(this.email);
-      let validPassword = passwordRegexp.test(this.password);
+      // let validPassword = passwordRegexp.test(this.password);
 
       if (this.mode == "createAccount") {
         if (!validFirstname) {
@@ -193,10 +193,10 @@ export default {
         if (!validEmail) {
           this.error.email = "Invalid email !";
         }
-        if (!validPassword) {
-          this.error.password =
-            "Invalid password ! Mini: 8 length, Must have uppercase & lowercase letters, at least 2 digits. No spaces.";
-        }
+        // if (!validPassword) {
+        //   this.error.password =
+        //     "Invalid password ! Mini: 8 length, Must have uppercase & lowercase letters, at least 2 digits. No spaces.";
+        // }
         if (this.password != this.passwordCheck) {
           this.error.passwordCheck = "Password do not match !";
         }
@@ -205,7 +205,7 @@ export default {
           validFirstname &&
           validLastname &&
           validEmail &&
-          validPassword &&
+          // validPassword &&
           this.password == this.passwordCheck
         ) {
           return true;
@@ -228,7 +228,8 @@ export default {
           this.switchToLogin();
         }
       } catch (error) {
-        this.error.database = "Email alreday exist or database error !";
+        // this.error.database = "Email alreday exist or database error !";
+        console.error(error);
       }
     },
     async login() {

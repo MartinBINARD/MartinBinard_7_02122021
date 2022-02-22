@@ -8,10 +8,10 @@ async function createComment(req, res, next) {
   try {
     let infoComment = {
       user_id: req.user,
-      post_id: req.post,
+      post_id: req.params.post_id,
       ...req.body
     };
-
+    console.log(infoComment);
     const newComment = await Comment.create(infoComment);
     res.status(201).send(newComment);
   } catch (error) {

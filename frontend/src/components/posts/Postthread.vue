@@ -18,13 +18,13 @@
           </div>
           <!-- start of post menu -->
           <div class="menu-post">
-            <div @click="togglePostMenu(postInfo.post_id)" class="menu-post__button" :class="{ 'menu-post__button--active': clicked }">=</div>
+            <div @click="togglePostMenu(postInfo.post_id)" class="menu-post__button" :class="{ 'menu-post__button--active': clicked === postInfo.post_id }">=</div>
             <div
-              v-if="visiblePostMenu"
-              @click="togglePostMenu()"
+              v-if="visiblePostMenu && postInfo.post_id"
+              @click="togglePostMenu(postInfo.post_id)"
               class="overlay-menu"
             ></div>
-            <ul v-if="visiblePostMenu" class="menu-post__list">
+            <ul v-if="visiblePostMenu && postInfo.post_id" class="menu-post__list">
               <li class="menu-post__list__select">
                 <div class="name">Modify</div>
               </li>
@@ -67,18 +67,19 @@ export default {
   data() {
     return {
       postInfos: null,
-      visiblePostMenu: false
+      visiblePostMenu: false,
+      clicked: null
     };
   },
-  computed: {
-    clicked() {
-      if (this.visiblePostMenu == true) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-  },
+  // computed: {
+  //   clicked() {
+  //     if (this.visiblePostMenu == true) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   },
+  // },
   async mounted() {
     try {
       let headers = {
@@ -95,8 +96,11 @@ export default {
     }
   },
   methods: {
-    togglePostMenu() {
-      this.visiblePostMenu = !this.visiblePostMenu;
+    togglePostMenu(post_id) {
+      this.clicked = post_id;
+      if(this.clicked) {
+        this.visiblePostMenu = !this.visiblePostMenu;
+      }
     },
     async deletePost(post_id) {
       try {

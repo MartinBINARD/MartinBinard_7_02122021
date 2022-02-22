@@ -55,18 +55,15 @@ const User = db.users;
 // 1 TO MANY RELATION
 // USER/POST FOREIGN KEY
 db.users.hasMany(db.posts);
-
 db.posts.belongsTo(db.users);
 
-// USER/COMMENT FOREIGN KEY
-db.users.hasMany(db.comments);
-
-db.comments.belongsTo(db.users);
-
 // POST/COMMENT FOREIGN KEY
-db.posts.hasMany(db.comments);
+db.posts.hasMany(db.comments, {foreignKey : 'post_id'});
+db.comments.belongsTo(db.posts, {foreignKey : 'post_id'});
 
-db.comments.belongsTo(db.posts);
+// USER/COMMENT FOREIGN KEY
+db.users.hasMany(db.comments, {foreignKey : 'user_id'});
+db.comments.belongsTo(db.users, {foreignKey : 'user_id'});
 
 // SYNCHRONIZE DATA
 sequelize

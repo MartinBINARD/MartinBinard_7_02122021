@@ -15,7 +15,7 @@
         </form>
       </div>
       <div class="comment__bar__footer">
-        <div v-if="comment" @click="createComment(post.post_id)" class="post-button">Post</div>
+        <div v-if="comment" @click="createComment(postInfo.post_id)" class="post-button">Post</div>
       </div>
     </div>
 <!-- end of comment bar -->
@@ -48,6 +48,7 @@ import Axios from 'axios';
 
 export default {
   name: "Comments",
+  props: ["postInfo"],
   data() {
     return {
       user_id: '',
@@ -65,14 +66,14 @@ export default {
       }
     },
   },
-  async mounted() {
+  async mounted(post_id) {
     try {
       let headers = {
         "content-type": "application/json",
-        authorization: "bearer " + localStorage.getItem("token"),
+        "authorization": "bearer " + localStorage.getItem("token")
       };
 
-      let getCommentContent = await Axios.get(`http://localhost:3001/api/comment/${this.post_id}`, {
+      let getCommentContent = await Axios.get(`http://localhost:3001/api/comment/${post_id}`, {
         headers
       });
       this.commentInfos = getCommentContent.data;
@@ -81,21 +82,17 @@ export default {
     }
   },
   methods: {
-    async createComment() {
+    async createComment(post_id) {
       try {
-        let data = new FormData();
-
-        data.append('userUserId', localStorage.getItem('userId'));
-        data.append('postPostId', this.post_id)
-        data.append('text', this.text);
+        let data = this.text;
 
         let headers = {
           'content-type': 'application/json',
           'authorization': 'bearer ' + localStorage.getItem('token')
         };
 
-        if(this.comment != '' && this.post_id != "") {
-          await Axios.post(`http://localhost:3001/api/comment`, data, { headers });
+        if(this.comment != '') {
+          await Axios.post(`http://localhost:3001/api/comment/${post_id}`, data, { headers });
         }
       } catch (error) {
         console.error(error);
