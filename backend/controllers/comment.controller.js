@@ -64,7 +64,7 @@ async function deleteComment(req, res, next) {
 async function getOneComment(req, res, next) {
   try {
     const oneComment = await Comment.findOne({
-      where: { comment_id: req.params.id }, include: [User, Post]
+      where: { post_id: req.params.post_id, comment_id: req.params.id }, include: [User, Post]
     });
     res.status(200).send(oneComment);
   } catch (error) {
@@ -74,7 +74,7 @@ async function getOneComment(req, res, next) {
 
 async function getAllComment(req, res, next) {
   try {
-    const allComment = await Comment.findAll({ include: [User, Post] });
+    const allComment = await Comment.findAll({ where: { post_id: req.params.post_id }, include: [User, Post] });
     res.status(200).send(allComment);
   } catch (error) {
     res.status(500).json({ message: error.message });

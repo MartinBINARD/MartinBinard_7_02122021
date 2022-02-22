@@ -1,5 +1,5 @@
 <template>
-<!-- start of comment bar -->
+  <!-- start of comment bar -->
   <div class="comment">
     <div class="comment__bar">
       <div class="comment__bar__content">
@@ -7,6 +7,7 @@
         <form>
           <input
             v-model="comment"
+            :id="`comment_${postInfo.post_id}`"
             class="comment-input"
             type="text"
             placeholder="Add a comment..."
@@ -15,45 +16,61 @@
         </form>
       </div>
       <div class="comment__bar__footer">
-        <div v-if="comment" @click="createComment(postInfo.post_id)" class="post-button">Post</div>
+        <div
+          v-if="comment"
+          @click="createComment(postInfo.post_id)"
+          class="post-button"
+        >
+          Post
+        </div>
       </div>
     </div>
-<!-- end of comment bar -->
-<!-- start of comment thread -->
+    <!-- end of comment bar -->
+    <!-- start of comment thread -->
     <div v-if="commentInfos" class="comment-area">
-      <div v-for="commentInfo in commentInfos" :key="commentInfo.comment_id" class="comment__thread">
+      <div
+        v-for="commentInfo in commentInfos"
+        :key="commentInfo.comment_id"
+        class="comment__thread"
+      >
         <div class="avatar"><i class="far fa-user"></i></div>
         <div class="container">
           <div class="container__content">
             <div class="user">
-              <div class="user__name">{{ commentInfo.user.firstname }} {{ commentInfos.user.lastname }}</div>
+              <div class="user__name">
+                {{ commentInfo.user.firstname }}
+                {{ commentInfos.user.lastname }}
+              </div>
               <div class="user__time-stamp">{{ commentInfo.createdAt }}</div>
             </div>
             <p class="text">{{ commentInfo.text }}</p>
           </div>
           <div class="container__footer">
             <div class="like-button">Like</div>
-            <div class="like"><i class="far fa-thumbs-up"></i>{{ commentInfo.comment_like }}</div>
-            <div class="dislike"><i class="far fa-thumbs-down"></i>{{ commentInfo.comment_dislike }}</div>
+            <div class="like">
+              <i class="far fa-thumbs-up"></i>{{ commentInfo.comment_like }}
+            </div>
+            <div class="dislike">
+              <i class="far fa-thumbs-down"></i
+              >{{ commentInfo.comment_dislike }}
+            </div>
           </div>
         </div>
       </div>
     </div>
-<!-- end of comment thread -->
+    <!-- end of comment thread -->
   </div>
 </template>
 
 <script>
-import Axios from 'axios';
+import Axios from "axios";
 
 export default {
   name: "Comments",
   props: ["postInfo"],
   data() {
     return {
-      user_id: '',
-      post_id: '',
-      comment: '',
+      comment: "",
       commentInfos: null,
     };
   },
@@ -70,12 +87,15 @@ export default {
     try {
       let headers = {
         "content-type": "application/json",
-        "authorization": "bearer " + localStorage.getItem("token")
+        authorization: "bearer " + localStorage.getItem("token"),
       };
 
-      let getCommentContent = await Axios.get(`http://localhost:3001/api/comment/${post_id}`, {
-        headers
-      });
+      let getCommentContent = await Axios.get(
+        `http://localhost:3001/api/comment/${post_id}`,
+        {
+          headers,
+        }
+      );
       this.commentInfos = getCommentContent.data;
     } catch (error) {
       console.error(error);
@@ -84,21 +104,27 @@ export default {
   methods: {
     async createComment(post_id) {
       try {
-        let data = this.text;
-
-        let headers = {
-          'content-type': 'application/json',
-          'authorization': 'bearer ' + localStorage.getItem('token')
+        let data = {
+          text: document.getElementById("comment_" + post_id).value,
         };
 
-        if(this.comment != '') {
-          await Axios.post(`http://localhost:3001/api/comment/${post_id}`, data, { headers });
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+
+        if (this.comment != "") {
+          await Axios.post(
+            `http://localhost:3001/api/comment/${post_id}`,
+            data,
+            { headers }
+          );
         }
       } catch (error) {
         console.error(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -18,13 +18,21 @@
           </div>
           <!-- start of post menu -->
           <div class="menu-post">
-            <div @click="togglePostMenu(postInfo.post_id)" class="menu-post__button" :class="{ 'menu-post__button--active': clicked === postInfo.post_id }">=</div>
             <div
-              v-if="visiblePostMenu && postInfo.post_id"
               @click="togglePostMenu(postInfo.post_id)"
+              class="menu-post__button"
+              :class="{
+                'menu-post__button--active': clicked(postInfo.post_id),
+              }"
+            >
+              =
+            </div>
+            <div
+              v-if="clicked(postInfo.post_id)"
+              @click="togglePostMenu(0)"
               class="overlay-menu"
             ></div>
-            <ul v-if="visiblePostMenu && postInfo.post_id" class="menu-post__list">
+            <ul v-if="clicked(postInfo.post_id)" class="menu-post__list">
               <li class="menu-post__list__select">
                 <div class="name">Modify</div>
               </li>
@@ -47,7 +55,7 @@
         <div class="thread__card__footer">
           <div class="react"><i class="far fa-thumbs-up"></i></div>
         </div>
-        <comments></comments>
+        <comments :postInfo="postInfo"></comments>
       </div>
     </div>
     <div v-else class="message-thread">
@@ -68,18 +76,9 @@ export default {
     return {
       postInfos: null,
       visiblePostMenu: false,
-      clicked: null
     };
   },
-  // computed: {
-  //   clicked() {
-  //     if (this.visiblePostMenu == true) {
-  //       return true;
-  //     } else {
-  //       return false;
-  //     }
-  //   },
-  // },
+  computed: {},
   async mounted() {
     try {
       let headers = {
@@ -88,7 +87,7 @@ export default {
       };
 
       let getPostContent = await Axios.get(`http://localhost:3001/api/post`, {
-        headers
+        headers,
       });
       this.postInfos = getPostContent.data;
     } catch (error) {
@@ -97,9 +96,13 @@ export default {
   },
   methods: {
     togglePostMenu(post_id) {
-      this.clicked = post_id;
-      if(this.clicked) {
-        this.visiblePostMenu = !this.visiblePostMenu;
+      this.visiblePostMenu = post_id;
+    },
+    clicked(post_id) {
+      if (this.visiblePostMenu === post_id) {
+        return true;
+      } else {
+        return false;
       }
     },
     async deletePost(post_id) {
@@ -229,7 +232,8 @@ $border-card: 25px;
     line-height: 1.5rem;
     padding: 0.2rem 0.3rem;
     border-radius: 5px;
-    &:hover, &--active {
+    &:hover,
+    &--active {
       background-color: $color-primary;
       color: $color-tertiary;
       cursor: pointer;

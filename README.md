@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #53**
+**Main branch - Commit #54**
 
 # Description
 
@@ -19,7 +19,10 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Change toggle Postmenu function.
+* Debug toggle post menu.
+* Add post comment in comment.vue.
+* change getOneComment route.
+* Add post_id in getAllComment controlller function.
 
 # Before to run this server
 
