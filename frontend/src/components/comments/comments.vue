@@ -38,8 +38,7 @@
           <div class="container__content">
             <div class="user">
               <div class="user__name">
-                {{ commentInfo.user.firstname }}
-                {{ commentInfos.user.lastname }}
+                {{ commentInfo.user.firstname }} {{ commentInfo.user.lastname }}
               </div>
               <div class="user__time-stamp">{{ commentInfo.createdAt }}</div>
             </div>
@@ -54,6 +53,7 @@
               <i class="far fa-thumbs-down"></i
               >{{ commentInfo.comment_dislike }}
             </div>
+            <div class="delete-button">Delete</div>
           </div>
         </div>
       </div>
@@ -67,7 +67,7 @@ import Axios from "axios";
 
 export default {
   name: "Comments",
-  props: ["postInfo"],
+  props: ["postInfo", "post_id"],
   data() {
     return {
       comment: "",
@@ -83,7 +83,7 @@ export default {
       }
     },
   },
-  async mounted(post_id) {
+  async mounted() {
     try {
       let headers = {
         "content-type": "application/json",
@@ -91,7 +91,7 @@ export default {
       };
 
       let getCommentContent = await Axios.get(
-        `http://localhost:3001/api/comment/${post_id}`,
+        `http://localhost:3001/api/comment/${this.post_id}`,
         {
           headers,
         }
@@ -120,6 +120,20 @@ export default {
             { headers }
           );
         }
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteComment(comment_id) {
+      try {
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+
+        await Axios.delete(`http://localhost:3001/api/comment/${comment_id}`, {
+          headers,
+        });
       } catch (error) {
         console.error(error);
       }

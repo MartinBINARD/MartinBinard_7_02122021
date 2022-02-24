@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #54**
+**Main branch - Commit #55**
 
 # Description
 
@@ -19,10 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Debug toggle post menu.
-* Add post comment in comment.vue.
-* change getOneComment route.
-* Add post_id in getAllComment controlller function.
+* Debug comment display function in comment.vue.
+* Add new instruction in README.md.
 
 # Before to run this server
 
@@ -51,6 +49,8 @@ USER_CRYPTOJS_KEY = INSERT RADOM ASCII CHARACTER
 SECRET_TOKEN = INSERT RANDOM ASCII CHARACTER
 ```
 * Then create your own local database (named groupomania by default with root user & azerty password).
+
+* In the root of the `/backend` folder, rename the folder called `/images.example` to `/images`.
 
 # How to run this application
 

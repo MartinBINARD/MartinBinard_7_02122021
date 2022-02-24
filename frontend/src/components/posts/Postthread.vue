@@ -55,7 +55,7 @@
         <div class="thread__card__footer">
           <div class="react"><i class="far fa-thumbs-up"></i></div>
         </div>
-        <comments :postInfo="postInfo"></comments>
+        <comments :postInfo="postInfo" :post_id="postInfo.post_id"></comments>
       </div>
     </div>
     <div v-else class="message-thread">
