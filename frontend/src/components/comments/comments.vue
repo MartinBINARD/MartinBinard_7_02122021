@@ -53,8 +53,33 @@
               <i class="far fa-thumbs-down"></i
               >{{ commentInfo.comment_dislike }}
             </div>
-            <div class="delete-button">Delete</div>
           </div>
+        </div>
+        <div class="menu-comment">
+          <div
+            @click="toggleCommentMenu(commentInfo.comment_id)"
+            class="menu-comment__button"
+            :class="{
+              'menu-comment__button--active': clicked(commentInfo.comment_id)
+            }"
+          >
+            ...
+          </div>
+          <div
+            v-if="clicked(commentInfo.comment_id)"
+            @click="toggleCommentMenu(0)"
+            class="overlay-menu"
+          ></div>
+          <ul v-if="clicked(commentInfo.comment_id)" class="menu-comment__list">
+              <li class="menu-comment__list__select">
+                <div class="name">Modify</div>
+              </li>
+              <li class="menu-comment__select">
+                <div @click="deleteComment(commentInfo.commend_id)" class="name">
+                  Delete
+                </div>
+              </li>
+            </ul>
         </div>
       </div>
     </div>
@@ -72,16 +97,8 @@ export default {
     return {
       comment: "",
       commentInfos: null,
+      visibleCommentMenu: false
     };
-  },
-  computed: {
-    commentInputFilled() {
-      if (this.comment != "") {
-        return true;
-      } else {
-        return false;
-      }
-    },
   },
   async mounted() {
     try {
@@ -102,6 +119,16 @@ export default {
     }
   },
   methods: {
+    toggleCommentMenu(comment_id) {
+      this.visibleCommentMenu = comment_id;
+    },
+    clicked(comment_id) {
+      if(this.visibleCommentMenu === comment_id) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     async createComment(post_id) {
       try {
         let data = {
@@ -145,6 +172,7 @@ export default {
 <style lang="scss" scoped>
 $color-primary: #1daba7;
 $color-secondary: #f6f6f6;
+$color-tertiary: white;
 $color-quinary: #e3e3e3;
 $border-card: 25px;
 
@@ -207,13 +235,54 @@ $border-card: 25px;
   margin: 1rem 0;
   .avatar {
     font-size: 30px;
-    margin: 0.5rem;
+    margin: 0 0.2rem 0 0;
+  }
+  .menu-comment {
+    position: relative;
+    &__button {
+    font-size: 30px;
+    font-weight: bold;
+    height: 1.5rem;
+    line-height: 0.1rem;
+    padding: 0.2rem 0.5rem;
+    margin: 0 0.3rem;
+    border-radius: 5px;
+    &:hover,
+    &--active {
+      background-color: $color-primary;
+      color: $color-tertiary;
+      cursor: pointer;
+      }
+    }
+
+    &__list {
+    position: absolute;
+    z-index: 3;
+    top: 2rem;
+    right: 1rem;
+    padding: 0.5rem;
+    background-color: $color-tertiary;
+    border-radius: 15px;
+    @extend %shadow-card;
+    .name {
+      padding: 0.5rem;
+      border-radius: 5px;
+      &:hover {
+        background-color: $color-primary;
+        color: $color-tertiary;
+        cursor: pointer;
+      }
+    }
+  }
   }
 }
+
 .container,
 .container__content {
   flex-direction: column;
+  width: 100%;
 }
+
 .container__content {
   background-color: $color-quinary;
   border-radius: $border-card;

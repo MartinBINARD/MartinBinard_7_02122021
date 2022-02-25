@@ -19,7 +19,7 @@
           <!-- start of post menu -->
           <div class="menu-post">
             <div
-              @click="togglePostMenu(postInfo.post_id)"
+              @click="togglePost(postInfo.post_id)"
               class="menu-post__button"
               :class="{
                 'menu-post__button--active': clicked(postInfo.post_id),
@@ -29,7 +29,7 @@
             </div>
             <div
               v-if="clicked(postInfo.post_id)"
-              @click="togglePostMenu(0)"
+              @click="togglePost(0)"
               class="overlay-menu"
             ></div>
             <ul v-if="clicked(postInfo.post_id)" class="menu-post__list">
@@ -75,10 +75,9 @@ export default {
   data() {
     return {
       postInfos: null,
-      visiblePostMenu: false,
+      visiblePost: false,
     };
   },
-  computed: {},
   async mounted() {
     try {
       let headers = {
@@ -95,11 +94,11 @@ export default {
     }
   },
   methods: {
-    togglePostMenu(post_id) {
-      this.visiblePostMenu = post_id;
+    togglePost(post_id) {
+      this.visiblePost = post_id;
     },
     clicked(post_id) {
-      if (this.visiblePostMenu === post_id) {
+      if (this.visiblePost === post_id) {
         return true;
       } else {
         return false;
@@ -124,7 +123,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $color-primary: #1daba7;
 $color-secondary: #f6f6f6;
 $color-tertiary: white;
@@ -147,7 +146,6 @@ $border-card: 25px;
     margin: 0.5rem auto;
     background-color: $color-secondary;
     padding: 1rem;
-    width: 50%;
     border-radius: $border-card;
     @extend %shadow-card;
     &__header {
@@ -258,6 +256,12 @@ $border-card: 25px;
         cursor: pointer;
       }
     }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .thread__card {
+    padding: 0.3rem;
   }
 }
 </style>

@@ -30,10 +30,10 @@ export default {
     }
   },
   methods: {
-    togglePost () {
+    togglePost() {
       this.visiblePost = !this.visiblePost;
     },
-    reloadThread () {
+    reloadThread() {
       this.reloadPostThread++;
     },
     resetForm() {
@@ -102,9 +102,15 @@ $border-card: 25px;
 }
 // End of styling post bar
 
+@media screen and (min-width: 768px) {
+  .postbar__card, .thread__card, .message-thread {
+    width: 50%;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .postbar__card, .thread__card, .message-thread {
-    width: 65%;
+    width: 70%;
   }
 }
 
@@ -113,5 +119,4 @@ $border-card: 25px;
     width: 93%;
   }
 }
-
 </style>

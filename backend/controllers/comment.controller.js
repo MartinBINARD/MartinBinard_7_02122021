@@ -40,7 +40,7 @@ async function modifyComment(req, res, next) {
 async function deleteComment(req, res, next) {
   try {
     const commentObject = await Comment.findOne({
-      where: { post_id: req.params.id },
+      where: { comment_id: req.params.id },
     });
 
     if (!commentObject) {
