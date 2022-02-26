@@ -18,12 +18,6 @@ body {
   max-width: 100%;
 }
 
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
 a, li {
   font-size: 16px;
   font-weight: bold;

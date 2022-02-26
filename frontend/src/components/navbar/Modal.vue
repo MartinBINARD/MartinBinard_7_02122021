@@ -7,12 +7,39 @@
       <div class="modal__card__content">
         <h2>User profile</h2>
         <div v-if="userInfo" class="user-info">
-          <div><p>Firstname:</p><span>{{ userInfo.firstname }}</span></div>
-          <div><p>Lastname:</p> <span>{{ userInfo.lastname }}</span></div>
-          <div><p>Created at:</p><span>{{ userInfo.createdAt }}</span></div>
-          <div><p>Updated at:</p><span>{{ userInfo.updatedAt }}</span></div>
-          <div><p>Admin:</p><span>{{ userInfo.admin }}</span></div>
-          <div><p>Active:</p><span>{{ userInfo.active }}</span></div>
+          <div class="user-avatar">
+            <div v-if="userInfo.avatar" class="user-avatar__own">
+              {{ userInfo.avatar }}
+            </div>
+            <div v-if="!userInfo.avatar" class="user-avatar__empty">
+              <i class="far fa-user"></i>
+            </div>
+          </div>
+          <div class="change-avatar">Modify avatar</div>
+          <div>
+            <p>Firstname:</p>
+            <span>{{ userInfo.firstname }}</span>
+          </div>
+          <div>
+            <p>Lastname:</p>
+            <span>{{ userInfo.lastname }}</span>
+          </div>
+          <div>
+            <p>Created at:</p>
+            <span>{{ userInfo.createdAt }}</span>
+          </div>
+          <div>
+            <p>Updated at:</p>
+            <span>{{ userInfo.updatedAt }}</span>
+          </div>
+          <div>
+            <p>Admin:</p>
+            <span>{{ userInfo.admin }}</span>
+          </div>
+          <div>
+            <p>Active:</p>
+            <span>{{ userInfo.active }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -20,31 +47,34 @@
 </template>
 
 <script>
-import Axios from 'axios';
+import Axios from "axios";
 
 export default {
-  name: 'Modal',
-  data () {
+  name: "Modal",
+  data() {
     return {
-      userInfo: null
-    }
+      userInfo: null,
+    };
   },
-  props: ['visibleModal', 'toggleModal'],
-  async mounted () {
+  props: ["visibleModal", "toggleModal"],
+  async mounted() {
     try {
-      let userId = localStorage.getItem('userId');
+      let userId = localStorage.getItem("userId");
       let headers = {
-        'content-type': 'application/json',
-        'authorization': 'bearer ' + localStorage.getItem('token')
+        "content-type": "application/json",
+        authorization: "bearer " + localStorage.getItem("token"),
       };
 
-      let getOneUserInfo = await Axios.get(`http://localhost:3001/api/user/${userId}`, { headers });
+      let getOneUserInfo = await Axios.get(
+        `http://localhost:3001/api/user/${userId}`,
+        { headers }
+      );
       this.userInfo = getOneUserInfo.data;
     } catch (error) {
       console.error(error);
     }
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
@@ -55,14 +85,17 @@ $color-tertiary: white;
 $border-card: 25px;
 
 %shadow-card {
-    box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
+  box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
 }
 
 %shadow-button {
-    box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.5);
+  box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.5);
 }
 
-.modal, .post-window, .overlay, .overlay-menu {
+.modal,
+.post-window,
+.overlay,
+.overlay-menu {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -74,7 +107,8 @@ $border-card: 25px;
   background: rgba(0, 0, 0, 0.3);
 }
 
-.modal, .post-window {
+.modal,
+.post-window {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,10 +128,10 @@ $border-card: 25px;
       border-radius: 5px;
       font-weight: bold;
       &:hover {
-          color: $color-tertiary;
-          cursor: pointer;
-          filter: brightness(90%);
-        }
+        color: $color-tertiary;
+        cursor: pointer;
+        filter: brightness(90%);
+      }
     }
     &__content {
       margin: 0.5rem 0.5rem 0 0;
@@ -112,8 +146,22 @@ $border-card: 25px;
     justify-content: space-between;
     margin: 0.2rem 0;
     span {
-    font-weight: bold;
+      font-weight: bold;
     }
   }
-};
+
+  .user-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__empty {
+      .fa-user {
+        font-size: 48px;
+        padding: 0.7rem 1rem;
+        border-radius: 1000px;
+        border: 1px solid black;
+      }
+    }
+  }
+}
 </style>

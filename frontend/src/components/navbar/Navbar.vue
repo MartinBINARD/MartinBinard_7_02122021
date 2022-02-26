@@ -91,6 +91,11 @@ $border-card: 25px;
 }
 
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
   background-color: $color-tertiary;
   margin: 0.5rem;
   border-radius: 25px;

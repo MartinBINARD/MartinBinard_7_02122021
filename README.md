@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #56**
+**Main branch - Commit #57**
 
 # Description
 
@@ -19,7 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add delete comment function and toggle comment menu in vue.
+* Add avatar user.
+* Fix post menu & comment menu buttons overlapping topbar.
 
 # Before to run this server
 

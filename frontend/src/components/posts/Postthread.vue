@@ -240,7 +240,6 @@ $border-card: 25px;
 
   &__list {
     position: absolute;
-    z-index: 3;
     top: 2.5rem;
     right: 0;
     padding: 0.5rem;
