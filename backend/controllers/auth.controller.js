@@ -18,17 +18,11 @@ async function signup (req, res, next) {
         // CHECK IF EMAIL IS ALREADY USED BEFORE ENCRYPTING
         const emailTaken = await User.findOne({ where: { email: cryptoMail }});
         
-        let userAvatar = null;
-
-        if (req.file) {
-            userAvatar = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        }
         // USER INFO
         let userInfo = {
             ...req.body,
             email: cryptoMail,
-            password: bcryptPass,
-            avatar: userAvatar
+            password: bcryptPass
         };
 
         if (emailTaken) {

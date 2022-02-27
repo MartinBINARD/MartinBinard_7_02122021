@@ -30,10 +30,10 @@ async function modifyPost (req, res, next) {
         let postObject = req.file ?
             {
                 ...JSON.parse(req.body.infoPost),
-                imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+                image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
             } : { ...req.body };
 
-        const updatePost = await Post.udpateOne({ post_id : req.params.id }, { ...postObject, post_id: req.params.id })
+        const updatePost = await Post.udpate({ ...postObject, post_id: req.params.id }, { where: { post_id : req.params.id } });
             res.status(201).send(updatePost)
     } catch (error) {
         res.status(500).json({ message : error.message })
@@ -52,8 +52,8 @@ async function deletePost (req, res, next) {
             res.status(400).send({ message: 'Unauthorized request !'})
         }
 
-        if( postObject.imageUrl != null) {
-            const filename = postObject.imageUrl.split('/images')[1];
+        if( postObject.image != null) {
+            const filename = postObject.image.split('/images')[1];
             fs.unlink(`images/${filename}`, (error) => {
                 console.log(error);
             })

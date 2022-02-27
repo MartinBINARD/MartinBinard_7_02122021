@@ -23,4 +23,20 @@ async function getAllUser (req, res, next) {
     }
 };
 
-module.exports = { getOneUser, getAllUser };
+async function modifyUser (req, res, next) {
+    try {
+        let userObject = req.file ?
+            {
+                ...JSON.parse(req.body.userInfo),
+                avatar: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+            } : { ...req.body };
+        
+        const updateUser = await User.update({ ...userObject, user_id : req.params.id}, { where: { user_id : req.params.id } });
+            res.status(201).send(updateUser)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+        next();
+    }
+}
+
+module.exports = { getOneUser, getAllUser, modifyUser };

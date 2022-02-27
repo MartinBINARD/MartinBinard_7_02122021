@@ -24,7 +24,7 @@ module.exports = (sequelize, Datatypes) => {
             allowNull: false
         },
         avatar: {
-            type: Datatypes.STRING(45),
+            type: Datatypes.STRING(200),
             allowNull: true,
             defaultValue: null
         },

@@ -20,20 +20,25 @@
             placeholder="What do you want to talk about ?"
             required
           />
-          <label for="file-image" class="attachment-button" >
+          <label for="file-image" class="attachment-button">
             <i class="fas fa-paperclip"></i>
-            <input @change="onImageSelected()" id="file-image" type="file" ref="image"/>
+            <input
+              @change="onImageSelected()"
+              id="file-image"
+              type="file"
+              ref="image"
+            />
           </label>
         </form>
         <div class="footer">
           <button
-            @click.prevent="
-              createPost()
-            "
+            @click.prevent="createPost()"
             class="button"
             :class="{ 'button--disabled': !correctForm }"
             type="submit"
-          >Post</button>
+          >
+            Post
+          </button>
         </div>
       </div>
     </div>
@@ -48,9 +53,9 @@ export default {
   props: ["visiblePost", "togglePost", "reloadThread", "resetForm"],
   data() {
     return {
-      title: '',
-      text: '',
-      image: null
+      title: "",
+      text: "",
+      image: null,
     };
   },
   computed: {
@@ -70,10 +75,10 @@ export default {
       try {
         let data = new FormData();
 
-        data.append('userUserId', localStorage.getItem('userId'));
-        data.append('title', this.title);
-        data.append('text', this.text);
-        data.append('image', this.image);
+        data.append("userUserId", localStorage.getItem("userId"));
+        data.append("title", this.title);
+        data.append("text", this.text);
+        data.append("image", this.image);
 
         let headers = {
           "content-type": "application/json",
@@ -89,7 +94,7 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    }
+    },
   },
 };
 </script>

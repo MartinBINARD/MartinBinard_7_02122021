@@ -9,13 +9,21 @@
         <div v-if="userInfo" class="user-info">
           <div class="user-avatar">
             <div v-if="userInfo.avatar" class="user-avatar__own">
-              {{ userInfo.avatar }}
+              <img :src="userInfo.avatar" alt="user avatar" />
             </div>
             <div v-if="!userInfo.avatar" class="user-avatar__empty">
               <i class="far fa-user"></i>
             </div>
           </div>
-          <div class="change-avatar">Modify avatar</div>
+          <label for="file-image" class="attachment-avatar">
+            <div class="change-avatar">Modify</div>
+            <input
+              @change="onAvatarSelected()"
+              id="file-image"
+              type="file"
+              ref="avatar"
+            />
+          </label>
           <div>
             <p>Firstname:</p>
             <span>{{ userInfo.firstname }}</span>
@@ -41,6 +49,13 @@
             <span>{{ userInfo.active }}</span>
           </div>
         </div>
+        <button
+          @click.prevent="uploadAvatar(userInfo.user_id)"
+          class="button"
+          :class="{ 'button--disabled': !avatar }"
+        >
+          Save
+        </button>
       </div>
     </div>
   </div>
@@ -54,6 +69,7 @@ export default {
   data() {
     return {
       userInfo: null,
+      avatar: "",
     };
   },
   props: ["visibleModal", "toggleModal"],
@@ -73,6 +89,30 @@ export default {
     } catch (error) {
       console.error(error);
     }
+  },
+  methods: {
+    onAvatarSelected() {
+      this.avatar = this.$refs.avatar.files[0];
+    },
+    async uploadAvatar(user_id) {
+      try {
+        let data = new FormData();
+        data.append("avatar", this.avatar);
+
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+
+        if (this.avatar) {
+          await Axios.put(`http://localhost:3001/api/user/${user_id}`, data, {
+            headers,
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };
 </script>
@@ -141,12 +181,32 @@ $border-card: 25px;
 
 .user-info {
   margin: 0.5rem 0;
+  position: relative;
   div {
     display: flex;
     justify-content: space-between;
     margin: 0.2rem 0;
     span {
       font-weight: bold;
+    }
+  }
+
+  .attachment-avatar {
+    input {
+      display: none;
+    }
+    .change-avatar {
+      font-weight: bold;
+      cursor: pointer;
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 0.3rem;
+      border-radius: 5px;
+      &:hover {
+        color: $color-tertiary;
+        background-color: $color-primary;
+      }
     }
   }
 
