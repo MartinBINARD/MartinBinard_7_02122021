@@ -53,7 +53,23 @@
           <div class="text">{{ postInfo.text }}</div>
         </div>
         <div class="thread__card__footer">
-          <div class="react"><i class="far fa-thumbs-up"></i></div>
+          <div class="react">
+            <div
+              @click="likePost(postInfo.post__id)"
+              class="react__like-button"
+            >
+              <i class="far fa-thumbs-up foward"></i>
+              <!-- <i class="far fa-thumbs-up backward"></i> -->
+            </div>
+            <div class="react__like-count">{{ postInfo.post__like }}</div>
+          </div>
+          <div @click="dislikePost(posInfo.post_id)" class="react">
+            <div class="react__dislike-button">
+              <i class="far fa-thumbs-down foward"></i>
+              <!-- <i class="far fa-thumbs-down backward"></i> -->
+            </div>
+            <div class="react__dislike">{{ postInfo.post__dislike }}</div>
+          </div>
         </div>
         <comments :postInfo="postInfo" :post_id="postInfo.post_id"></comments>
       </div>
@@ -119,6 +135,36 @@ export default {
         console.error(error);
       }
     },
+    async likePost(post_id) {
+      try {
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+
+        await Axios.put(`http://localhost:3001/api/post/${post_id}/like/1`, {
+          headers,
+        });
+        this.reloadThread();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async dislikePost(post_id) {
+      try {
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+
+        await Axios.put(`http://localhost:3001/api/post/${post_id}/like/-1`, {
+          headers,
+        });
+        this.reloadThread();
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };
 </script>
@@ -127,6 +173,8 @@ export default {
 $color-primary: #1daba7;
 $color-secondary: #f6f6f6;
 $color-tertiary: white;
+$color-warning: #f44336;
+$color-like: #3f51b5;
 $border-card: 25px;
 
 %shadow-card {
@@ -192,13 +240,22 @@ $border-card: 25px;
       }
     }
     &__footer {
+      display: flex;
       border-top: 1px solid rgba(0, 0, 0, 0.2);
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
       padding: 0.5rem 0 0.5rem;
       margin: 1.5rem 0;
-      .fa-thumbs-up {
-        font-size: 30px;
-        margin: 0 1.5rem;
+      .react {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+        margin: 0 1rem;
+        .fa-thumbs-up,
+        .fa-thumbs-down {
+          font-size: 25px;
+          margin: 0 0.5rem;
+        }
       }
     }
   }
