@@ -147,18 +147,22 @@ $border-card: 25px;
   background: rgba(0, 0, 0, 0.3);
 }
 
+.modal {
+  z-index: 3;
+}
+
 .modal,
 .post-window {
   display: flex;
   justify-content: center;
   align-items: center;
   &__card {
+    position: relative;
     background-color: $color-secondary;
     padding: 2rem;
     margin: 0.5rem;
     border-radius: $border-card;
     @extend %shadow-card;
-    position: relative;
     &__button {
       position: absolute;
       right: 0.8rem;

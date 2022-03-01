@@ -40,18 +40,18 @@ async function modifyComment(req, res, next) {
 async function deleteComment(req, res, next) {
   try {
     const commentObject = await Comment.findOne({
-      where: { comment_id: req.params.id },
+      where: { comment_id: req.params.id }, include: [User]
     });
 
-    if (!commentObject) {
-      res.status(404).send({ message: "No such Comment !" });
-    }
+    // if (!commentObject) {
+    //   res.status(404).send({ message: "No such Comment !" });
+    // }
 
-    if (commentObject.userId !== req.auth.userId) {
-      res.status(400).send({ message: "Unauthorized request !" });
-    }
+    // if (commentObject.user.userId !== req.auth.userId) {
+    //   res.status(400).send({ message: "Unauthorized request !" });
+    // }
 
-    const discardComment = await Comment.destroy({
+    await Comment.destroy({
       where: { comment_id: req.params.id },
     });
     res.status(200).send({ message: "Comment deleted !" });

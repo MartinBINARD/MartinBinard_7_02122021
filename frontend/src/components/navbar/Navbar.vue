@@ -144,8 +144,8 @@ $border-card: 25px;
 }
 
 .menu-list {
-  z-index: 3;
   position: fixed;
+  z-index: 3;
   top: 5rem;
   right: 0;
   background-color: $color-tertiary;

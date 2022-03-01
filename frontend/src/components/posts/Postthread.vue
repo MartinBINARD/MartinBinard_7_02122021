@@ -55,23 +55,28 @@
         <div class="thread__card__footer">
           <div class="react">
             <div
-              @click="likePost(postInfo.post__id)"
+              @click="likePost(postInfo.post_id)"
               class="react__like-button"
             >
               <i class="far fa-thumbs-up foward"></i>
               <!-- <i class="far fa-thumbs-up backward"></i> -->
             </div>
-            <div class="react__like-count">{{ postInfo.post__like }}</div>
+            <div class="react__like-count">{{ postInfo.post_like }}</div>
           </div>
           <div @click="dislikePost(posInfo.post_id)" class="react">
             <div class="react__dislike-button">
               <i class="far fa-thumbs-down foward"></i>
               <!-- <i class="far fa-thumbs-down backward"></i> -->
             </div>
-            <div class="react__dislike">{{ postInfo.post__dislike }}</div>
+            <div class="react__dislike">{{ postInfo.post_dislike }}</div>
           </div>
         </div>
-        <comments :postInfo="postInfo" :post_id="postInfo.post_id"></comments>
+        <comments
+          :postInfo="postInfo"
+          :post_id="postInfo.post_id"
+          :key="reloadCommentThread"
+          :reloadComment="reloadComment"
+        ></comments>
       </div>
     </div>
     <div v-else class="message-thread">
@@ -92,6 +97,7 @@ export default {
     return {
       postInfos: null,
       visiblePost: false,
+      reloadCommentThread: 0,
     };
   },
   async mounted() {
@@ -110,6 +116,9 @@ export default {
     }
   },
   methods: {
+    reloadComment() {
+      this.reloadCommentThread++;
+    },
     togglePost(post_id) {
       this.visiblePost = post_id;
     },

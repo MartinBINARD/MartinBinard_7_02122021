@@ -60,7 +60,7 @@
             @click="toggleCommentMenu(commentInfo.comment_id)"
             class="menu-comment__button"
             :class="{
-              'menu-comment__button--active': clicked(commentInfo.comment_id)
+              'menu-comment__button--active': clicked(commentInfo.comment_id),
             }"
           >
             ...
@@ -71,15 +71,15 @@
             class="overlay-menu"
           ></div>
           <ul v-if="clicked(commentInfo.comment_id)" class="menu-comment__list">
-              <li class="menu-comment__list__select">
-                <div class="name">Modify</div>
-              </li>
-              <li class="menu-comment__select">
-                <div @click="deleteComment(commentInfo.commend_id)" class="name">
-                  Delete
-                </div>
-              </li>
-            </ul>
+            <li class="menu-comment__list__select">
+              <div class="name">Modify</div>
+            </li>
+            <li class="menu-comment__select">
+              <div @click="deleteComment(commentInfo.comment_id)" class="name">
+                Delete
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -92,12 +92,12 @@ import Axios from "axios";
 
 export default {
   name: "Comments",
-  props: ["postInfo", "post_id"],
+  props: ["postInfo", "post_id", "reloadComment"],
   data() {
     return {
       comment: "",
       commentInfos: null,
-      visibleCommentMenu: false
+      visibleCommentMenu: false,
     };
   },
   async mounted() {
@@ -123,7 +123,7 @@ export default {
       this.visibleCommentMenu = comment_id;
     },
     clicked(comment_id) {
-      if(this.visibleCommentMenu === comment_id) {
+      if (this.visibleCommentMenu === comment_id) {
         return true;
       } else {
         return false;
@@ -147,6 +147,7 @@ export default {
             { headers }
           );
         }
+        this.reloadComment();
       } catch (error) {
         console.error(error);
       }
@@ -161,6 +162,7 @@ export default {
         await Axios.delete(`http://localhost:3001/api/comment/${comment_id}`, {
           headers,
         });
+        this.reloadComment();
       } catch (error) {
         console.error(error);
       }
@@ -224,6 +226,7 @@ $border-card: 25px;
   }
 }
 
+.comment-area,
 .comment__thread,
 .container,
 .user,
@@ -231,48 +234,51 @@ $border-card: 25px;
   display: flex;
 }
 
-.comment__thread {
-  margin: 1rem 0;
-  .avatar {
-    font-size: 30px;
-    margin: 0 0.2rem 0 0;
-  }
-  .menu-comment {
-    position: relative;
-    &__button {
-    font-size: 30px;
-    font-weight: bold;
-    height: 1.5rem;
-    line-height: 0.1rem;
-    padding: 0.2rem 0.5rem;
-    margin: 0 0.3rem;
-    border-radius: 5px;
-    &:hover,
-    &--active {
-      background-color: $color-primary;
-      color: $color-tertiary;
-      cursor: pointer;
-      }
+.comment-area {
+  flex-direction: column-reverse;
+  .comment__thread {
+    margin: 1rem 0;
+    .avatar {
+      font-size: 30px;
+      margin: 0 0.2rem 0 0;
     }
+    .menu-comment {
+      position: relative;
+      &__button {
+        font-size: 30px;
+        font-weight: bold;
+        height: 1.5rem;
+        line-height: 0.1rem;
+        padding: 0.2rem 0.5rem;
+        margin: 0 0.3rem;
+        border-radius: 5px;
+        &:hover,
+        &--active {
+          background-color: $color-primary;
+          color: $color-tertiary;
+          cursor: pointer;
+        }
+      }
 
-    &__list {
-    position: absolute;
-    top: 2rem;
-    right: 1rem;
-    padding: 0.5rem;
-    background-color: $color-tertiary;
-    border-radius: 15px;
-    @extend %shadow-card;
-    .name {
-      padding: 0.5rem;
-      border-radius: 5px;
-      &:hover {
-        background-color: $color-primary;
-        color: $color-tertiary;
-        cursor: pointer;
+      &__list {
+        position: absolute;
+        top: 2rem;
+        right: 1rem;
+        padding: 0.5rem;
+        background-color: $color-tertiary;
+        border-radius: 15px;
+        @extend %shadow-card;
+        .name {
+          padding: 0.5rem;
+          border-radius: 5px;
+          &:hover {
+            background-color: $color-primary;
+            color: $color-tertiary;
+            cursor: pointer;
+          }
+        }
       }
     }
-  }
   }
 }
 
