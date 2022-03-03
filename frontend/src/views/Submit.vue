@@ -53,7 +53,7 @@
             required
           />
           <div
-            v-if="mode == 'createAccount' && error.password != null"
+            v-if="mode != 'createAccount' && error.password != null"
             class="error"
           >
             {{ error.password }}
@@ -145,7 +145,8 @@ export default {
           this.firstname != "" &&
           this.lastname != "" &&
           this.email != "" &&
-          this.password != ""
+          this.password != "" &&
+          this.passwordCheck != ""
         ) {
           return true;
         } else {
