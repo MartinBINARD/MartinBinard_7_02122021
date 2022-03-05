@@ -16,8 +16,8 @@
 </template>
 
 <script>
-import Postthread from './Postthread.vue';
-import Postwindow from './Postwindow.vue';
+import Postthread from './childPosts/Postthread.vue';
+import Postwindow from './childPosts/Postwindow.vue';
 
 export default {
   name: 'Postbar',

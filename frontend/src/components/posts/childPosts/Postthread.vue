@@ -90,7 +90,7 @@
 
 <script>
 import Axios from "axios";
-import Comments from "../comments/comments.vue";
+import Comments from "../../comments/comments.vue";
 
 export default {
   components: { Comments },
@@ -100,7 +100,9 @@ export default {
     return {
       postInfos: null,
       visiblePost: false,
-      reloadCommentThread: 0
+      reloadCommentThread: 0,
+      hasLiked: false,
+      hasDisliked: false
     };
   },
   async mounted() {
@@ -138,7 +140,7 @@ export default {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-
+        
         await Axios.delete(`http://localhost:3001/api/post/${post_id}`, {
           headers,
         });
@@ -153,13 +155,37 @@ export default {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        
-        const dumbBody = {};
-
-        await Axios.put(`http://localhost:3001/api/post/${post_id}/like/1`, dumbBody, {
-          headers,
-        });
+        console.log("hasLiked before IF");
+        console.log(this.hasLiked);
+        console.log("hasDisliked before IF");
+        console.log(this.hasDisliked);
+        if(!this.hasLiked && !this.hasDisliked) {
+          await Axios.put(`http://localhost:3001/api/post/${post_id}/like/1`, {}, {
+            headers,
+          });
+          this.hasLiked = true;
+          console.log("hasLiked");
+          console.log(this.hasLiked);
+          console.log("hasDisliked");
+          console.log(this.hasDisliked);
+          console.log("addLike");
+        } else {
+          await Axios.put(`http://localhost:3001/api/post/${post_id}/like/0`, {}, {
+            headers,
+          });
+          this.hasLiked = false;
+          console.log("hasLiked");
+          console.log(this.hasLiked);
+          console.log("hasDisliked");
+          console.log(this.hasDisliked);
+          console.log("removeLike");
+        }
         this.reloadThread();
+        
+        console.log("hasLiked after RELOAD");
+        console.log(this.hasLiked);
+        console.log("hasDisliked after RELOAD");
+        console.log(this.hasDisliked);
       } catch (error) {
         console.error(error);
       }
@@ -170,12 +196,20 @@ export default {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
+        let hasLiked = this.hasLiked;
+        let hasDisliked = this.hasDisliked;
 
-        const emptyBody = {};
-
-        await Axios.put(`http://localhost:3001/api/post/${post_id}/like/-1`, emptyBody, {
-          headers,
-        });
+        if(!hasDisliked || !hasLiked) {
+          await Axios.put(`http://localhost:3001/api/post/${post_id}/like/-1`, {}, {
+            headers,
+          });
+          hasDisliked = true;
+        } else {
+          await Axios.put(`http://localhost:3001/api/post/${post_id}/like/0`, {}, {
+            headers,
+          });
+          hasDisliked = false;
+        }
         this.reloadThread();
       } catch (error) {
         console.error(error);

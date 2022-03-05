@@ -29,7 +29,7 @@ async function modifyPost (req, res, next) {
     try{
         let postObject = req.file ?
             {
-                ...JSON.parse(req.body.infoPost),
+                ...req.body.Post,
                 image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
             } : { ...req.body };
 

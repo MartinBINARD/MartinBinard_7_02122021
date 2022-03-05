@@ -1,5 +1,6 @@
 const dotenv = require("dotenv").config({ path: `../.env` });
 const { Sequelize, DataTypes } = require("sequelize");
+// const bcrypt = require('bcrypt');
 const path = require("path");
 const fs = require("fs");
 const basename = path.basename(__filename);
@@ -41,17 +42,6 @@ db.users = require("./userModel")(sequelize, DataTypes);
 db.posts = require("./postModel")(sequelize, DataTypes);
 db.comments = require("./commentModel")(sequelize, DataTypes);
 
-// CREATE ADMIN USER BY DEFAULT
-const User = db.users;
-// let adminParam = {
-//     firstname : process.env.ADMIN_FIRSTNAME,
-//     lastname: process.env.ADMIN_LASTNAME,
-//     email: process.env.ADMIN_EMAIL,
-//     password: process.env.ADMIN_PASS,
-//     avatar: null,
-//     admin: true
-// };
-
 // 1 TO MANY RELATION
 // USER/POST FOREIGN KEY
 db.users.hasMany(db.posts);
@@ -68,11 +58,27 @@ db.comments.belongsTo(db.users, {foreignKey : 'user_id'});
 // SYNCHRONIZE DATA
 sequelize
   .sync()
-  .then(() => {
-    // return admin = User.create(adminParam);
-  })
   .catch((error) => {
     console.log(error);
   });
+
+// CREATE ADMIN USER BY DEFAULT
+
+// const encryptedAdminPass = async function (){
+//   const User = db.users;
+//   const bcryptPassAdmin = await bcrypt.hash(process.env.ADMIN_PASS, 10);
+//   let adminParam = {
+//     firstname : process.env.ADMIN_FIRSTNAME,
+//     lastname: process.env.ADMIN_LASTNAME,
+//     email: process.env.ADMIN_EMAIL,
+//     password: bcryptPassAdmin,
+//     avatar: null,
+//     admin: true
+//   };
+
+//   await User.create(adminParam)
+// }
+
+// return encryptedAdminPass;
 
 module.exports = db;
