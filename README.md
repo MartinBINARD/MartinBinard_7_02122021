@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #62**
+**Main branch - Commit #63**
 
 # Description
 
@@ -19,7 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Try to add like/dislike function in vue.
+* Create optionLike in getAllPost in post.controller.js.
+* Add optionLike in like/dislike function in vue.
 
 # Before to run this server
 

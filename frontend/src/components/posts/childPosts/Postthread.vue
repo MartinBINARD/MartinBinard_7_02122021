@@ -55,7 +55,7 @@
         <div class="thread__card__footer">
           <div class="react">
             <div
-              @click.prevent="likePost(postInfo.post_id)"
+              @click.prevent="likePost(postInfo.post_id, postInfo.likeOption)"
               class="react__like-button"
             >
               <i class="far fa-thumbs-up foward"></i>
@@ -65,7 +65,7 @@
           </div>
           <div class="react">
             <div
-              @click.prevent="dislikePost(postInfo.post_id)"
+              @click.prevent="dislikePost(postInfo.post_id,postInfo.likeOption)"
               class="react__dislike-button"
             >
               <i class="far fa-thumbs-down foward"></i>
@@ -101,8 +101,6 @@ export default {
       postInfos: null,
       visiblePost: false,
       reloadCommentThread: 0,
-      hasLiked: false,
-      hasDisliked: false
     };
   },
   async mounted() {
@@ -149,66 +147,42 @@ export default {
         console.error(error);
       }
     },
-    async likePost(post_id) {
+    async likePost(post_id, optionLike) {
       try {
         let headers = {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        console.log("hasLiked before IF");
-        console.log(this.hasLiked);
-        console.log("hasDisliked before IF");
-        console.log(this.hasDisliked);
-        if(!this.hasLiked && !this.hasDisliked) {
+        console.log(optionLike);
+        if(optionLike == 1) {
           await Axios.put(`http://localhost:3001/api/post/${post_id}/like/1`, {}, {
             headers,
           });
-          this.hasLiked = true;
-          console.log("hasLiked");
-          console.log(this.hasLiked);
-          console.log("hasDisliked");
-          console.log(this.hasDisliked);
-          console.log("addLike");
         } else {
           await Axios.put(`http://localhost:3001/api/post/${post_id}/like/0`, {}, {
             headers,
           });
-          this.hasLiked = false;
-          console.log("hasLiked");
-          console.log(this.hasLiked);
-          console.log("hasDisliked");
-          console.log(this.hasDisliked);
-          console.log("removeLike");
         }
         this.reloadThread();
-        
-        console.log("hasLiked after RELOAD");
-        console.log(this.hasLiked);
-        console.log("hasDisliked after RELOAD");
-        console.log(this.hasDisliked);
       } catch (error) {
         console.error(error);
       }
     },
-    async dislikePost(post_id) {
+    async dislikePost(post_id,optionLike) {
       try {
         let headers = {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        let hasLiked = this.hasLiked;
-        let hasDisliked = this.hasDisliked;
 
-        if(!hasDisliked || !hasLiked) {
+        if(optionLike == 1) {
           await Axios.put(`http://localhost:3001/api/post/${post_id}/like/-1`, {}, {
             headers,
           });
-          hasDisliked = true;
         } else {
           await Axios.put(`http://localhost:3001/api/post/${post_id}/like/0`, {}, {
             headers,
           });
-          hasDisliked = false;
         }
         this.reloadThread();
       } catch (error) {

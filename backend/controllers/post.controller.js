@@ -27,13 +27,9 @@ async function createPost (req, res, next) {
 
 async function modifyPost (req, res, next) {
     try{
-        let postObject = req.file ?
-            {
-                ...req.body.Post,
-                image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-            } : { ...req.body };
+        let postObject = await Post.findOne({ where : { post_id: req.params.id }, include: [User] })
 
-        const updatePost = await Post.udpate({ ...postObject, post_id: req.params.id }, { where: { post_id : req.params.id } });
+        const updatePost = await Post.udpate({ ...postObject }, { where: { post_id : req.params.id } });
             res.status(201).send(updatePost)
     } catch (error) {
         res.status(500).json({ message : error.message })
@@ -78,12 +74,26 @@ async function getOnePost (req, res, next) {
     }
 };
 
-async function getAllPost (req, res, next) {
-    try{
-        const allPost = await Post.findAll({ include: [User] });
-            res.status(200).send(allPost)
+async function getAllPost(req, res, next) {
+    try {
+        let allPost = await Post.findAll({ include: [User] });
+        let postToShow = [];
+        allPost.forEach(element => {
+            let userLikedList = element.userId_post_like.split(",");
+            let userDislikedList = element.userId_post_dislike.split(",");
+            if (userLikedList.includes("" + req.user)) {
+                element.likeOption = 0;
+            } else if (userDislikedList.includes("" + req.user)) {
+                element.likeOption = 0;
+            } else {
+                element.likeOption = 1;
+            }
+            postToShow.push(element);
+        });
+        console.log(postToShow);
+        res.status(200).send(postToShow)
     } catch (error) {
-        res.status(500).json({ message : error.message })
+        res.status(500).json({ message: error.message })
         next();
     }
 };
