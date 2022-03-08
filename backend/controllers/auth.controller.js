@@ -46,19 +46,20 @@ async function login (req, res, next) {
         // CHECK PASSWORD
         const bcryptPassValid = await bcrypt.compare(req.body.password, userLogin.password);
         // JWT TOKEN
-        let token = {
+        let userInfo = {
             userId: userLogin.user_id,
             token: jwt.sign(
                 { userId: userLogin.user_id },
                 process.env.SECRET_TOKEN,
                 { expiresIn: '24h' }
-            )
+            ),
+            admin: userLogin.admin
         };
 
         if (!userLogin) { res.status(401).send({ message: 'User not found !'}) }
         else if (!bcryptPassValid) { res.status(401).send({ message: 'Wrong password !'}) }
         else { 
-            res.status(200).json(token)
+            res.status(200).json(userInfo)
         }
 
     } catch (error) {

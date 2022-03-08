@@ -19,7 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add new modifyPost function post.controller.js.
+* Add new like/dislike function.
 
 # Before to run this server
 

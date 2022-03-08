@@ -11,6 +11,11 @@ async function likePost (req, res, next) {
         console.log(userId);
 		let userLikedList = postToUpdate.userId_post_like.split(",");
 		let userDislikedList = postToUpdate.userId_post_dislike.split(",");
+        if (userLikedList.includes("" + req.user)) {
+            req.params.likeChoice = "2";
+        } else if (userDislikedList.includes("" + req.user)) {
+            req.params.likeChoice = "2";
+        }
         console.log("likeChoice:");
         console.log(req.params.likeChoice);
         switch(req.params.likeChoice){
@@ -30,7 +35,7 @@ async function likePost (req, res, next) {
 					postToUpdate = await Post.findOne({ where: { post_id : req.params.id }});
                 }
             break;
-            case "0": // User cancel like or dislike
+            case "2": // User cancel like or dislike
 				console.log(userDislikedList);
 				console.log("AND");
 				console.log(userLikedList);

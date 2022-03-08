@@ -47,7 +47,7 @@ async function modifyPost (req, res, next) {
             image: img
         }
 
-        const updatePost = await Post.udpate({ newInfoPost }, { where: { post_id : req.params.id } });
+        const updatePost = await Post.create({ newInfoPost }, { where: { post_id : req.params.id } });
             res.status(201).send(updatePost)
     } catch (error) {
         res.status(500).json({ message : error.message })
@@ -95,21 +95,7 @@ async function getOnePost (req, res, next) {
 async function getAllPost(req, res, next) {
     try {
         let allPost = await Post.findAll({ include: [User] });
-        let postToShow = [];
-        allPost.forEach(element => {
-            let userLikedList = element.userId_post_like.split(",");
-            let userDislikedList = element.userId_post_dislike.split(",");
-            if (userLikedList.includes("" + req.user)) {
-                element.likeOption = 0;
-            } else if (userDislikedList.includes("" + req.user)) {
-                element.likeOption = 0;
-            } else {
-                element.likeOption = 1;
-            }
-            postToShow.push(element);
-        });
-        console.log(postToShow);
-        res.status(200).send(postToShow)
+        res.status(200).send(allPost);
     } catch (error) {
         res.status(500).json({ message: error.message })
         next();

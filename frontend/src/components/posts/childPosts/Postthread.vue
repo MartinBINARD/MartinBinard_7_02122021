@@ -17,7 +17,7 @@
             </div>
           </div>
           <!-- start of post menu -->
-          <div class="menu-post">
+          <div v-if="isAdminOrOwner(postInfo.userUserId)" class="menu-post">
             <div
               @click="togglePost(postInfo.post_id)"
               class="menu-post__button"
@@ -55,7 +55,7 @@
         <div class="thread__card__footer">
           <div class="react">
             <div
-              @click.prevent="likePost(postInfo.post_id, postInfo.likeOption)"
+              @click.prevent="likePost(postInfo.post_id)"
               class="react__like-button"
             >
               <i class="far fa-thumbs-up foward"></i>
@@ -65,7 +65,7 @@
           </div>
           <div class="react">
             <div
-              @click.prevent="dislikePost(postInfo.post_id,postInfo.likeOption)"
+              @click.prevent="dislikePost(postInfo.post_id)"
               class="react__dislike-button"
             >
               <i class="far fa-thumbs-down foward"></i>
@@ -110,7 +110,7 @@ export default {
         authorization: "bearer " + localStorage.getItem("token"),
       };
 
-      let getPostContent = await Axios.get(`http://localhost:3001/api/post`, {
+      let getPostContent = await Axios.get(`http://localhost:3001/api/post/`, {
         headers,
       });
       this.postInfos = getPostContent.data;
@@ -132,6 +132,16 @@ export default {
         return false;
       }
     },
+    isAdminOrOwner(userPost){
+      let userConnected = localStorage.getItem("userId");
+      let adminUser = localStorage.getItem("admin");
+      if (adminUser === 'true' || (userConnected == userPost)){
+        console.log(adminUser + " - "+ userPost + " - "+ userConnected);
+        return true;
+      }else{
+        return false;
+      }
+    },
     async deletePost(post_id) {
       try {
         let headers = {
@@ -147,43 +157,29 @@ export default {
         console.error(error);
       }
     },
-    async likePost(post_id, optionLike) {
+    async likePost(post_id) {
       try {
         let headers = {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        console.log(optionLike);
-        if(optionLike == 1) {
-          await Axios.put(`http://localhost:3001/api/post/${post_id}/like/1`, {}, {
-            headers,
-          });
-        } else {
-          await Axios.put(`http://localhost:3001/api/post/${post_id}/like/0`, {}, {
-            headers,
-          });
-        }
+        await Axios.put(`http://localhost:3001/api/post/${post_id}/like/1`, {}, {
+          headers,
+        });
         this.reloadThread();
       } catch (error) {
         console.error(error);
       }
     },
-    async dislikePost(post_id,optionLike) {
+    async dislikePost(post_id) {
       try {
         let headers = {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-
-        if(optionLike == 1) {
-          await Axios.put(`http://localhost:3001/api/post/${post_id}/like/-1`, {}, {
-            headers,
-          });
-        } else {
-          await Axios.put(`http://localhost:3001/api/post/${post_id}/like/0`, {}, {
-            headers,
-          });
-        }
+        await Axios.put(`http://localhost:3001/api/post/${post_id}/like/-1`, {}, {
+          headers,
+        });
         this.reloadThread();
       } catch (error) {
         console.error(error);

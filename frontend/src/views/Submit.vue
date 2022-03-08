@@ -246,6 +246,7 @@ export default {
         );
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("userId", res.data.userId);
+        localStorage.setItem("admin", res.data.admin);
         await this.$router.push("/");
       } catch (error) {
         this.error.password = "Invalid email/password !";
