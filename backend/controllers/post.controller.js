@@ -27,15 +27,27 @@ async function createPost (req, res, next) {
 
 async function modifyPost (req, res, next) {
     try{
-        let postObjectMofidy = req.file ?
-            {
-                ...req.body.Post,
-                image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-            } : { ...req.body };
+        let img = null;
+        const postObject = await Post.findOne({ where : { post_id: req.params.id }, include: [User] });
 
-        // const postObjectModify = await Post.findOne({ where : { post_id: req.params.id } });
+        if( postObject.image != null) {
+            const filename = postObject.image.split('/images')[1];
+            fs.unlink(`images/${filename}`, (error) => {
+                console.log(error);
+            })
+        }
+        
+        if(req.file) {
+            img = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        }
 
-        const updatePost = await Post.udpate( { ...postObjectMofidy}, { where: { post_id : req.params.id } });
+        let newInfoPost = {
+            user_id: req.user,
+            ...req.body,
+            image: img
+        }
+
+        const updatePost = await Post.udpate({ newInfoPost }, { where: { post_id : req.params.id } });
             res.status(201).send(updatePost)
     } catch (error) {
         res.status(500).json({ message : error.message })

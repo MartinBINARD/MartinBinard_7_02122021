@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #64**
+**Main branch - Commit #65**
 
 # Description
 
@@ -19,7 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add delete user function in user.controller.js.
+* Add new modifyPost function post.controller.js.
 
 # Before to run this server
 
