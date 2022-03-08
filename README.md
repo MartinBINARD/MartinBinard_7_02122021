@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #63**
+**Main branch - Commit #64**
 
 # Description
 
@@ -19,8 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Create optionLike in getAllPost in post.controller.js.
-* Add optionLike in like/dislike function in vue.
+* Add delete user function in user.controller.js.
 
 # Before to run this server
 

@@ -27,9 +27,15 @@ async function createPost (req, res, next) {
 
 async function modifyPost (req, res, next) {
     try{
-        let postObject = await Post.findOne({ where : { post_id: req.params.id }, include: [User] })
+        let postObjectMofidy = req.file ?
+            {
+                ...req.body.Post,
+                image: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+            } : { ...req.body };
 
-        const updatePost = await Post.udpate({ ...postObject }, { where: { post_id : req.params.id } });
+        // const postObjectModify = await Post.findOne({ where : { post_id: req.params.id } });
+
+        const updatePost = await Post.udpate( { ...postObjectMofidy}, { where: { post_id : req.params.id } });
             res.status(201).send(updatePost)
     } catch (error) {
         res.status(500).json({ message : error.message })
