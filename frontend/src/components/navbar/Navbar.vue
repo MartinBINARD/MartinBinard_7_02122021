@@ -67,6 +67,7 @@ export default {
       try {
         localStorage.removeItem("token");
         localStorage.removeItem("userId");
+        localStorage.removeItem("admin");
         await this.$router.push("/submit");
       } catch (error) {
         console.error(error);

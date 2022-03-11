@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #65**
+**Main branch - Commit #67**
 
 # Description
 
@@ -19,7 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add new like/dislike function.
+* Add new modifyPost function in post.controller.js.
 
 # Before to run this server
 
