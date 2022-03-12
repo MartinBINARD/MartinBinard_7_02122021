@@ -5,7 +5,8 @@
     <div class="post-window__card">
       <div @click="togglePost()" class="post-window__card__button">X</div>
       <div class="post-window__card__content">
-        <h2>Create a post</h2>
+        <h2 v-if="mode == 'postToCreate'">Create a post</h2>
+        <h2 v-else>Modify a post</h2>
         <form class="post-form">
           <input
             v-model="title"
@@ -32,12 +33,22 @@
         </form>
         <div class="footer">
           <button
+            v-if="mode == 'postToCreate'"
             @click.prevent="createPost()"
             class="button"
             :class="{ 'button--disabled': !correctForm }"
             type="submit"
           >
             Post
+          </button>
+          <button
+            v-else
+            @click.prevent="modifyPost(postInfo.post_id)"
+            class="button"
+            :class="{ 'button--disabled': !correctForm }"
+            type="submit"
+          >
+            Modify
           </button>
         </div>
       </div>
@@ -50,12 +61,12 @@ import Axios from "axios";
 
 export default {
   name: "Postwindow",
-  props: ["visiblePost", "togglePost", "reloadThread", "resetForm"],
+  props: ["visiblePost", "togglePost", "reloadThread", "resetForm", "mode", "postInfo"],
   data() {
     return {
       title: "",
       text: "",
-      image: null,
+      image: null
     };
   },
   computed: {
@@ -95,6 +106,30 @@ export default {
         console.error(error);
       }
     },
+    async modifyPost(post_id) {
+      try {
+        let data = new FormData();
+
+        data.append("userUserId", localStorage.getItem("userId"));
+        data.append("title", this.title);
+        data.append("text", this.text);
+        data.append("image", this.image);
+
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+
+        if (this.title != "" && this.text != "" && this.user_id != "") {
+          await Axios.put(`http://localhost:3001/api/post/${post_id}`, data, { headers });
+          this.togglePost();
+          this.reloadThread();
+          this.resetForm();
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    }
   },
 };
 </script>

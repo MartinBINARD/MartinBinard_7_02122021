@@ -19,7 +19,7 @@
           <!-- start of post menu -->
           <div v-if="isAdminOrOwner(postInfo.userUserId)" class="menu-post">
             <div
-              @click="togglePost(postInfo.post_id)"
+              @click="togglePostMenu(postInfo.post_id)"
               class="menu-post__button"
               :class="{
                 'menu-post__button--active': clicked(postInfo.post_id),
@@ -29,12 +29,12 @@
             </div>
             <div
               v-if="clicked(postInfo.post_id)"
-              @click="togglePost(0)"
+              @click="togglePostMenu(0)"
               class="overlay-menu"
             ></div>
             <ul v-if="clicked(postInfo.post_id)" class="menu-post__list">
               <li class="menu-post__list__select">
-                <div class="name">Modify</div>
+                <div @click="toggleModifyPost(postInfo.post_id)" class="name">Modify</div>
               </li>
               <li class="menu-list__select">
                 <div @click="deletePost(postInfo.post_id)" class="name">
@@ -95,12 +95,12 @@ import Comments from "../../comments/comments.vue";
 export default {
   components: { Comments },
   name: "Postthread",
-  props: ["userInfo", "reloadThread"],
+  props: ["reloadThread", "togglePost", "visiblePost", "toggleModifyPost"],
   data() {
     return {
       postInfos: null,
-      visiblePost: false,
-      reloadCommentThread: 0,
+      visiblePostMenu: false,
+      reloadCommentThread: 0
     };
   },
   async mounted() {
@@ -122,11 +122,11 @@ export default {
     reloadComment() {
       this.reloadCommentThread++;
     },
-    togglePost(post_id) {
-      this.visiblePost = post_id;
+    togglePostMenu(post_id) {
+      this.visiblePostMenu = post_id;
     },
     clicked(post_id) {
-      if (this.visiblePost === post_id) {
+      if (this.visiblePostMenu === post_id) {
         return true;
       } else {
         return false;
