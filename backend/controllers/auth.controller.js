@@ -49,7 +49,7 @@ async function login (req, res, next) {
         let userInfo = {
             userId: userLogin.user_id,
             token: jwt.sign(
-                { userId: userLogin.user_id },
+                { userId: userLogin.user_id, admin: userLogin.admin  },
                 process.env.SECRET_TOKEN,
                 { expiresIn: '24h' }
             ),

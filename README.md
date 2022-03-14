@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #68**
+**Main branch - Commit #69**
 
 # Description
 
@@ -19,7 +19,9 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add toggleModifyPost function in postThread.vue.
+* Add admin in auth.controller.js & auth.middleware.js.
+* Set post_id:0 in postBar.vue in order to debug modifyPost function in window.vue.
+* Remove unnecessary variables in .env.example file.
 
 # Before to run this server
 
@@ -40,10 +42,6 @@ DB_DIALECT = mysql
 DB_PORT = 3306
 APP_PORT = 3001
 
-ADMIN_FIRSTNAME = INSERT ADMIN FIRST NAME
-ADMIN_LASTNAME = INSERT ADMIN LASTNAME
-ADMIN_EMAIL = INSERT ADMIN EMAIL
-ADMIN_PASS = INSERT ADMIN PASSWORD
 USER_CRYPTOJS_KEY = INSERT RADOM ASCII CHARACTER
 SECRET_TOKEN = INSERT RANDOM ASCII CHARACTER
 ```

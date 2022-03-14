@@ -10,8 +10,8 @@
       </div>
     </div>
     <!-- End of post bar -->
-    <postthread :key="reloadPostThread" :reloadThread="reloadThread" :visiblePost="visiblePost" :toggleModifyPost="toggleModifyPost" :mode="mode" :postInfo="postInfo"></postthread>
-    <postwindow :key="resetPostForm" :resetForm="resetForm"  :reloadThread="reloadThread" :visiblePost="visiblePost" :togglePost="togglePost" :mode="mode"></postwindow>
+    <postthread :key="reloadPostThread" :reloadThread="reloadThread" :visiblePost="visiblePost" :toggleModifyPost="toggleModifyPost" :mode="mode"></postthread>
+    <postwindow :key="resetPostForm" :postId="postId" :resetForm="resetForm"  :reloadThread="reloadThread" :visiblePost="visiblePost" :togglePost="togglePost" :mode="mode"></postwindow>
   </section>
 </template>
 
@@ -28,6 +28,7 @@ export default {
       reloadPostThread: 0,
       resetPostForm: 0,
       mode: "postToCreate",
+      postId: "0"
     }
   },
   methods: {
@@ -35,9 +36,10 @@ export default {
       this.visiblePost = !this.visiblePost;
       this.mode = "postToCreate"
     },
-    toggleModifyPost() {
+    toggleModifyPost(postId) {
       this.visiblePost = !this.visiblePost;
-      this.mode = "postToModify"
+      this.mode = "postToModify";
+      this.postId = postId;
     },
     reloadThread() {
       this.reloadPostThread++;

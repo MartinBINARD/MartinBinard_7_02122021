@@ -43,7 +43,7 @@
           </button>
           <button
             v-else
-            @click.prevent="modifyPost(postInfo.post_id)"
+            @click.prevent="modifyPost(postId)"
             class="button"
             :class="{ 'button--disabled': !correctForm }"
             type="submit"
@@ -61,7 +61,7 @@ import Axios from "axios";
 
 export default {
   name: "Postwindow",
-  props: ["visiblePost", "togglePost", "reloadThread", "resetForm", "mode", "postInfo"],
+  props: ["visiblePost", "togglePost", "reloadThread", "resetForm", "mode" , "postId"],
   data() {
     return {
       title: "",
@@ -109,7 +109,7 @@ export default {
     async modifyPost(post_id) {
       try {
         let data = new FormData();
-
+        console.log("POST_ID: " + post_id);
         data.append("userUserId", localStorage.getItem("userId"));
         data.append("title", this.title);
         data.append("text", this.text);
