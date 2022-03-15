@@ -33,34 +33,41 @@ async function modifyPost(req, res, next) {
       include: [User],
     });
 
-    if (postObject.image != null) {
-      const filename = postObject.image.split("/images")[1];
-      fs.unlink(`images/${filename}`, (error) => {
-        console.log(error);
-      });
-    }
+    if (postObject.user_id == req.user || req.admin == true) {
+      if (postObject.image != null) {
+        const filename = postObject.image.split("/images")[1];
+        fs.unlink(`images/${filename}`, (error) => {
+          console.log(error);
+        });
+      }
 
-    if (req.file) {
-      let modifiedPicture = `${req.protocol}://${req.get("host")}/images/${
-        req.file.filename
-      }`;
-      let updateObject = {
-        ...req.body,
-        image: modifiedPicture,
-      };
+      if (req.file) {
+        let modifiedPicture = `${req.protocol}://${req.get("host")}/images/${
+          req.file.filename
+        }`;
+        let updateObject = {
+          ...req.body,
+          image: modifiedPicture,
+        };
 
-      const updatePost = await Post.update(
-        { ...updateObject },
-        { where: { post_id: req.params.id } }
-      );
-      res.status(201).send({ message: 'Post modified !'});
+        const updatePost = await Post.update(
+          { ...updateObject },
+          { where: { post_id: req.params.id } }
+        );
+        res.status(201).send({ message: "Post modified !" });
+      } else {
+        let updateObject = { ...req.body, image: null };
+        const updatePost = await Post.update(
+          { ...updateObject },
+          { where: { post_id: req.params.id } }
+        );
+        res.status(201).send({ message: "Post modified with no image !" });
+      }
     } else {
-      let updateObject = { ...req.body, image: null };
-      const updatePost = await Post.update(
-        { ...updateObject },
-        { where: { post_id: req.params.id } }
-      );
-      res.status(201).send({ message: 'Post modified with no image !'});
+      res.status(401).json({
+        message:
+          "You are not the post owner or you do not have root privileges !",
+      });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -75,24 +82,31 @@ async function deletePost(req, res, next) {
       include: [User],
     });
 
-    if (!postObject) {
-      res.status(404).send({ message: "No such Post !" });
-    }
-    if (postObject.user.user_id !== req.auth.userId) {
-      res.status(400).send({ message: "Unauthorized request !" });
-    }
+    if (postObject.user_id == req.user || req.admin == true) {
+      if (!postObject) {
+        res.status(404).send({ message: "No such Post !" });
+      }
+      if (postObject.user.user_id !== req.auth.userId) {
+        res.status(400).send({ message: "Unauthorized request !" });
+      }
 
-    if (postObject.image != null) {
-      const filename = postObject.image.split("/images")[1];
-      fs.unlink(`images/${filename}`, (error) => {
-        console.log(error);
+      if (postObject.image != null) {
+        const filename = postObject.image.split("/images")[1];
+        fs.unlink(`images/${filename}`, (error) => {
+          console.log(error);
+        });
+      }
+
+      const deletePost = await Post.destroy({
+        where: { post_id: req.params.id },
+      });
+      res.status(200).send({ message: "Post deleted !" });
+    } else {
+      res.status(401).json({
+        message:
+          "You are not the post owner or you do not have root privileges !",
       });
     }
-
-    const deletePost = await Post.destroy({
-      where: { post_id: req.params.id },
-    });
-    res.status(200).send({ message: "Post deleted !" });
   } catch (error) {
     res.status(500).json({ message: error.message });
     next();

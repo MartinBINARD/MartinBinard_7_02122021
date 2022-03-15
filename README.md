@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #69**
+**Main branch - Commit #70**
 
 # Description
 
@@ -19,9 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add admin in auth.controller.js & auth.middleware.js.
-* Set post_id:0 in postBar.vue in order to debug modifyPost function in window.vue.
-* Remove unnecessary variables in .env.example file.
+* Add admin privileges to modifyPost, deletePost & deleteComment in controllers.
 
 # Before to run this server
 
