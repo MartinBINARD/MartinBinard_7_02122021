@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #70**
+**Main branch - Commit #71**
 
 # Description
 
@@ -19,7 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add admin privileges to modifyPost, deletePost & deleteComment in controllers.
+* Add access restriction to comment menu in vue.
+* Add admin privileges to modifyComment in controllers.
 
 # Before to run this server
 

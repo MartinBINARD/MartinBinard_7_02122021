@@ -22,15 +22,22 @@ async function createComment(req, res, next) {
 
 async function modifyComment(req, res, next) {
   try {
-    let commentObject = req.file
+    const commentObject = req.file
       ? { ...JSON.parse(req.body.infoComment) }
       : { ...req.body };
 
-    const updateComment = await Comment.updateOne(
-      { comment_id: req.params.id },
-      { ...commentObject, comment_id: req.params.id }
-    );
-    res.status(201).send(updateComment);
+    if (commentObject.user_id == req.user || req.admin == true) {
+      const updateComment = await Comment.updateOne(
+        { comment_id: req.params.id },
+        { ...commentObject, comment_id: req.params.id }
+      );
+      res.status(201).send(updateComment);
+    } else {
+      res.status(401).json({
+        message:
+          "You are not the post owner or you do not have root privileges !",
+      });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
     next();

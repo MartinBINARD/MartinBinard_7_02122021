@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <div class="menu-comment">
+        <div v-if="isAllowedToCommentMenu(commentInfo.user_id)" class="menu-comment">
           <div
             @click="toggleCommentMenu(commentInfo.comment_id)"
             class="menu-comment__button"
@@ -126,6 +126,16 @@ export default {
       if (this.visibleCommentMenu === comment_id) {
         return true;
       } else {
+        return false;
+      }
+    },
+    isAllowedToCommentMenu(user_id){
+      let userConnected = localStorage.getItem("userId");
+      let adminUser = localStorage.getItem("admin");
+      if (adminUser === 'true' || (userConnected == user_id)){
+        console.log(adminUser + " - "+ user_id + " - "+ userConnected);
+        return true;
+      }else{
         return false;
       }
     },

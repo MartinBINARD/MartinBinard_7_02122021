@@ -82,13 +82,14 @@ async function deletePost(req, res, next) {
       include: [User],
     });
 
+    if (!postObject) {
+      res.status(404).send({ message: "No such Post !" });
+    }
+    if (postObject.user.user_id !== req.auth.userId) {
+      res.status(400).send({ message: "Unauthorized request !" });
+    }
+    
     if (postObject.user_id == req.user || req.admin == true) {
-      if (!postObject) {
-        res.status(404).send({ message: "No such Post !" });
-      }
-      if (postObject.user.user_id !== req.auth.userId) {
-        res.status(400).send({ message: "Unauthorized request !" });
-      }
 
       if (postObject.image != null) {
         const filename = postObject.image.split("/images")[1];
@@ -97,7 +98,7 @@ async function deletePost(req, res, next) {
         });
       }
 
-      const deletePost = await Post.destroy({
+      await Post.destroy({
         where: { post_id: req.params.id },
       });
       res.status(200).send({ message: "Post deleted !" });
