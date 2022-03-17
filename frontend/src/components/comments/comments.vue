@@ -45,17 +45,34 @@
             <p class="text">{{ commentInfo.text }}</p>
           </div>
           <div class="container__footer">
-            <div class="like-button">Like</div>
-            <div class="like">
-              <i class="far fa-thumbs-up"></i>{{ commentInfo.comment_like }}
+            <div class="react">
+              <div
+                @click.prevent="likeComment(commentInfo.comment_id)"
+                class="react__like-button"
+              >
+                <i class="far fa-thumbs-up foward"></i>
+                <!-- <i class="far fa-thumbs-up backward"></i> -->
+              </div>
+              <div class="react__like-count">{{ commentInfo.comment_like }}</div>
             </div>
-            <div class="dislike">
-              <i class="far fa-thumbs-down"></i
-              >{{ commentInfo.comment_dislike }}
+            <div class="react">
+              <div
+                @click.prevent="dislikePost(commentInfo.comment_id)"
+                class="react__dislike-button"
+              >
+                <i class="far fa-thumbs-down foward"></i>
+                <!-- <i class="far fa-thumbs-up backward"></i> -->
+              </div>
+              <div class="react__dislike-count">
+                {{ commentInfo.comment_dislike }}
+              </div>
             </div>
           </div>
         </div>
-        <div v-if="isAllowedToCommentMenu(commentInfo.user_id)" class="menu-comment">
+        <div
+          v-if="isAllowedToCommentMenu(commentInfo.user_id)"
+          class="menu-comment"
+        >
           <div
             @click="toggleCommentMenu(commentInfo.comment_id)"
             class="menu-comment__button"
@@ -129,13 +146,13 @@ export default {
         return false;
       }
     },
-    isAllowedToCommentMenu(user_id){
+    isAllowedToCommentMenu(user_id) {
       let userConnected = localStorage.getItem("userId");
       let adminUser = localStorage.getItem("admin");
-      if (adminUser === 'true' || (userConnected == user_id)){
-        console.log(adminUser + " - "+ user_id + " - "+ userConnected);
+      if (adminUser === "true" || userConnected == user_id) {
+        console.log(adminUser + " - " + user_id + " - " + userConnected);
         return true;
-      }else{
+      } else {
         return false;
       }
     },
@@ -172,6 +189,42 @@ export default {
         await Axios.delete(`http://localhost:3001/api/comment/${comment_id}`, {
           headers,
         });
+        this.reloadComment();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async likeComment(comment_id) {
+      try {
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+        await Axios.put(
+          `http://localhost:3001/api/comment/${comment_id}/like/1`,
+          {},
+          {
+            headers,
+          }
+        );
+        this.reloadComment();
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async dislikeComment(comment_id) {
+      try {
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+        await Axios.put(
+          `http://localhost:3001/api/comment/${comment_id}/like/-1`,
+          {},
+          {
+            headers,
+          }
+        );
         this.reloadComment();
       } catch (error) {
         console.error(error);
@@ -311,22 +364,16 @@ $border-card: 25px;
 .container__footer {
   margin: 0.3rem 1rem;
   align-items: center;
-  .like-button,
-  .like,
-  .dislike {
+  .react{
+    display: flex;
     margin-right: 1rem;
-    .fa-thumbs-up,
-    .fa-thumbs-down {
-      padding-right: 0.2rem;
+    &__like-button, &__dislike-button {
+      margin-right: 0.2rem;
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
-  .like-button {
-    padding: 0.2rem;
-    border-radius: 5px;
-    &:hover {
-      background-color: $color-quinary;
-      cursor: pointer;
-    }
-  }
+  
 }
 </style>

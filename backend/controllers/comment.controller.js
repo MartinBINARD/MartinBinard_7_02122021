@@ -26,7 +26,7 @@ async function modifyComment(req, res, next) {
       ? { ...JSON.parse(req.body.infoComment) }
       : { ...req.body };
 
-    if (commentObject.user_id == req.user || req.admin == true) {
+    if (commentObject.user.user_id == req.user || req.admin == true) {
       const updateComment = await Comment.updateOne(
         { comment_id: req.params.id },
         { ...commentObject, comment_id: req.params.id }
@@ -51,15 +51,15 @@ async function deleteComment(req, res, next) {
       include: [User],
     });
 
-    // if (!commentObject) {
-    //   res.status(404).send({ message: "No such Comment !" });
-    // }
+    if (!commentObject) {
+      res.status(404).send({ message: "No such Comment !" });
+    }
 
     // if (commentObject.user.userId !== req.auth.userId) {
     //   res.status(400).send({ message: "Unauthorized request !" });
     // }
 
-    if (commentObject.user_id == req.user || req.admin == true) {
+    if (commentObject.user.user_id == req.user || req.admin == true) {
       await Comment.destroy({
         where: { comment_id: req.params.id },
       });
@@ -79,7 +79,7 @@ async function deleteComment(req, res, next) {
 async function getOneComment(req, res, next) {
   try {
     const oneComment = await Comment.findOne({
-      where: { post_id: req.params.post_id, comment_id: req.params.id },
+      where: { comment_id: req.params.id },
       include: [User, Post],
     });
     res.status(200).send(oneComment);
