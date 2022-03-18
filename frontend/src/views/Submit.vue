@@ -17,7 +17,10 @@
             placeholder="Firstname"
             required
           />
-          <div v-if="mode == 'createAccount' && error.firstname != null" class="error">
+          <div
+            v-if="mode == 'createAccount' && error.firstname != null"
+            class="error"
+          >
             {{ error.firstname }}
           </div>
         </div>
@@ -30,7 +33,10 @@
             placeholder="Lastname"
             required
           />
-          <div v-if="mode == 'createAccount' && error.lastname != null" class="error">
+          <div
+            v-if="mode == 'createAccount' && error.lastname != null"
+            class="error"
+          >
             {{ error.lastname }}
           </div>
         </div>
@@ -42,7 +48,12 @@
             placeholder="Email"
             required
           />
-          <div v-if="mode == 'createAccount' && error.email != null" class="error">{{ error.email }}</div>
+          <div
+            v-if="mode == 'createAccount' && error.email != null"
+            class="error"
+          >
+            {{ error.email }}
+          </div>
         </div>
         <div class="submit-form__field">
           <input

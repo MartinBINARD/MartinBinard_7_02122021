@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #72**
+**Main branch - Commit #73**
 
 # Description
 
@@ -19,9 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Debug delete/modify post/comment condtions in controllers.
-* Add like/dislike comment function in controllers in vue.
-* Modify getOneComment function in comment.controller.js.
+* Modify deleteUser function into deactivateAccount.
+* Set logOut function synchronous in vue.
 
 # Before to run this server
 

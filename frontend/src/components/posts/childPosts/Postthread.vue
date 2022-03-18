@@ -14,6 +14,7 @@
                 {{ postInfo.user.firstname }} {{ postInfo.user.lastname }}
               </div>
               <div class="user__time-stamp">{{ postInfo.createdAt }}</div>
+              <div class="user__time-status" v-if="!postInfo.user.active">User deactivated</div>
             </div>
           </div>
           <!-- start of post menu -->

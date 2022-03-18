@@ -58,6 +58,7 @@ async function login (req, res, next) {
 
         if (!userLogin) { res.status(401).send({ message: 'User not found !'}) }
         else if (!bcryptPassValid) { res.status(401).send({ message: 'Wrong password !'}) }
+        else if (!userLogin.active) { res.status(401).send({ message: 'User account deactivate !'}) }
         else { 
             res.status(200).json(userInfo)
         }

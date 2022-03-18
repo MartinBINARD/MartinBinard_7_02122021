@@ -39,14 +39,18 @@ async function modifyUser (req, res, next) {
     }
 }
 
-async function destroyUser (req, res, next) {
+async function deactivateUser (req, res, next) {
     try {
-        const inactiveUser = await User.destroy({ where: { user_id: req.params.id } });
-            res.status(200).send(inactiveUser)
+        let userObject = {
+            ...req.body,
+            active: false
+        }
+        const inactiveUser = await User.update({ ...userObject }, { where: { user_id: req.params.id } });
+            res.status(200).send({ message: 'User deactivate !' })
     } catch (error) {
-        res.status(500).json({ message: 'User deleted !' })
+        res.status(500).json({ message: error.message })
         next();
     }
 }
 
-module.exports = { getOneUser, getAllUser, modifyUser, destroyUser };
+module.exports = { getOneUser, getAllUser, modifyUser, deactivateUser  };

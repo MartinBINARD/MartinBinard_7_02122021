@@ -16,7 +16,7 @@
             </div>
           </div>
           <label for="file-image" class="attachment-avatar">
-            <div class="change-avatar">Modify</div>
+            <button class="button-change-avatar">Modify</button>
             <input
               @change="onAvatarSelected()"
               id="file-image"
@@ -49,13 +49,21 @@
             <span>{{ userInfo.active }}</span>
           </div>
         </div>
-        <button
-          @click.prevent="uploadAvatar(userInfo.user_id)"
-          class="button"
-          :class="{ 'button--disabled': !avatar }"
-        >
-          Save
-        </button>
+        <div class="button__user">
+          <button
+            @click.prevent="uploadAvatar(userInfo.user_id)"
+            class="button__user__save"
+            :class="{ 'button--disabled': !avatar }"
+          >
+            Save avatar
+          </button>
+          <button
+            @click.prevent="deleteAccount(userInfo.user_id)"
+            class="button__user__delete"
+          >
+            Delete account
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -72,7 +80,7 @@ export default {
       avatar: "",
     };
   },
-  props: ["visibleModal", "toggleModal"],
+  props: ["visibleModal", "toggleModal", "logOut"],
   async mounted() {
     try {
       let userId = localStorage.getItem("userId");
@@ -113,6 +121,23 @@ export default {
         console.error(error);
       }
     },
+    async deleteAccount(user_id) {
+      try {
+        let headers = {
+          "content-type": "application/json",
+          authorization: "bearer " + localStorage.getItem("token"),
+        };
+        await Axios.put(
+          `http://localhost:3001/api/user/${user_id}`, { active: false},
+          {
+            headers,
+          }
+        );
+        this.logOut();
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };
 </script>
@@ -122,6 +147,7 @@ export default {
 $color-primary: #1daba7;
 $color-secondary: #f6f6f6;
 $color-tertiary: white;
+$color-warning: #f44336;
 $border-card: 25px;
 
 %shadow-card {
@@ -199,17 +225,18 @@ $border-card: 25px;
     input {
       display: none;
     }
-    .change-avatar {
+    .button-change-avatar {
       font-weight: bold;
       cursor: pointer;
       position: absolute;
       top: 0;
       right: 0;
-      padding: 0.3rem;
-      border-radius: 5px;
+      padding: 0.5rem;
+      border-radius: 10px;
+      background-color: $color-primary;
+      color: $color-tertiary;
       &:hover {
-        color: $color-tertiary;
-        background-color: $color-primary;
+        filter: brightness(90%);
       }
     }
   }
@@ -226,6 +253,26 @@ $border-card: 25px;
         border: 1px solid black;
       }
     }
+  }
+}
+
+.button__user {
+  display: flex;
+  flex-direction: column;
+  &__save,
+  &__delete {
+    margin: 1rem 0 0 0;
+    padding: 0.5rem;
+    color: $color-tertiary;
+    &:hover {
+      filter: brightness(90%);
+    }
+  }
+  &__save {
+    background-color: $color-primary;
+  }
+  &__delete {
+    background-color: $color-warning;
   }
 }
 </style>

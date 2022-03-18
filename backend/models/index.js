@@ -62,23 +62,4 @@ sequelize
     console.log(error);
   });
 
-// CREATE ADMIN USER BY DEFAULT
-
-// const encryptedAdminPass = async function (){
-//   const User = db.users;
-//   const bcryptPassAdmin = await bcrypt.hash(process.env.ADMIN_PASS, 10);
-//   let adminParam = {
-//     firstname : process.env.ADMIN_FIRSTNAME,
-//     lastname: process.env.ADMIN_LASTNAME,
-//     email: process.env.ADMIN_EMAIL,
-//     password: bcryptPassAdmin,
-//     avatar: null,
-//     admin: true
-//   };
-
-//   await User.create(adminParam)
-// }
-
-// return encryptedAdminPass;
-
 module.exports = db;

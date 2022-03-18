@@ -31,7 +31,7 @@
         <div class="menu-list__select__name">Log out</div>
       </li>
     </ul>
-    <modal :visibleModal="visibleModal" :toggleModal="toggleModal"></modal>
+    <modal :visibleModal="visibleModal" :toggleModal="toggleModal" :logOut="logOut"></modal>
   </header>
 </template>
 
@@ -63,15 +63,11 @@ export default {
     toggleModal() {
       this.visibleModal = !this.visibleModal;
     },
-    async logOut() {
-      try {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userId");
-        localStorage.removeItem("admin");
-        await this.$router.push("/submit");
-      } catch (error) {
-        console.error(error);
-      }
+    logOut() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("admin");
+      this.$router.push("/submit");
     },
   },
 };
