@@ -6,6 +6,6 @@ const multer = require('../middleware/multer-config.middleware');
 router.get('/:id', auth, userCtrl.getOneUser);
 router.get('/', auth, userCtrl.getAllUser);
 router.put('/:id', auth, multer, userCtrl.modifyUser);
-router.put('/:id', auth, userCtrl.deactivateUser);
+router.put('/deactivate/:id', auth, userCtrl.deactivateUser);
 
 module.exports = router;

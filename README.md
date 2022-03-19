@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #73**
+**Main branch - Commit #74**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Modify deleteUser function into deactivateAccount.
-* Set logOut function synchronous in vue.
+* Add modifyUser controller function.
+* Modify deactivate user account route.
 
 # Before to run this server
 

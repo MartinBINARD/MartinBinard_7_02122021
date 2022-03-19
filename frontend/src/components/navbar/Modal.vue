@@ -128,7 +128,7 @@ export default {
           authorization: "bearer " + localStorage.getItem("token"),
         };
         await Axios.put(
-          `http://localhost:3001/api/user/${user_id}`, { active: false},
+          `http://localhost:3001/api/user/deactivate/${user_id}`, { active: false},
           {
             headers,
           }
@@ -228,10 +228,7 @@ $border-card: 25px;
     .button-change-avatar {
       font-weight: bold;
       cursor: pointer;
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding: 0.5rem;
+      padding: 0.3rem;
       border-radius: 10px;
       background-color: $color-primary;
       color: $color-tertiary;
