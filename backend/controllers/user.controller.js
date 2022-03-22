@@ -1,4 +1,5 @@
 const db = require("../models");
+const fs = require("fs");
 
 //LOAD MODELS
 const User = db.users;
@@ -32,7 +33,7 @@ async function modifyUser(req, res, next) {
     });
 
     if (userObject.avatar != null) {
-      const filename = postObject.image.split("/images")[1];
+      const filename = userObject.avatar.split("/images")[1];
       fs.unlink(`images/${filename}`, (error) => {
         console.log(error);
       });

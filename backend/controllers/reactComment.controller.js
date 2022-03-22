@@ -23,14 +23,14 @@ async function likeComment (req, res, next) {
                     userLikedList.push(userId);
 					userLikedList = userLikedList.join(","); 
                     await Comment.update({ comment_like: (commentToUpdate.comment_like + 1), userId_comment_like: userLikedList},{where:{ comment_id : req.params.id }});
-					commentToUpdate = await Comment.findOne({ where: { post_id : req.params.id }});
+					commentToUpdate = await Comment.findOne({ where: { comment_id : req.params.id }});
                 }
             break;
             case "-1": // User dislike
                 if(!userDislikedList.includes(""+userId)){
                     userDislikedList.push(userId);
 					userDislikedList = userDislikedList.join(",");
-                    await Comment.update({ comment_dislike: (commentToUpdate.post_dislike + 1), userId_comment_dislike: userDislikedList},{where:{ comment_id : req.params.id }});
+                    await Comment.update({ comment_dislike: (commentToUpdate.comment_dislike + 1), userId_comment_dislike: userDislikedList},{where:{ comment_id : req.params.id }});
 					commentToUpdate = await Comment.findOne({ where: { comment_id : req.params.id }});
                 }
             break;
@@ -55,7 +55,8 @@ async function likeComment (req, res, next) {
         } 
 		res.status(200).send(commentToUpdate);		
     } catch (error) {
-        res.status(500).json({ message : error.message })
+        res.status(500).send({ message : error.message });
+        console.log(error);
         next();
     }
 };

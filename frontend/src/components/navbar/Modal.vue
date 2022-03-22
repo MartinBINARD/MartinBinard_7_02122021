@@ -15,38 +15,47 @@
               <i class="far fa-user"></i>
             </div>
           </div>
-          <label for="file-image" class="attachment-avatar">
-            <button class="button-change-avatar">Modify</button>
-            <input
-              @change="onAvatarSelected()"
-              id="file-image"
-              type="file"
-              ref="avatar"
-            />
-          </label>
+          <div class="upload-avatar">
+            <div class="upload-avatar__button">
+              <input
+                @change="onImageSelected()"
+                id="file-input"
+                type="file"
+                ref="avatar"
+              />
+              <label for="file-input" class="attachment-avatar"
+                >Choose a file...</label
+              >
+            </div>
+            <span>
+              <strong>Chosen file: </strong>
+              <span v-if="avatar">{{ avatar.name }}</span>
+              <span v-else>None</span>
+            </span>
+          </div>
           <div>
             <p>Firstname:</p>
-            <span>{{ userInfo.firstname }}</span>
+            <span class="user-feild">{{ userInfo.firstname }}</span>
           </div>
           <div>
             <p>Lastname:</p>
-            <span>{{ userInfo.lastname }}</span>
+            <span class="user-feild">{{ userInfo.lastname }}</span>
           </div>
           <div>
             <p>Created at:</p>
-            <span>{{ userInfo.createdAt }}</span>
+            <span class="user-feild">{{ userInfo.createdAt }}</span>
           </div>
           <div>
             <p>Updated at:</p>
-            <span>{{ userInfo.updatedAt }}</span>
+            <span class="user-feild">{{ userInfo.updatedAt }}</span>
           </div>
           <div>
-            <p>Admin:</p>
-            <span>{{ userInfo.admin }}</span>
+            <span v-if="userInfo.admin" class="user-feild">Administrator</span>
+            <span v-else class="user-feild">Standard user</span>
           </div>
           <div>
-            <p>Active:</p>
-            <span>{{ userInfo.active }}</span>
+            <span v-if="userInfo.active" class="user-feild">User active</span>
+            <span v-else class="user-feild">User inactive</span>
           </div>
         </div>
         <div class="button__user">
@@ -77,7 +86,7 @@ export default {
   data() {
     return {
       userInfo: null,
-      avatar: "",
+      avatar: null,
     };
   },
   props: ["visibleModal", "toggleModal", "logOut"],
@@ -99,7 +108,7 @@ export default {
     }
   },
   methods: {
-    onAvatarSelected() {
+    onImageSelected() {
       this.avatar = this.$refs.avatar.files[0];
     },
     async uploadAvatar(user_id) {
@@ -128,7 +137,8 @@ export default {
           authorization: "bearer " + localStorage.getItem("token"),
         };
         await Axios.put(
-          `http://localhost:3001/api/user/deactivate/${user_id}`, { active: false},
+          `http://localhost:3001/api/user/deactivate/${user_id}`,
+          { active: false },
           {
             headers,
           }
@@ -185,7 +195,7 @@ $border-card: 25px;
   &__card {
     position: relative;
     background-color: $color-secondary;
-    padding: 2rem;
+    padding: 1rem 0.8rem;
     margin: 0.5rem;
     border-radius: $border-card;
     @extend %shadow-card;
@@ -215,26 +225,32 @@ $border-card: 25px;
   div {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 0.2rem 0;
-    span {
+    .user-feild {
       font-weight: bold;
+    }
+  }
+  .upload-avatar {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0.5rem 0;
+    input {
+      display: none;
     }
   }
 
   .attachment-avatar {
-    input {
-      display: none;
-    }
-    .button-change-avatar {
-      font-weight: bold;
-      cursor: pointer;
-      padding: 0.3rem;
-      border-radius: 10px;
-      background-color: $color-primary;
-      color: $color-tertiary;
-      &:hover {
-        filter: brightness(90%);
-      }
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0.5rem;
+    border: 2px solid #252525;
+    border-radius: 7px;
+    background-color: $color-primary;
+    color: $color-tertiary;
+    &:hover {
+      filter: brightness(90%);
     }
   }
 
@@ -242,7 +258,14 @@ $border-card: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
+    &__own img {
+      border-radius: 100px;
+      border: 2px solid $color-primary;
+      height: 125px;
+      width: 125px;
+    }
     &__empty {
+      margin: 0.5rem;
       .fa-user {
         font-size: 48px;
         padding: 0.7rem 1rem;
@@ -270,6 +293,12 @@ $border-card: 25px;
   }
   &__delete {
     background-color: $color-warning;
+  }
+}
+
+@media screen and (max-height: 730px) {
+  .modal__card {
+    top: 6.5%;
   }
 }
 </style>

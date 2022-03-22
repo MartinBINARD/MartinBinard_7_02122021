@@ -54,37 +54,37 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: '0'
         },
         userId_comment_like: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_comment_dislike: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_comment_love: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_post_celebrate: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_comment_support: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_comment_insighful: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         },
         userId_comment_curious: {
-            type: DataTypes.JSON,
+            type: DataTypes.STRING(200),
             allowNull: false,
             defaultValue: '0'
         }

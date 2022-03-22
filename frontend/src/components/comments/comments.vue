@@ -88,9 +88,9 @@
             class="overlay-menu"
           ></div>
           <ul v-if="clicked(commentInfo.comment_id)" class="menu-comment__list">
-            <li class="menu-comment__list__select">
+            <!-- <li class="menu-comment__list__select">
               <div class="name">Modify</div>
-            </li>
+            </li> -->
             <li class="menu-comment__select">
               <div @click="deleteComment(commentInfo.comment_id)" class="name">
                 Delete
@@ -375,5 +375,10 @@ $border-card: 25px;
     }
   }
   
+}
+
+.user {
+  display: flex;
+  flex-wrap: wrap;
 }
 </style>

@@ -8,7 +8,8 @@
       >
         <div class="thread__card__header">
           <div class="id-card">
-            <div class="avatar"><i class="far fa-user"></i></div>
+            <div v-if="postInfo.user.avatar" class="avatar"><img :src="postInfo.user.avatar" alt="user avatar" /></div>
+            <div v-else class="avatar"><i class="far fa-user"></i></div>
             <div class="user">
               <div class="user__name">
                 {{ postInfo.user.firstname }} {{ postInfo.user.lastname }}
