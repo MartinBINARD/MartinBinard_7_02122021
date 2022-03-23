@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #75**
+**Main branch - Commit #76**
 
 # Description
 
@@ -19,8 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Modify commentLike controller function.
-* Add a new customize upload file button for user avatar.
+* Debug dislike and upload avatar user function in vue.
 
 # Before to run this server
 

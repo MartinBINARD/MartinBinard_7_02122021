@@ -8,26 +8,10 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-  //   userData: {
-  //     fisrtname: '',
-  //     lastname: '',
-  //     email: '',
-  //     password: ''
-  //   }
   },
   mutations: {
   },
   actions: {
-    // signUp: ({commit}, userData) => {
-    //   commit;
-    //   instance.post('/signup', { userData })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   })
-    // }
   },
   modules: {
   }

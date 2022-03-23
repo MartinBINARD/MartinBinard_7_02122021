@@ -8,14 +8,18 @@
       >
         <div class="thread__card__header">
           <div class="id-card">
-            <div v-if="postInfo.user.avatar" class="avatar"><img :src="postInfo.user.avatar" alt="user avatar" /></div>
+            <div v-if="postInfo.user.avatar" class="avatar">
+              <img :src="postInfo.user.avatar" alt="user avatar" />
+            </div>
             <div v-else class="avatar"><i class="far fa-user"></i></div>
             <div class="user">
               <div class="user__name">
                 {{ postInfo.user.firstname }} {{ postInfo.user.lastname }}
               </div>
               <div class="user__time-stamp">{{ postInfo.createdAt }}</div>
-              <div class="user__time-status" v-if="!postInfo.user.active">User deactivated</div>
+              <div class="user__time-status" v-if="!postInfo.user.active">
+                User deactivated
+              </div>
             </div>
           </div>
           <!-- start of post menu -->
@@ -36,7 +40,9 @@
             ></div>
             <ul v-if="clicked(postInfo.post_id)" class="menu-post__list">
               <li class="menu-post__list__select">
-                <div @click="toggleModifyPost(postInfo.post_id)" class="name">Modify</div>
+                <div @click="toggleModifyPost(postInfo.post_id)" class="name">
+                  Modify
+                </div>
               </li>
               <li class="menu-list__select">
                 <div @click="deletePost(postInfo.post_id)" class="name">
@@ -102,7 +108,7 @@ export default {
     return {
       postInfos: null,
       visiblePostMenu: false,
-      reloadCommentThread: 0
+      reloadCommentThread: 0,
     };
   },
   async mounted() {
@@ -134,13 +140,13 @@ export default {
         return false;
       }
     },
-    isAdminOrOwner(userPost){
+    isAdminOrOwner(userPost) {
       let userConnected = localStorage.getItem("userId");
       let adminUser = localStorage.getItem("admin");
-      if (adminUser === 'true' || (userConnected == userPost)){
-        console.log(adminUser + " - "+ userPost + " - "+ userConnected);
+      if (adminUser === "true" || userConnected == userPost) {
+        console.log(adminUser + " - " + userPost + " - " + userConnected);
         return true;
-      }else{
+      } else {
         return false;
       }
     },
@@ -150,7 +156,7 @@ export default {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        
+
         await Axios.delete(`http://localhost:3001/api/post/${post_id}`, {
           headers,
         });
@@ -165,9 +171,13 @@ export default {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        await Axios.put(`http://localhost:3001/api/post/${post_id}/like/1`, {}, {
-          headers,
-        });
+        await Axios.put(
+          `http://localhost:3001/api/post/${post_id}/like/1`,
+          {},
+          {
+            headers,
+          }
+        );
         this.reloadThread();
       } catch (error) {
         console.error(error);
@@ -179,9 +189,13 @@ export default {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        await Axios.put(`http://localhost:3001/api/post/${post_id}/like/-1`, {}, {
-          headers,
-        });
+        await Axios.put(
+          `http://localhost:3001/api/post/${post_id}/like/-1`,
+          {},
+          {
+            headers,
+          }
+        );
         this.reloadThread();
       } catch (error) {
         console.error(error);
@@ -229,6 +243,11 @@ $border-card: 25px;
         .avatar {
           font-size: 48px;
           margin: 0 0.5rem;
+          img {
+            border-radius: 100px;
+            border: 2px solid $color-primary;
+            width: 60px;
+          }
         }
         .user__name {
           font-weight: bold;

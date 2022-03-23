@@ -31,7 +31,13 @@
         <div class="menu-list__select__name">Log out</div>
       </li>
     </ul>
-    <modal :visibleModal="visibleModal" :toggleModal="toggleModal" :logOut="logOut"></modal>
+    <modal
+      :visibleModal="visibleModal"
+      :toggleModal="toggleModal"
+      :logOut="logOut"
+      :key="reloadModalUser"
+      :reloadModal="reloadModal"
+    ></modal>
   </header>
 </template>
 
@@ -41,10 +47,12 @@ import Modal from "./Modal.vue";
 export default {
   name: "Navbar",
   components: { Modal },
+  props: ["reloadPosthread", "reloadThread"],
   data() {
     return {
       visibleMenu: false,
       visibleModal: false,
+      reloadModalUser: 0,
     };
   },
   computed: {
@@ -57,6 +65,9 @@ export default {
     },
   },
   methods: {
+    reloadModal() {
+      this.reloadModalUser++;
+    },
     toggleMenu() {
       this.visibleMenu = !this.visibleMenu;
     },

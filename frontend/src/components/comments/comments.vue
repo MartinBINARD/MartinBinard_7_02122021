@@ -3,7 +3,10 @@
   <div class="comment">
     <div class="comment__bar">
       <div class="comment__bar__content">
-        <div class="avatar"><i class="far fa-user"></i></div>
+        <div v-if="postInfo.user.avatar" class="avatar">
+          <img :src="postInfo.user.avatar" alt="user avatar" />
+        </div>
+        <div v-else class="avatar"><i class="far fa-user"></i></div>
         <form>
           <input
             v-model="comment"
@@ -33,7 +36,10 @@
         :key="commentInfo.comment_id"
         class="comment__thread"
       >
-        <div class="avatar"><i class="far fa-user"></i></div>
+        <div v-if="commentInfo.user.avatar" class="avatar">
+          <img :src="commentInfo.user.avatar" alt="user avatar" />
+        </div>
+        <div v-else class="avatar"><i class="far fa-user"></i></div>
         <div class="container">
           <div class="container__content">
             <div class="user">
@@ -53,11 +59,13 @@
                 <i class="far fa-thumbs-up foward"></i>
                 <!-- <i class="far fa-thumbs-up backward"></i> -->
               </div>
-              <div class="react__like-count">{{ commentInfo.comment_like }}</div>
+              <div class="react__like-count">
+                {{ commentInfo.comment_like }}
+              </div>
             </div>
             <div class="react">
               <div
-                @click.prevent="dislikePost(commentInfo.comment_id)"
+                @click.prevent="dislikeComment(commentInfo.comment_id)"
                 class="react__dislike-button"
               >
                 <i class="far fa-thumbs-down foward"></i>
@@ -260,6 +268,11 @@ $border-card: 25px;
     .avatar {
       font-size: 40px;
       margin: 0 0.5rem;
+      img {
+        border-radius: 100px;
+        border: 2px solid $color-primary;
+        width: 55px;
+      }
     }
     form,
     input {
@@ -304,6 +317,11 @@ $border-card: 25px;
     .avatar {
       font-size: 30px;
       margin: 0 0.2rem 0 0;
+      img {
+        border-radius: 100px;
+        border: 2px solid $color-primary;
+        width: 45px;
+      }
     }
     .menu-comment {
       position: relative;
@@ -364,17 +382,17 @@ $border-card: 25px;
 .container__footer {
   margin: 0.3rem 1rem;
   align-items: center;
-  .react{
+  .react {
     display: flex;
     margin-right: 1rem;
-    &__like-button, &__dislike-button {
+    &__like-button,
+    &__dislike-button {
       margin-right: 0.2rem;
       &:hover {
         cursor: pointer;
       }
     }
   }
-  
 }
 
 .user {

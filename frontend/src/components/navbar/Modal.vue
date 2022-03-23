@@ -11,7 +11,7 @@
             <div v-if="userInfo.avatar" class="user-avatar__own">
               <img :src="userInfo.avatar" alt="user avatar" />
             </div>
-            <div v-if="!userInfo.avatar" class="user-avatar__empty">
+            <div v-else class="user-avatar__empty">
               <i class="far fa-user"></i>
             </div>
           </div>
@@ -89,7 +89,13 @@ export default {
       avatar: null,
     };
   },
-  props: ["visibleModal", "toggleModal", "logOut"],
+  props: [
+    "visibleModal",
+    "toggleModal",
+    "logOut",
+    "reloadModal",
+    "reloadModalUser",
+  ],
   async mounted() {
     try {
       let userId = localStorage.getItem("userId");
@@ -114,7 +120,7 @@ export default {
     async uploadAvatar(user_id) {
       try {
         let data = new FormData();
-        data.append("avatar", this.avatar);
+        data.append("image", this.avatar);
 
         let headers = {
           "content-type": "application/json",
@@ -126,6 +132,7 @@ export default {
             headers,
           });
         }
+        this.reloadModal();
       } catch (error) {
         console.error(error);
       }
@@ -261,7 +268,6 @@ $border-card: 25px;
     &__own img {
       border-radius: 100px;
       border: 2px solid $color-primary;
-      height: 125px;
       width: 125px;
     }
     &__empty {
