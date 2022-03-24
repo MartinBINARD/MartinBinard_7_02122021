@@ -3,8 +3,9 @@
 </template>
 
 <style lang="scss">
-$color-primary: #1daba7;
-$color-secondary: #f6f6f6;
+$color-primary: #122542;
+$color-secondary: #d1515a;
+$color-tertiary: #f6f6f6;
 
 * {
   padding: 0;
@@ -40,7 +41,7 @@ input, textarea {
   padding-left: 0.5rem;
   &:focus {
     outline: none !important;
-    border: 3px solid $color-primary;
+    border: 3px solid $color-secondary;
   }
 }
 
@@ -52,8 +53,8 @@ button {
 .button {
     padding: 0.8rem 2.5rem;
     margin-left: 1rem;
-    background-color: $color-primary;
-    color: $color-secondary;
+    background-color: $color-secondary;
+    color: $color-tertiary;
     font-weight: bold;
     &:hover {
       filter: brightness(90%);
@@ -62,6 +63,7 @@ button {
 
 .button--disabled {
   filter: brightness(80%);
+  background-color: $color-secondary;
   &:hover {
     cursor: not-allowed;
     filter: brightness(70%);

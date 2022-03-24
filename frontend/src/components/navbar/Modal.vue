@@ -161,9 +161,9 @@ export default {
 
 <style lang="scss">
 // setting modal & post modal style
-$color-primary: #1daba7;
-$color-secondary: #f6f6f6;
-$color-tertiary: white;
+$color-primary: #122542;
+$color-secondary: #d1515a;
+$color-tertiary: #f6f6f6;
 $color-warning: #f44336;
 $border-card: 25px;
 
@@ -201,7 +201,7 @@ $border-card: 25px;
   align-items: center;
   &__card {
     position: relative;
-    background-color: $color-secondary;
+    background-color: $color-tertiary;
     padding: 1rem 0.8rem;
     margin: 0.5rem;
     border-radius: $border-card;
@@ -211,7 +211,7 @@ $border-card: 25px;
       right: 0.8rem;
       top: 0.8rem;
       padding: 0.5rem;
-      background-color: $color-primary;
+      background-color: $color-secondary;
       border-radius: 5px;
       font-weight: bold;
       &:hover {
@@ -254,7 +254,7 @@ $border-card: 25px;
     padding: 0.5rem;
     border: 2px solid #252525;
     border-radius: 7px;
-    background-color: $color-primary;
+    background-color: $color-secondary;
     color: $color-tertiary;
     &:hover {
       filter: brightness(90%);
@@ -267,7 +267,7 @@ $border-card: 25px;
     align-items: center;
     &__own img {
       border-radius: 100px;
-      border: 2px solid $color-primary;
+      border: 2px solid $color-secondary;
       width: 125px;
     }
     &__empty {
@@ -289,16 +289,17 @@ $border-card: 25px;
   &__delete {
     margin: 1rem 0 0 0;
     padding: 0.5rem;
-    color: $color-tertiary;
     &:hover {
       filter: brightness(90%);
     }
   }
   &__save {
     background-color: $color-primary;
+    color: $color-tertiary;
   }
   &__delete {
     background-color: $color-warning;
+    color: $color-tertiary;
   }
 }
 

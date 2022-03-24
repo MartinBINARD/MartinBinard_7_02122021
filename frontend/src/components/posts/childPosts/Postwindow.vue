@@ -135,8 +135,8 @@ export default {
 </script>
 
 <style lang="scss">
-$color-primary: #1daba7;
-$color-tertiary: white;
+$color-secondary: #d1515a;
+$color-tertiary: #f6f6f6;
 
 .post-form {
   margin: 1rem 0;
@@ -163,7 +163,7 @@ $color-tertiary: white;
     font-size: 30px;
     cursor: pointer;
     &:hover {
-      background-color: $color-primary;
+      background-color: $color-secondary;
       color: $color-tertiary;
     }
     input {

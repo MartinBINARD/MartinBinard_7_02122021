@@ -206,9 +206,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-primary: #1daba7;
-$color-secondary: #f6f6f6;
-$color-tertiary: white;
+$color-primary: #122542;
+$color-secondary: #d1515a;
+$color-tertiary: #f6f6f6;
 $color-warning: #f44336;
 $color-like: #3f51b5;
 $border-card: 25px;
@@ -228,7 +228,7 @@ $border-card: 25px;
   flex-direction: column;
   &__card {
     margin: 0.5rem auto;
-    background-color: $color-secondary;
+    background-color: $color-tertiary;
     padding: 1rem;
     border-radius: $border-card;
     @extend %shadow-card;
@@ -245,7 +245,7 @@ $border-card: 25px;
           margin: 0 0.5rem;
           img {
             border-radius: 100px;
-            border: 2px solid $color-primary;
+            border: 2px solid $color-secondary;
             width: 60px;
           }
         }
@@ -261,7 +261,7 @@ $border-card: 25px;
         line-height: 1rem;
         color: black;
         &:hover {
-          background-color: $color-primary;
+          background-color: $color-secondary;
           border-radius: 5px;
           color: $color-tertiary;
           cursor: pointer;
@@ -310,7 +310,7 @@ $border-card: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $color-secondary;
+  background-color: $color-tertiary;
   height: 10rem;
   width: 50%;
   margin: 1rem auto;
@@ -330,7 +330,7 @@ $border-card: 25px;
     border-radius: 5px;
     &:hover,
     &--active {
-      background-color: $color-primary;
+      background-color: $color-secondary;
       color: $color-tertiary;
       cursor: pointer;
     }
@@ -348,7 +348,7 @@ $border-card: 25px;
       padding: 0.5rem;
       border-radius: 5px;
       &:hover {
-        background-color: $color-primary;
+        background-color: $color-secondary;
         color: $color-tertiary;
         cursor: pointer;
       }

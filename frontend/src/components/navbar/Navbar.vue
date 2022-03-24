@@ -85,9 +85,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$color-primary: #1daba7;
-$color-secondary: #f6f6f6;
-$color-tertiary: white;
+$color-primary: #122542;
+$color-secondary: #d1515a;
+$color-tertiary: #f6f6f6;
 $border-card: 25px;
 
 %shadow-card {
@@ -136,8 +136,8 @@ $border-card: 25px;
   outline: none;
   &:hover,
   &--active {
-    background-color: $color-primary;
-    color: $color-secondary;
+    background-color: $color-secondary;
+    color: $color-tertiary;
     @extend %shadow-button;
   }
 }
@@ -170,7 +170,7 @@ $border-card: 25px;
     height: 50%;
     padding-top: 5%;
     &:hover {
-      background-color: $color-primary;
+      background-color: $color-secondary;
       border-radius: 5px;
       color: $color-tertiary;
       cursor: pointer;

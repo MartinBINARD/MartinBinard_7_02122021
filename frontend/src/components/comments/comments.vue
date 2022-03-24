@@ -243,9 +243,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-primary: #1daba7;
-$color-secondary: #f6f6f6;
-$color-tertiary: white;
+$color-primary: #122542;
+$color-secondary: #d1515a;
+$color-tertiary: #f6f6f6;
 $color-quinary: #e3e3e3;
 $border-card: 25px;
 
@@ -270,7 +270,7 @@ $border-card: 25px;
       margin: 0 0.5rem;
       img {
         border-radius: 100px;
-        border: 2px solid $color-primary;
+        border: 2px solid $color-secondary;
         width: 55px;
       }
     }
@@ -286,8 +286,8 @@ $border-card: 25px;
   &__footer {
     padding: 0.5rem 3.2rem;
     .post-button {
-      background-color: $color-primary;
-      color: $color-secondary;
+      background-color: $color-secondary;
+      color: $color-tertiary;
       width: 4rem;
       padding: 0.35rem;
       font-weight: bold;
@@ -319,7 +319,7 @@ $border-card: 25px;
       margin: 0 0.2rem 0 0;
       img {
         border-radius: 100px;
-        border: 2px solid $color-primary;
+        border: 2px solid $color-secondary;
         width: 45px;
       }
     }
@@ -335,7 +335,7 @@ $border-card: 25px;
         border-radius: 5px;
         &:hover,
         &--active {
-          background-color: $color-primary;
+          background-color: $color-secondary;
           color: $color-tertiary;
           cursor: pointer;
         }
@@ -353,7 +353,7 @@ $border-card: 25px;
           padding: 0.5rem;
           border-radius: 5px;
           &:hover {
-            background-color: $color-primary;
+            background-color: $color-secondary;
             color: $color-tertiary;
             cursor: pointer;
           }

@@ -90,6 +90,12 @@
           >
             {{ error.passwordCheck }}
           </div>
+          <div
+            v-if="mode == 'createAccount' && error.serverResponse != null"
+            class="error"
+          >
+            {{ error.serverResponse }}. Please, contact administrator !
+          </div>
         </div>
         <button
           v-if="mode == 'createAccount'"
@@ -144,6 +150,7 @@ export default {
         password: null,
         passwordCheck: null,
         database: null,
+        serverResponse: null,
       },
       validForm: false,
     };
@@ -185,13 +192,9 @@ export default {
       let emailRegexp = new RegExp(
         "^(([^<>()[].,;:s@]+(.[^<>()[].,;:s@]+)*)|(.+))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$"
       );
-      // let passwordRegexp = new RegExp(
-      //   "^(?=.*d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
-      // );
       let validFirstname = firstnameRegexp.test(this.firstname);
       let validLastname = lastnameRegexp.test(this.lastname);
       let validEmail = emailRegexp.test(this.email);
-      // let validPassword = passwordRegexp.test(this.password);
 
       if (this.mode == "createAccount") {
         if (!validFirstname) {
@@ -205,10 +208,6 @@ export default {
         if (!validEmail) {
           this.error.email = "Invalid email !";
         }
-        // if (!validPassword) {
-        //   this.error.password =
-        //     "Invalid password ! Mini: 8 length, Must have uppercase & lowercase letters, at least 2 digits. No spaces.";
-        // }
         if (this.password != this.passwordCheck) {
           this.error.passwordCheck = "Password do not match !";
         }
@@ -234,14 +233,19 @@ export default {
           email: this.email,
           password: this.password,
         };
+        this.error.serverResponse = null;
 
         if (this.formCheck()) {
           await Axios.post("http://localhost:3001/api/auth/signup", data);
           this.switchToLogin();
         }
       } catch (error) {
-        // this.error.database = "Email alreday exist or database error !";
-        console.error(error);
+        if (error.status === 401) {
+          this.error.serverResponse = "Email already exist !";
+        } else if (error.status === 403) {
+          this.error.serverResponse =
+            "Weak password ! Minimun length is 8. Maximum length 100. Must have uppercase letters. Must have lowercase letters. Must have at least 2 digits. Must have at least 2 digits. Must have at least 2 digits. Should not have spaces. And not these kinds of password: Ex: Passw0rd, Password123";
+        }
       }
     },
     async login() {
@@ -268,8 +272,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$color-primary: #1daba7;
-$color-secondary: #f6f6f6;
+$color-primary: #122542;
+$color-tertiary: #f6f6f6;
 $color-warning: #f44336;
 %shadow-card {
   box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
@@ -279,7 +283,7 @@ $color-warning: #f44336;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  background-color: $color-secondary;
+  background-color: $color-tertiary;
   margin: 1rem;
   border-radius: 1.5rem;
   padding: 1rem 0;
@@ -304,7 +308,7 @@ $color-warning: #f44336;
 }
 
 .link__button {
-  background-color: white;
+  background-color: $color-tertiary;
   color: $color-primary;
   width: 12rem;
   margin: 1rem;

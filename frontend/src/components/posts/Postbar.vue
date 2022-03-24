@@ -65,8 +65,8 @@ export default {
 </script>
 
 <style lang="scss">
-$color-primary: #1daba7;
-$color-secondary: #f6f6f6;
+$color-primary: #122542;
+$color-tertiary: #f6f6f6;
 $color-quaternary: #dadada;
 $border-card: 25px;
 
@@ -83,7 +83,7 @@ $border-card: 25px;
   &__card {
     display: flex;
     justify-content: center;
-    background-color: $color-secondary;
+    background-color: $color-tertiary;
     padding: 1rem;
     width: 50%;
     border-radius: $border-card;
@@ -96,7 +96,7 @@ $border-card: 25px;
         font-size: 20px;
         border-radius: 100px;
         border: 2px solid black;
-        background: white;
+        background: $color-tertiary;
         &:hover {
           background-color: $color-quaternary;
           cursor: pointer;
