@@ -88,6 +88,7 @@ export default {
 $color-primary: #122542;
 $color-secondary: #d1515a;
 $color-tertiary: #f6f6f6;
+$color-quinary: white;
 $border-card: 25px;
 
 %shadow-card {
@@ -104,7 +105,7 @@ $border-card: 25px;
   left: 0;
   right: 0;
   z-index: 5;
-  background-color: $color-tertiary;
+  background-color: $color-quinary;
   margin: 0.5rem;
   border-radius: 25px;
   @extend %shadow-card;
@@ -156,7 +157,7 @@ $border-card: 25px;
   z-index: 3;
   top: 5rem;
   right: 0;
-  background-color: $color-tertiary;
+  background-color: $color-quinary;
   height: 5rem;
   width: 10rem;
   margin: 0 0.5rem;

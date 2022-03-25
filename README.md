@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #77**
+**Main branch - Commit #78**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Display error server message in vue when sign up.
-* Add Groupomania theme colors.
+* Debug reception of error server message in vue when sign up.
+* Add new background color for comments.
 
 # Before to run this server
 

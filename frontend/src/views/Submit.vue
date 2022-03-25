@@ -90,12 +90,9 @@
           >
             {{ error.passwordCheck }}
           </div>
-          <div
-            v-if="mode == 'createAccount' && error.serverResponse != null"
-            class="error"
-          >
-            {{ error.serverResponse }}. Please, contact administrator !
-          </div>
+        </div>
+        <div v-if="error.serverResponse != null" class="error">
+          {{ error.serverResponse }}
         </div>
         <button
           v-if="mode == 'createAccount'"
@@ -149,7 +146,6 @@ export default {
         email: null,
         password: null,
         passwordCheck: null,
-        database: null,
         serverResponse: null,
       },
       validForm: false,
@@ -233,6 +229,11 @@ export default {
           email: this.email,
           password: this.password,
         };
+        this.error.firstname = null;
+        this.error.lastname = null;
+        this.error.email = null;
+        this.error.password = null;
+        this.error.passwordCheck = null;
         this.error.serverResponse = null;
 
         if (this.formCheck()) {
@@ -240,12 +241,7 @@ export default {
           this.switchToLogin();
         }
       } catch (error) {
-        if (error.status === 401) {
-          this.error.serverResponse = "Email already exist !";
-        } else if (error.status === 403) {
-          this.error.serverResponse =
-            "Weak password ! Minimun length is 8. Maximum length 100. Must have uppercase letters. Must have lowercase letters. Must have at least 2 digits. Must have at least 2 digits. Must have at least 2 digits. Should not have spaces. And not these kinds of password: Ex: Passw0rd, Password123";
-        }
+        this.error.serverResponse = error.response.data.message;
       }
     },
     async login() {
@@ -264,7 +260,7 @@ export default {
         localStorage.setItem("admin", res.data.admin);
         await this.$router.push("/");
       } catch (error) {
-        this.error.password = "Invalid email/password !";
+        this.error.serverResponse = error.response.data.message;
       }
     },
   },
@@ -295,16 +291,17 @@ $color-warning: #f44336;
 
 .submit-form__field {
   padding: 10px 15px;
-  .error {
-    font-weight: bold;
-    color: white;
-    background-color: $color-warning;
-    border-radius: 5px;
-    padding: 0.1rem 1rem;
-    margin-top: 0.2rem;
-    overflow-wrap: break-all;
-    max-width: 17.2rem;
-  }
+}
+
+.error {
+  font-weight: bold;
+  color: white;
+  background-color: $color-warning;
+  border-radius: 5px;
+  padding: 0.1rem 1rem;
+  margin: 0 1rem 0.5rem;
+  overflow-wrap: break-all;
+  max-width: 17.2rem;
 }
 
 .link__button {

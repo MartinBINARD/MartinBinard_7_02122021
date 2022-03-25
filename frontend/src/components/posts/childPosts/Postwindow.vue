@@ -21,15 +21,24 @@
             placeholder="What do you want to talk about ?"
             required
           />
-          <label for="file-image" class="attachment-button">
-            <i class="fas fa-paperclip"></i>
-            <input
-              @change="onImageSelected()"
-              id="file-image"
-              type="file"
-              ref="image"
-            />
-          </label>
+          <div class="upload-image">
+            <div class="upload-image__button">
+              <input
+                @change="onImageSelected()"
+                id="file-image"
+                type="file"
+                ref="image"
+              />
+              <label for="file-image" class="attachment-button">
+                <i class="fas fa-paperclip"></i>
+              </label>
+            </div>
+            <span>
+              <strong>Chosen file: </strong>
+              <span v-if="image">{{ image.name }}</span>
+              <span v-else>None</span>
+            </span>
+          </div>
         </form>
         <div class="footer">
           <button
@@ -61,12 +70,19 @@ import Axios from "axios";
 
 export default {
   name: "Postwindow",
-  props: ["visiblePost", "togglePost", "reloadThread", "resetForm", "mode" , "postId"],
+  props: [
+    "visiblePost",
+    "togglePost",
+    "reloadThread",
+    "resetForm",
+    "mode",
+    "postId",
+  ],
   data() {
     return {
       title: "",
       text: "",
-      image: null
+      image: null,
     };
   },
   computed: {
@@ -121,7 +137,9 @@ export default {
         };
 
         if (this.title != "" && this.text != "" && this.user_id != "") {
-          await Axios.put(`http://localhost:3001/api/post/${post_id}`, data, { headers });
+          await Axios.put(`http://localhost:3001/api/post/${post_id}`, data, {
+            headers,
+          });
           this.togglePost();
           this.reloadThread();
           this.resetForm();
@@ -129,7 +147,7 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    }
+    },
   },
 };
 </script>
@@ -150,27 +168,33 @@ $color-tertiary: #f6f6f6;
     height: 10rem;
     margin-top: 1rem;
   }
-  .attachment-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    bottom: -2.5rem;
-    right: 1rem;
-    height: 2.3rem;
-    width: 2.3rem;
-    border-radius: 500px;
-    font-size: 30px;
-    cursor: pointer;
-    &:hover {
-      background-color: $color-secondary;
-      color: $color-tertiary;
+  .upload-image {
+    &__button {
+      margin-right: 0.5rem;
     }
+    display: flex;
+    align-items: center;
+    margin: 0.5rem 0;
     input {
       display: none;
     }
-    .fa-paperclip {
-      font-size: 25px;
+    .attachment-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      right: 1rem;
+      height: 2.3rem;
+      width: 2.3rem;
+      border-radius: 500px;
+      font-size: 30px;
+      cursor: pointer;
+      &:hover {
+        background-color: $color-secondary;
+        color: $color-tertiary;
+      }
+      .fa-paperclip {
+        font-size: 25px;
+      }
     }
   }
 }

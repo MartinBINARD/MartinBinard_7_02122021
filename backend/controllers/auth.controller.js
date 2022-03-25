@@ -26,7 +26,7 @@ async function signup (req, res, next) {
         };
 
         if (emailTaken) {
-            res.status(401).send({ message: 'Email already exist !'})
+            res.status(401).send({ message: 'Email already exist ! Please, contact administrator !'})
         } else {
             const user = await User.create( userInfo )
                 res.status(201).send({ message: 'User created !'});
@@ -58,7 +58,7 @@ async function login (req, res, next) {
 
         if (!userLogin) { res.status(401).send({ message: 'User not found !'}) }
         else if (!bcryptPassValid) { res.status(401).send({ message: 'Wrong password !'}) }
-        else if (!userLogin.active) { res.status(401).send({ message: 'User account deactivate !'}) }
+        else if (!userLogin.active) { res.status(403).send({ message: 'User account deactivate ! Please, contact administrator.'}) }
         else { 
             res.status(200).json(userInfo)
         }

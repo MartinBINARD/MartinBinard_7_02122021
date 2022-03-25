@@ -96,9 +96,6 @@
             class="overlay-menu"
           ></div>
           <ul v-if="clicked(commentInfo.comment_id)" class="menu-comment__list">
-            <!-- <li class="menu-comment__list__select">
-              <div class="name">Modify</div>
-            </li> -->
             <li class="menu-comment__select">
               <div @click="deleteComment(commentInfo.comment_id)" class="name">
                 Delete
@@ -246,7 +243,8 @@ export default {
 $color-primary: #122542;
 $color-secondary: #d1515a;
 $color-tertiary: #f6f6f6;
-$color-quinary: #e3e3e3;
+$color-quinary: white;
+$color-senary: #ffd7d7;
 $border-card: 25px;
 
 %shadow-card {
@@ -370,7 +368,7 @@ $border-card: 25px;
 }
 
 .container__content {
-  background-color: $color-quinary;
+  background-color: $color-senary;
   border-radius: $border-card;
   padding: 1rem;
   .user {

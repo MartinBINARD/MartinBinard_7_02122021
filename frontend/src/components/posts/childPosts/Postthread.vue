@@ -60,28 +60,14 @@
           </div>
           <div class="text">{{ postInfo.text }}</div>
         </div>
-        <div class="thread__card__footer">
-          <div class="react">
-            <div
-              @click.prevent="likePost(postInfo.post_id)"
-              class="react__like-button"
-            >
-              <i class="far fa-thumbs-up foward"></i>
-              <!-- <i class="far fa-thumbs-up backward"></i> -->
-            </div>
-            <div class="react__like-count">{{ postInfo.post_like }}</div>
-          </div>
-          <div class="react">
-            <div
-              @click.prevent="dislikePost(postInfo.post_id)"
-              class="react__dislike-button"
-            >
-              <i class="far fa-thumbs-down foward"></i>
-              <!-- <i class="far fa-thumbs-up backward"></i> -->
-            </div>
-            <div class="react__dislike-count">{{ postInfo.post_dislike }}</div>
-          </div>
-        </div>
+        <likedislikesposts
+          :postInfo="postInfo"
+          :post_id="postInfo.post_id"
+          :key="reloadLikePostCounter"
+          :reloadLikePost="reloadLikePost"
+          class="thread__card__footer"
+        >
+        </likedislikesposts>
         <comments
           :postInfo="postInfo"
           :post_id="postInfo.post_id"
@@ -99,9 +85,10 @@
 <script>
 import Axios from "axios";
 import Comments from "../../comments/comments.vue";
+import Likedislikesposts from "../../likesdislikesposts/likedislikesposts.vue";
 
 export default {
-  components: { Comments },
+  components: { Comments, Likedislikesposts },
   name: "Postthread",
   props: ["reloadThread", "togglePost", "visiblePost", "toggleModifyPost"],
   data() {
@@ -109,6 +96,7 @@ export default {
       postInfos: null,
       visiblePostMenu: false,
       reloadCommentThread: 0,
+      reloadLikePostCounter: 0,
     };
   },
   async mounted() {
@@ -129,6 +117,9 @@ export default {
   methods: {
     reloadComment() {
       this.reloadCommentThread++;
+    },
+    reloadLikePost() {
+      this.reloadLikePostCounter++;
     },
     togglePostMenu(post_id) {
       this.visiblePostMenu = post_id;
@@ -165,42 +156,6 @@ export default {
         console.error(error);
       }
     },
-    async likePost(post_id) {
-      try {
-        let headers = {
-          "content-type": "application/json",
-          authorization: "bearer " + localStorage.getItem("token"),
-        };
-        await Axios.put(
-          `http://localhost:3001/api/post/${post_id}/like/1`,
-          {},
-          {
-            headers,
-          }
-        );
-        this.reloadThread();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async dislikePost(post_id) {
-      try {
-        let headers = {
-          "content-type": "application/json",
-          authorization: "bearer " + localStorage.getItem("token"),
-        };
-        await Axios.put(
-          `http://localhost:3001/api/post/${post_id}/like/-1`,
-          {},
-          {
-            headers,
-          }
-        );
-        this.reloadThread();
-      } catch (error) {
-        console.error(error);
-      }
-    },
   },
 };
 </script>
@@ -209,8 +164,6 @@ export default {
 $color-primary: #122542;
 $color-secondary: #d1515a;
 $color-tertiary: #f6f6f6;
-$color-warning: #f44336;
-$color-like: #3f51b5;
 $border-card: 25px;
 
 %shadow-card {
@@ -277,7 +230,9 @@ $border-card: 25px;
         display: flex;
         justify-content: center;
         margin: 1rem 0;
-        border-radius: $border-card;
+        img {
+          border-radius: $border-card;
+        }
       }
     }
     &__footer {
@@ -286,18 +241,6 @@ $border-card: 25px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
       padding: 0.5rem 0 0.5rem;
       margin: 1.5rem 0;
-      .react {
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-        font-size: 18px;
-        margin: 0 1rem;
-        .fa-thumbs-up,
-        .fa-thumbs-down {
-          font-size: 25px;
-          margin: 0 0.5rem;
-        }
-      }
     }
   }
 }

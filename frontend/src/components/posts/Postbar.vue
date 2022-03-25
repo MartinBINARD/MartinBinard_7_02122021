@@ -67,7 +67,7 @@ export default {
 <style lang="scss">
 $color-primary: #122542;
 $color-tertiary: #f6f6f6;
-$color-quaternary: #dadada;
+$color-senary: #ffd7d7;
 $border-card: 25px;
 
 %shadow-card {
@@ -98,7 +98,7 @@ $border-card: 25px;
         border: 2px solid black;
         background: $color-tertiary;
         &:hover {
-          background-color: $color-quaternary;
+          background-color: $color-senary;
           cursor: pointer;
         }
       }
