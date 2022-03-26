@@ -58,6 +58,9 @@
             <span v-else class="user-feild">User inactive</span>
           </div>
         </div>
+        <div v-else class="message-user-info">
+          <h3>Sorry, server must be shutdown ! Try it later !</h3>
+        </div>
         <div class="button__user">
           <button
             @click.prevent="uploadAvatar(userInfo.user_id)"
@@ -94,7 +97,7 @@ export default {
     "toggleModal",
     "logOut",
     "reloadModal",
-    "reloadModalUser",
+    "reloadModalUser"
   ],
   async mounted() {
     try {
@@ -164,6 +167,7 @@ export default {
 $color-primary: #122542;
 $color-secondary: #d1515a;
 $color-tertiary: #f6f6f6;
+$color-senary: #ffd7d7;
 $color-warning: #f44336;
 $border-card: 25px;
 
@@ -205,6 +209,12 @@ $border-card: 25px;
     padding: 1rem 0.8rem;
     margin: 0.5rem;
     border-radius: $border-card;
+    .message-user-info{
+      background-color: $color-senary;
+      margin: 1rem 0;
+      padding: 2rem;
+      border-radius: $border-card;
+    }
     @extend %shadow-card;
     &__button {
       position: absolute;

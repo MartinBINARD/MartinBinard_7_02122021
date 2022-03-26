@@ -3,10 +3,10 @@
   <div class="comment">
     <div class="comment__bar">
       <div class="comment__bar__content">
-        <div v-if="postInfo.user.avatar" class="avatar">
+        <!-- <div v-if="userInfo.user.avatar" class="avatar">
           <img :src="postInfo.user.avatar" alt="user avatar" />
-        </div>
-        <div v-else class="avatar"><i class="far fa-user"></i></div>
+        </div> -->
+        <!-- <div v-else class="avatar"><i class="far fa-user"></i></div> -->
         <form>
           <input
             v-model="comment"

@@ -76,7 +76,7 @@
         ></comments>
       </div>
     </div>
-    <div v-else class="message-thread">
+    <div v-if="postInfos == null || postInfos == false" class="message-thread">
       <h2>No posts available !</h2>
     </div>
   </div>
@@ -112,6 +112,7 @@ export default {
       this.postInfos = getPostContent.data;
     } catch (error) {
       console.error(error);
+      this.postInfos = false;
     }
   },
   methods: {
@@ -302,6 +303,18 @@ $border-card: 25px;
 @media screen and (max-width: 375px) {
   .thread__card {
     padding: 0.3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .message-thread {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .message-thread {
+    width: 93%;
   }
 }
 </style>

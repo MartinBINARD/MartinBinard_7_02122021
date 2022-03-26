@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #78**
+**Main branch - Commit #79**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Debug reception of error server message in vue when sign up.
-* Add new background color for comments.
+* Add message "No posts available" when no post thread has ever added or no server response.
+* Add server shutdown message in user info.
 
 # Before to run this server
 

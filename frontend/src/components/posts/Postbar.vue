@@ -114,24 +114,21 @@ $border-card: 25px;
 
 @media screen and (min-width: 768px) {
   .postbar__card,
-  .thread__card,
-  .message-thread {
+  .thread__card {
     width: 50%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .postbar__card,
-  .thread__card,
-  .message-thread {
+  .thread__card {
     width: 70%;
   }
 }
 
 @media screen and (max-width: 425px) {
   .postbar__card,
-  .thread__card,
-  .message-thread {
+  .thread__card {
     width: 93%;
   }
 }
