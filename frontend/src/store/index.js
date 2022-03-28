@@ -8,12 +8,8 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    reloadThreadPost: 0
   },
   mutations: {
-    reloadThread (state) {
-      state.reloadThreadPost++
-    }
   },
   actions: {
     

@@ -61,10 +61,8 @@
           <div class="text">{{ postInfo.text }}</div>
         </div>
         <likedislikesposts
-          :postInfo="postInfo"
+          :postInfoData="postInfo"
           :post_id="postInfo.post_id"
-          :key="reloadLikePostCounter"
-          :reloadLikePost="reloadLikePost"
           class="thread__card__footer"
         >
         </likedislikesposts>
@@ -96,7 +94,6 @@ export default {
       postInfos: null,
       visiblePostMenu: false,
       reloadCommentThread: 0,
-      reloadLikePostCounter: 0,
     };
   },
   async mounted() {
@@ -118,9 +115,6 @@ export default {
   methods: {
     reloadComment() {
       this.reloadCommentThread++;
-    },
-    reloadLikePost() {
-      this.reloadLikePostCounter++;
     },
     togglePostMenu(post_id) {
       this.visiblePostMenu = post_id;

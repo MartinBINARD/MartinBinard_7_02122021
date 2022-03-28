@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #79**
+**Main branch - Commit #80**
 
 # Description
 
@@ -19,8 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add message "No posts available" when no post thread has ever added or no server response.
-* Add server shutdown message in user info.
+* Debug update like post function in vue.
+* Debug "User not found!" message when sign up in auth.controller.js.
 
 # Before to run this server
 

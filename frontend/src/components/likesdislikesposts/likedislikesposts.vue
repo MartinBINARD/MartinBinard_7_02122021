@@ -30,7 +30,12 @@ import Axios from "axios";
 
 export default {
   name: "Likesdislikesposts",
-  props: ["postInfo", "post_id", "reloadLikePost"],
+  props: ["postInfoData", "post_id", "reloadCommentThread"],
+  data() {
+    return {
+      postInfo: this.postInfoData,
+    };
+  },
   methods: {
     async likePost(post_id) {
       try {
@@ -38,14 +43,14 @@ export default {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        await Axios.put(
+        let postInfoDataLike = await Axios.put(
           `http://localhost:3001/api/post/${post_id}/like/1`,
           {},
           {
             headers,
           }
         );
-        this.reloadLikePost();
+        this.postInfo = postInfoDataLike.data;
       } catch (error) {
         console.error(error);
       }
@@ -56,14 +61,14 @@ export default {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        await Axios.put(
+        let postInfoDataLike = await Axios.put(
           `http://localhost:3001/api/post/${post_id}/like/-1`,
           {},
           {
             headers,
           }
         );
-        this.reloadLikePost();
+        this.postInfo = postInfoDataLike.data;
       } catch (error) {
         console.error(error);
       }
