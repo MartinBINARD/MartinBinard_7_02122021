@@ -2,25 +2,27 @@
   <div class="container-react">
     <div class="react">
       <div
-        @click.prevent="likePost(postInfo.post_id)"
+        @click.prevent="likeComment(commentInfo.comment_id)"
         class="react__like-button"
       >
         <i class="far fa-thumbs-up foward"></i>
         <!-- <i class="far fa-thumbs-up backward"></i> -->
       </div>
       <div class="react__like-count">
-        {{ postInfo.post_like }}
+        {{ commentInfo.comment_like }}
       </div>
     </div>
     <div class="react">
       <div
-        @click.prevent="dislikePost(postInfo.post_id)"
+        @click.prevent="dislikeComment(commentInfo.comment_id)"
         class="react__dislike-button"
       >
         <i class="far fa-thumbs-down foward"></i>
         <!-- <i class="far fa-thumbs-up backward"></i> -->
       </div>
-      <div class="react__dislike-count">{{ postInfo.post_dislike }}</div>
+      <div class="react__dislike-count">
+        {{ commentInfo.comment_dislike }}
+      </div>
     </div>
   </div>
 </template>
@@ -29,46 +31,46 @@
 import Axios from "axios";
 
 export default {
-  name: "Likesdislikesposts",
-  props: ["postInfoData", "post_id"],
+  name: "LikesDislikescomments",
+  props: ["commentInfoData", "comment_id"],
   data() {
     return {
-      postInfo: this.postInfoData,
+      commentInfo: this.commentInfoData,
     };
   },
   methods: {
-    async likePost(post_id) {
+    async likeComment(comment_id) {
       try {
         let headers = {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        let postInfoDataLike = await Axios.put(
-          `http://localhost:3001/api/post/${post_id}/like/1`,
+        let commentInfoDataLike = await Axios.put(
+          `http://localhost:3001/api/comment/${comment_id}/like/1`,
           {},
           {
             headers,
           }
         );
-        this.postInfo = postInfoDataLike.data;
+        this.commentInfo = commentInfoDataLike.data;
       } catch (error) {
         console.error(error);
       }
     },
-    async dislikePost(post_id) {
+    async dislikeComment(comment_id) {
       try {
         let headers = {
           "content-type": "application/json",
           authorization: "bearer " + localStorage.getItem("token"),
         };
-        let postInfoDataLike = await Axios.put(
-          `http://localhost:3001/api/post/${post_id}/like/-1`,
+        let commentInfoDataLike = await Axios.put(
+          `http://localhost:3001/api/comment/${comment_id}/like/-1`,
           {},
           {
             headers,
           }
         );
-        this.postInfo = postInfoDataLike.data;
+        this.commentInfo = commentInfoDataLike.data;
       } catch (error) {
         console.error(error);
       }
@@ -78,19 +80,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$color-warning: #f44336;
-$color-like: #3f51b5;
+.container-react, .react {
+  display: flex;
+}
 
 .react {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-  font-size: 18px;
-  margin: 0 1rem;
-  .fa-thumbs-up,
-  .fa-thumbs-down {
-    font-size: 25px;
-    margin: 0 0.5rem;
+  margin-right: 1rem;
+  &__like-button,
+  &__dislike-button {
+    margin-right: 0.2rem;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 </style>

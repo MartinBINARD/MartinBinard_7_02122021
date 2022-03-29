@@ -3,10 +3,10 @@
   <div class="comment">
     <div class="comment__bar">
       <div class="comment__bar__content">
-        <!-- <div v-if="userInfo.user.avatar" class="avatar">
+        <div v-if="postInfo.user.avatar" class="avatar">
           <img :src="postInfo.user.avatar" alt="user avatar" />
-        </div> -->
-        <!-- <div v-else class="avatar"><i class="far fa-user"></i></div> -->
+        </div>
+        <div v-else class="avatar"><i class="far fa-user"></i></div>
         <form>
           <input
             v-model="comment"
@@ -51,30 +51,10 @@
             <p class="text">{{ commentInfo.text }}</p>
           </div>
           <div class="container__footer">
-            <div class="react">
-              <div
-                @click.prevent="likeComment(commentInfo.comment_id)"
-                class="react__like-button"
-              >
-                <i class="far fa-thumbs-up foward"></i>
-                <!-- <i class="far fa-thumbs-up backward"></i> -->
-              </div>
-              <div class="react__like-count">
-                {{ commentInfo.comment_like }}
-              </div>
-            </div>
-            <div class="react">
-              <div
-                @click.prevent="dislikeComment(commentInfo.comment_id)"
-                class="react__dislike-button"
-              >
-                <i class="far fa-thumbs-down foward"></i>
-                <!-- <i class="far fa-thumbs-up backward"></i> -->
-              </div>
-              <div class="react__dislike-count">
-                {{ commentInfo.comment_dislike }}
-              </div>
-            </div>
+            <LikesDislikescomments
+              :commentInfoData="commentInfo"
+              :comment_id="commentInfo.comment_id"
+            ></LikesDislikescomments>
           </div>
         </div>
         <div
@@ -111,8 +91,10 @@
 
 <script>
 import Axios from "axios";
+import LikesDislikescomments from "../likesdislikescomments/likesdislikescomments.vue";
 
 export default {
+  components: { LikesDislikescomments },
   name: "Comments",
   props: ["postInfo", "post_id", "reloadComment"],
   data() {
@@ -194,42 +176,6 @@ export default {
         await Axios.delete(`http://localhost:3001/api/comment/${comment_id}`, {
           headers,
         });
-        this.reloadComment();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async likeComment(comment_id) {
-      try {
-        let headers = {
-          "content-type": "application/json",
-          authorization: "bearer " + localStorage.getItem("token"),
-        };
-        await Axios.put(
-          `http://localhost:3001/api/comment/${comment_id}/like/1`,
-          {},
-          {
-            headers,
-          }
-        );
-        this.reloadComment();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    async dislikeComment(comment_id) {
-      try {
-        let headers = {
-          "content-type": "application/json",
-          authorization: "bearer " + localStorage.getItem("token"),
-        };
-        await Axios.put(
-          `http://localhost:3001/api/comment/${comment_id}/like/-1`,
-          {},
-          {
-            headers,
-          }
-        );
         this.reloadComment();
       } catch (error) {
         console.error(error);
@@ -380,17 +326,6 @@ $border-card: 25px;
 .container__footer {
   margin: 0.3rem 1rem;
   align-items: center;
-  .react {
-    display: flex;
-    margin-right: 1rem;
-    &__like-button,
-    &__dislike-button {
-      margin-right: 0.2rem;
-      &:hover {
-        cursor: pointer;
-      }
-    }
-  }
 }
 
 .user {

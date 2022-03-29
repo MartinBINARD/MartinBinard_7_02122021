@@ -60,18 +60,18 @@
           </div>
           <div class="text">{{ postInfo.text }}</div>
         </div>
-        <likedislikesposts
+        <Likedislikesposts
           :postInfoData="postInfo"
           :post_id="postInfo.post_id"
           class="thread__card__footer"
         >
-        </likedislikesposts>
-        <comments
+        </Likedislikesposts>
+        <Comments
           :postInfo="postInfo"
           :post_id="postInfo.post_id"
           :key="reloadCommentThread"
           :reloadComment="reloadComment"
-        ></comments>
+        ></Comments>
       </div>
     </div>
     <div v-if="postInfos == null || postInfos == false" class="message-thread">

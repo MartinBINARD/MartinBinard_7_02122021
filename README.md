@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #80**
+**Main branch - Commit #81**
 
 # Description
 
@@ -19,8 +19,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Debug update like post function in vue.
-* Debug "User not found!" message when sign up in auth.controller.js.
+* Add new likesdislikescomment function in vue.
 
 # Before to run this server
 
