@@ -3,10 +3,9 @@
     <div class="react">
       <div
         @click.prevent="likeComment(commentInfo.comment_id)"
-        class="react__like-button"
+        class="react__button-like"
       >
-        <i class="far fa-thumbs-up foward"></i>
-        <!-- <i class="far fa-thumbs-up backward"></i> -->
+        <i class="fas fa-thumbs-up"></i>
       </div>
       <div class="react__like-count">
         {{ commentInfo.comment_like }}
@@ -15,10 +14,9 @@
     <div class="react">
       <div
         @click.prevent="dislikeComment(commentInfo.comment_id)"
-        class="react__dislike-button"
+        class="react__button-dislike"
       >
-        <i class="far fa-thumbs-down foward"></i>
-        <!-- <i class="far fa-thumbs-up backward"></i> -->
+        <i class="fas fa-thumbs-down"></i>
       </div>
       <div class="react__dislike-count">
         {{ commentInfo.comment_dislike }}
@@ -86,9 +84,9 @@ export default {
 
 .react {
   margin-right: 1rem;
-  &__like-button,
-  &__dislike-button {
-    margin-right: 0.2rem;
+  &__button-like,
+  &__button-dislike {
+    margin-right: 0.5rem;
     &:hover {
       cursor: pointer;
     }

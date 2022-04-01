@@ -135,7 +135,7 @@ export default {
             headers,
           });
         }
-        this.reloadModal();
+        location.reload();
       } catch (error) {
         console.error(error);
       }

@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #81**
+**Main branch - Commit #82**
 
 # Description
 
@@ -19,7 +19,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add new likesdislikescomment function in vue.
+* Add refresh content when user avatar is changed.
+* Add new like/dislike button.
 
 # Before to run this server
 

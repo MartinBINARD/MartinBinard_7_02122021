@@ -1,24 +1,14 @@
 <template>
   <div class="container-react">
     <div class="react">
-      <div
-        @click.prevent="likePost(postInfo.post_id)"
-        class="react__like-button"
-      >
-        <i class="far fa-thumbs-up foward"></i>
-        <!-- <i class="far fa-thumbs-up backward"></i> -->
+      <div @click.prevent="likePost(postInfo.post_id)" class="react__button-like">
+        <i class="fas fa-thumbs-up"></i>
       </div>
-      <div class="react__like-count">
-        {{ postInfo.post_like }}
-      </div>
+      <div class="react__like-count">{{ postInfo.post_like }}</div>
     </div>
     <div class="react">
-      <div
-        @click.prevent="dislikePost(postInfo.post_id)"
-        class="react__dislike-button"
-      >
-        <i class="far fa-thumbs-down foward"></i>
-        <!-- <i class="far fa-thumbs-up backward"></i> -->
+      <div @click.prevent="dislikePost(postInfo.post_id)" class="react__button-dislike">
+        <i class="fas fa-thumbs-down"></i>
       </div>
       <div class="react__dislike-count">{{ postInfo.post_dislike }}</div>
     </div>
@@ -33,7 +23,7 @@ export default {
   props: ["postInfoData", "post_id"],
   data() {
     return {
-      postInfo: this.postInfoData,
+      postInfo: this.postInfoData
     };
   },
   methods: {
@@ -85,12 +75,15 @@ $color-like: #3f51b5;
   display: flex;
   align-items: center;
   font-weight: bold;
-  font-size: 18px;
-  margin: 0 1rem;
-  .fa-thumbs-up,
-  .fa-thumbs-down {
-    font-size: 25px;
-    margin: 0 0.5rem;
+  margin: 0 0.5rem;
+  &__button-like,
+  &__button-dislike {
+    cursor: pointer;
+    .fa-thumbs-up,
+    .fa-thumbs-down {
+      font-size: 25px;
+      margin: 0 0.5rem;
+    }
   }
 }
 </style>
