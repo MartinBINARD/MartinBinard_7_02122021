@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #82**
+**Main branch - Commit #83**
 
 # Description
 
@@ -19,18 +19,18 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add refresh content when user avatar is changed.
-* Add new like/dislike button.
+* Add new instruction in README.md.
 
 # Before to run this server
 
 * Create a mysql root user with password as : azerty or change it in the .env.example file.
 
-* Then create a mySQL database called groupomania by default:
+* Then, in a terminal, create a mySQL database called groupomania by default:
 ```
 CREATE DATABASE groupomania;
 ```
 * Rename .env.example into .env file loacted in backend folder.
+* In the root of the `/backend` folder, rename the folder called `/images.example` to `/images`.
 * Then insert your parameters:
 ```
 DB_NAME = INSERT DATABASE NAME
@@ -44,9 +44,7 @@ APP_PORT = 3001
 USER_CRYPTOJS_KEY = INSERT RADOM ASCII CHARACTER
 SECRET_TOKEN = INSERT RANDOM ASCII CHARACTER
 ```
-* Then create your own local database (named groupomania by default with root user & azerty password).
-
-* In the root of the `/backend` folder, rename the folder called `/images.example` to `/images`.
+* :warning: Create your own local database, named `groupomania` by default with `root` user & `azerty` password.
 
 # How to run this application
 
@@ -63,3 +61,10 @@ npm run start
 * Then open this link: [http://localhost:8080/submit](http://localhost:8080/submit) in your favorite browser.
 
 * :warning: In order to prevent from port collisions, the API code port value is 3001, the data base port value is 3306 by default and the frontend port value is 8080.
+
+# How to create an admin user with root privileges :crown:
+
+* In the dabase named `groupomania` by default insert this query:
+```
+UPDATE `users` SET `admin` = '1' WHERE `user_id` = '1';
+```
