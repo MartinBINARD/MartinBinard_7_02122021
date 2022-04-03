@@ -113,7 +113,7 @@ export default {
         };
 
         if (this.title != "" && this.text != "" && this.user_id != "") {
-          await Axios.post(`http://localhost:3001/api/post`, data, { headers });
+          await Axios.post(`http://localhost:${process.env.VUE_APP_API_PORT}/api/post`, data, { headers });
           this.togglePost();
           this.reloadThread();
           this.resetForm();
@@ -137,7 +137,7 @@ export default {
         };
 
         if (this.title != "" && this.text != "" && this.user_id != "") {
-          await Axios.put(`http://localhost:3001/api/post/${post_id}`, data, {
+          await Axios.put(`http://localhost:${process.env.VUE_APP_API_PORT}/api/post/${post_id}`, data, {
             headers,
           });
           this.togglePost();

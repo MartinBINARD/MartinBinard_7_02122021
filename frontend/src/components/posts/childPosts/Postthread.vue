@@ -103,7 +103,7 @@ export default {
         authorization: "bearer " + localStorage.getItem("token"),
       };
 
-      let getPostContent = await Axios.get(`http://localhost:3001/api/post/`, {
+      let getPostContent = await Axios.get(`http://localhost:${process.env.VUE_APP_API_PORT}/api/post/`, {
         headers,
       });
       this.postInfos = getPostContent.data;
@@ -143,7 +143,7 @@ export default {
           authorization: "bearer " + localStorage.getItem("token"),
         };
 
-        await Axios.delete(`http://localhost:3001/api/post/${post_id}`, {
+        await Axios.delete(`http://localhost:${process.env.VUE_APP_API_PORT}/api/post/${post_id}`, {
           headers,
         });
         this.reloadThread();

@@ -3,10 +3,6 @@
   <div class="comment">
     <div class="comment__bar">
       <div class="comment__bar__content">
-        <!-- <div v-if="postInfo.user.avatar" class="avatar">
-          <img :src="postInfo.user.avatar" alt="user avatar" />
-        </div>
-        <div v-else class="avatar"><i class="far fa-user"></i></div> -->
         <form>
           <input
             v-model="comment"
@@ -112,7 +108,7 @@ export default {
       };
 
       let getCommentContent = await Axios.get(
-        `http://localhost:3001/api/comment/${this.post_id}`,
+        `http://localhost:${process.env.VUE_APP_API_PORT}/api/comment/${this.post_id}`,
         {
           headers,
         }
@@ -156,7 +152,7 @@ export default {
 
         if (this.comment != "") {
           await Axios.post(
-            `http://localhost:3001/api/comment/${post_id}`,
+            `http://localhost:${process.env.VUE_APP_API_PORT}/api/comment/${post_id}`,
             data,
             { headers }
           );
@@ -173,7 +169,7 @@ export default {
           authorization: "bearer " + localStorage.getItem("token"),
         };
 
-        await Axios.delete(`http://localhost:3001/api/comment/${comment_id}`, {
+        await Axios.delete(`http://localhost:${process.env.VUE_APP_API_PORT}/api/comment/${comment_id}`, {
           headers,
         });
         this.reloadComment();
@@ -228,7 +224,7 @@ $border-card: 25px;
     }
   }
   &__footer {
-    padding: 0.5rem 3.2rem;
+    padding: 0.5rem 0.2rem;
     .post-button {
       background-color: $color-secondary;
       color: $color-tertiary;

@@ -44,7 +44,7 @@ export default {
           authorization: "bearer " + localStorage.getItem("token"),
         };
         let commentInfoDataLike = await Axios.put(
-          `http://localhost:3001/api/comment/${comment_id}/like/1`,
+          `http://localhost:${process.env.VUE_APP_API_PORT}/api/comment/${comment_id}/like/1`,
           {},
           {
             headers,
@@ -62,7 +62,7 @@ export default {
           authorization: "bearer " + localStorage.getItem("token"),
         };
         let commentInfoDataLike = await Axios.put(
-          `http://localhost:3001/api/comment/${comment_id}/like/-1`,
+          `http://localhost:${process.env.VUE_APP_API_PORT}/api/comment/${comment_id}/like/-1`,
           {},
           {
             headers,

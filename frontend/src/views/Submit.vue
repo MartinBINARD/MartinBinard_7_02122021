@@ -237,7 +237,7 @@ export default {
         this.error.serverResponse = null;
 
         if (this.formCheck()) {
-          await Axios.post("http://localhost:3001/api/auth/signup", data);
+          await Axios.post(`http://localhost:${process.env.VUE_APP_API_PORT}/api/auth/signup`, data);
           this.switchToLogin();
         }
       } catch (error) {
@@ -252,7 +252,7 @@ export default {
         };
 
         const res = await Axios.post(
-          "http://localhost:3001/api/auth/login",
+          `http://localhost:${process.env.VUE_APP_API_PORT}/api/auth/login`,
           data
         );
         localStorage.setItem("token", res.data.token);

@@ -1,37 +1,37 @@
 MartinBinard_7_02122021
 **Projet 7**
 
-***GROUPOMANIA - A social network using VueJS, nodeJS, express, MySQL & Sequelize***
+***GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #83**
+**Main branch - Commit #84**
 
 # Description
 
 * This website is a project to web developer course teached by [Openclassroom](https://openclassrooms.com/en/paths/141-web-developer)
-
+* Build a full-stack private social network for a company called Groupomania.
 * The entire project is made from scratch, only logos are delivered.
-* I choose VueJS 3 for this project.
+
+![groupomania screenshot](./groupomania_screenshot.png)
 
 # Main goals
 
-* CSS style comments in post.
-* Update README.md database instructions.
+* Using VueJS 3 with API option architecture. Sooner, in a next repo, it will build with Vite 7 Pinia.
+* The backend is made with NodeJS, Express with MySQL database & Sequelize as ORM.
 
 # Change done
 
-* Add new instruction in README.md.
+* Add .env file in frontend repo & new instruction in README.md.
 
 # Before to run this server
 
-* Create a mysql root user with password as : azerty or change it in the .env.example file.
-
-* Then, in a terminal, create a mySQL database called groupomania by default:
+* :warning: In a terminal, create your own MySQL database, named `groupomania` by default with `root` user & `azerty` password.
+* In the root of the `/backend` folder, rename the folder called `/images.example` to `/images`.
+* Rename `.env.example` into `.env` files loacted for each frontend & backend folder.
+* In the .env backend file, insert your parameters:
 ```
 CREATE DATABASE groupomania;
 ```
-* Rename .env.example into .env file loacted in backend folder.
-* In the root of the `/backend` folder, rename the folder called `/images.example` to `/images`.
-* Then insert your parameters:
+* In the .env backend file, insert your parameters :
 ```
 DB_NAME = INSERT DATABASE NAME
 DB_USER = INSERT DATABASE USER
@@ -44,7 +44,11 @@ APP_PORT = 3001
 USER_CRYPTOJS_KEY = INSERT RADOM ASCII CHARACTER
 SECRET_TOKEN = INSERT RANDOM ASCII CHARACTER
 ```
-* :warning: Create your own local database, named `groupomania` by default with `root` user & `azerty` password.
+* In the .env frontend file, insert your parameters:
+```
+VUE_APP_API_PORT = 3001
+```
+* :warning: VUE_APP_API_PORT value must be equal to APP_PORT one.
 
 # How to run this application
 
@@ -64,7 +68,7 @@ npm run start
 
 # How to create an admin user with root privileges :crown:
 
-* In the dabase named `groupomania` by default insert this query:
+* In the dabase named `groupomania` by default insert this query with the desired user_id :
 ```
 UPDATE `users` SET `admin` = '1' WHERE `user_id` = '1';
 ```

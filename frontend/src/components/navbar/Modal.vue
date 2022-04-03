@@ -108,7 +108,7 @@ export default {
       };
 
       let getOneUserInfo = await Axios.get(
-        `http://localhost:3001/api/user/${userId}`,
+        `http://localhost:${process.env.VUE_APP_API_PORT}/api/user/${userId}`,
         { headers }
       );
       this.userInfo = getOneUserInfo.data;
@@ -131,7 +131,7 @@ export default {
         };
 
         if (this.avatar) {
-          await Axios.put(`http://localhost:3001/api/user/${user_id}`, data, {
+          await Axios.put(`http://localhost:${process.env.VUE_APP_API_PORT}/api/user/${user_id}`, data, {
             headers,
           });
         }
@@ -147,7 +147,7 @@ export default {
           authorization: "bearer " + localStorage.getItem("token"),
         };
         await Axios.put(
-          `http://localhost:3001/api/user/deactivate/${user_id}`,
+          `http://localhost:${process.env.VUE_APP_API_PORT}/api/user/deactivate/${user_id}`,
           { active: false },
           {
             headers,
