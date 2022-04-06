@@ -1,25 +1,19 @@
 <template>
   <div class="thread">
     <div v-if="postInfos != null" class="container">
-      <div
-        v-for="postInfo in postInfos"
-        :key="postInfo.post_id"
-        class="thread__card"
-      >
+      <div v-for="postInfo in postInfos" :key="postInfo.post_id" class="thread__card">
         <div class="thread__card__header">
           <div class="id-card">
             <div v-if="postInfo.user.avatar" class="avatar">
               <img :src="postInfo.user.avatar" alt="user avatar" />
             </div>
-            <div v-else class="avatar"><i class="far fa-user"></i></div>
+            <div v-else class="avatar">
+              <i class="far fa-user"></i>
+            </div>
             <div class="user">
-              <div class="user__name">
-                {{ postInfo.user.firstname }} {{ postInfo.user.lastname }}
-              </div>
-              <div class="user__time-stamp">{{ postInfo.createdAt }}</div>
-              <div class="user__time-status" v-if="!postInfo.user.active">
-                User deactivated
-              </div>
+              <div class="user__name">{{ postInfo.user.firstname }} {{ postInfo.user.lastname }}</div>
+              <div class="user__time-stamp">{{ formatDate(postInfo.createdAt) }}</div>
+              <div class="user__time-status" v-if="!postInfo.user.active">User deactivated</div>
             </div>
           </div>
           <!-- start of post menu -->
@@ -30,24 +24,14 @@
               :class="{
                 'menu-post__button--active': clicked(postInfo.post_id),
               }"
-            >
-              =
-            </div>
-            <div
-              v-if="clicked(postInfo.post_id)"
-              @click="togglePostMenu(0)"
-              class="overlay-menu"
-            ></div>
+            >=</div>
+            <div v-if="clicked(postInfo.post_id)" @click="togglePostMenu(0)" class="overlay-menu"></div>
             <ul v-if="clicked(postInfo.post_id)" class="menu-post__list">
               <li class="menu-post__list__select">
-                <div @click="toggleModifyPost(postInfo.post_id)" class="name">
-                  Modify
-                </div>
+                <div @click="toggleModifyPost(postInfo.post_id)" class="name">Modify</div>
               </li>
               <li class="menu-list__select">
-                <div @click="deletePost(postInfo.post_id)" class="name">
-                  Delete
-                </div>
+                <div @click="deletePost(postInfo.post_id)" class="name">Delete</div>
               </li>
             </ul>
           </div>
@@ -64,8 +48,7 @@
           :postInfoData="postInfo"
           :post_id="postInfo.post_id"
           class="thread__card__footer"
-        >
-        </Likedislikesposts>
+        ></Likedislikesposts>
         <Comments
           :postInfo="postInfo"
           :post_id="postInfo.post_id"
@@ -113,6 +96,10 @@ export default {
     }
   },
   methods: {
+    formatDate(date) {
+      const options = { weekday: "long", year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }
+      return new Date(date).toLocaleDateString('en-US', options)
+    },
     reloadComment() {
       this.reloadCommentThread++;
     },

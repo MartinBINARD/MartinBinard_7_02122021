@@ -17,18 +17,11 @@
           </div>
           <div class="upload-avatar">
             <div class="upload-avatar__button">
-              <input
-                @change="onImageSelected()"
-                id="file-input"
-                type="file"
-                ref="avatar"
-              />
-              <label for="file-input" class="attachment-avatar"
-                >Choose a file...</label
-              >
+              <input @change="onImageSelected()" id="file-input" type="file" ref="avatar" />
+              <label for="file-input" class="attachment-avatar">Choose a file...</label>
             </div>
             <span>
-              <strong>Chosen file: </strong>
+              <strong>Chosen file:</strong>
               <span v-if="avatar">{{ avatar.name }}</span>
               <span v-else>None</span>
             </span>
@@ -43,11 +36,11 @@
           </div>
           <div>
             <p>Created at:</p>
-            <span class="user-feild">{{ userInfo.createdAt }}</span>
+            <span class="user-feild">{{ formatDate(userInfo.createdAt) }}</span>
           </div>
           <div>
             <p>Updated at:</p>
-            <span class="user-feild">{{ userInfo.updatedAt }}</span>
+            <span class="user-feild">{{ formatDate(userInfo.updatedAt) }}</span>
           </div>
           <div>
             <span v-if="userInfo.admin" class="user-feild">Administrator</span>
@@ -66,15 +59,11 @@
             @click.prevent="uploadAvatar(userInfo.user_id)"
             class="button__user__save"
             :class="{ 'button--disabled': !avatar }"
-          >
-            Save avatar
-          </button>
+          >Save avatar</button>
           <button
             @click.prevent="deleteAccount(userInfo.user_id)"
             class="button__user__delete"
-          >
-            Delete account
-          </button>
+          >Delete account</button>
         </div>
       </div>
     </div>
@@ -117,6 +106,10 @@ export default {
     }
   },
   methods: {
+    formatDate(date) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' }
+      return new Date(date).toLocaleDateString('en-US', options)
+    },
     onImageSelected() {
       this.avatar = this.$refs.avatar.files[0];
     },
@@ -209,7 +202,7 @@ $border-card: 25px;
     padding: 1rem 0.8rem;
     margin: 0.5rem;
     border-radius: $border-card;
-    .message-user-info{
+    .message-user-info {
       background-color: $color-senary;
       margin: 1rem 0;
       padding: 2rem;

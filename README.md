@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #84**
+**Main branch - Commit #85**
 
 # Description
 
@@ -20,7 +20,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add .env file in frontend repo & new instruction in README.md.
+* Add formatDate function to time stamp in post, comment & profile & ubuntu fonts.
 
 # Before to run this server
 

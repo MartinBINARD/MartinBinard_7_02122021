@@ -15,13 +15,7 @@
         </form>
       </div>
       <div class="comment__bar__footer">
-        <div
-          v-if="comment"
-          @click="createComment(postInfo.post_id)"
-          class="post-button"
-        >
-          Post
-        </div>
+        <div v-if="comment" @click="createComment(postInfo.post_id)" class="post-button">Post</div>
       </div>
     </div>
     <!-- end of comment bar -->
@@ -35,14 +29,16 @@
         <div v-if="commentInfo.user.avatar" class="avatar">
           <img :src="commentInfo.user.avatar" alt="user avatar" />
         </div>
-        <div v-else class="avatar"><i class="far fa-user"></i></div>
+        <div v-else class="avatar">
+          <i class="far fa-user"></i>
+        </div>
         <div class="container">
           <div class="container__content">
             <div class="user">
-              <div class="user__name">
-                {{ commentInfo.user.firstname }} {{ commentInfo.user.lastname }}
-              </div>
-              <div class="user__time-stamp">{{ commentInfo.createdAt }}</div>
+              <div
+                class="user__name"
+              >{{ commentInfo.user.firstname }} {{ commentInfo.user.lastname }}</div>
+              <div class="user__time-stamp">{{ formatDate(commentInfo.createdAt) }}</div>
             </div>
             <p class="text">{{ commentInfo.text }}</p>
           </div>
@@ -53,19 +49,14 @@
             ></LikesDislikescomments>
           </div>
         </div>
-        <div
-          v-if="isAllowedToCommentMenu(commentInfo.user_id)"
-          class="menu-comment"
-        >
+        <div v-if="isAllowedToCommentMenu(commentInfo.user_id)" class="menu-comment">
           <div
             @click="toggleCommentMenu(commentInfo.comment_id)"
             class="menu-comment__button"
             :class="{
               'menu-comment__button--active': clicked(commentInfo.comment_id),
             }"
-          >
-            ...
-          </div>
+          >...</div>
           <div
             v-if="clicked(commentInfo.comment_id)"
             @click="toggleCommentMenu(0)"
@@ -73,9 +64,7 @@
           ></div>
           <ul v-if="clicked(commentInfo.comment_id)" class="menu-comment__list">
             <li class="menu-comment__select">
-              <div @click="deleteComment(commentInfo.comment_id)" class="name">
-                Delete
-              </div>
+              <div @click="deleteComment(commentInfo.comment_id)" class="name">Delete</div>
             </li>
           </ul>
         </div>
@@ -119,6 +108,10 @@ export default {
     }
   },
   methods: {
+    formatDate(date) {
+      const options = { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' }
+      return new Date(date).toLocaleDateString('en-US', options)
+    },
     toggleCommentMenu(comment_id) {
       this.visibleCommentMenu = comment_id;
     },
@@ -316,6 +309,9 @@ $border-card: 25px;
   .user {
     justify-content: space-between;
     margin-bottom: 1rem;
+    &__name {
+      font-weight: bold;
+    }
   }
 }
 

@@ -3,9 +3,13 @@
 </template>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300&display=swap');
+
 $color-primary: #122542;
 $color-secondary: #d1515a;
 $color-tertiary: #f6f6f6;
+$color-senary: #ffd7d7;
 
 * {
   padding: 0;
@@ -14,7 +18,7 @@ $color-tertiary: #f6f6f6;
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Ubuntu', sans-serif, Arial, Helvetica, sans-serif;
   background-color: $color-primary;
   max-width: 100%;
 }
@@ -68,5 +72,16 @@ button {
     cursor: not-allowed;
     filter: brightness(70%);
   }
+}
+
+.user__time-stamp, .user__time-status {
+  font-style: italic;
+}
+
+.user__time-status {
+  background-color: $color-senary;
+  padding: 0.2rem 0.4rem;
+  width: max-content;
+  border-radius: 5px;
 }
 </style>
