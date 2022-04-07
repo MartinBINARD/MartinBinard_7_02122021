@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #87**
+**Main branch - Commit #88**
 
 # Description
 
@@ -11,7 +11,8 @@ MartinBinard_7_02122021
 * Build a full-stack private social network for a company called Groupomania.
 * The entire project is made from scratch, only logos are delivered.
 
-![groupomania screenshot](./groupomania_screenshot.png)
+# Watch on Youtube
+[![groupomania screenshot](./groupomania_screenshot.png)](https://www.youtube.com/watch?v=3EP2cDBHx0U "Watch Groupomania on Youtube")
 
 # Main goals
 
@@ -20,7 +21,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Correction of avatar image distorsion.
+* Add youtube link to README.md image.
 
 # Before to run this server
 
