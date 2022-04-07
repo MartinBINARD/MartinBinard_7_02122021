@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #86**
+**Main branch - Commit #87**
 
 # Description
 
@@ -20,8 +20,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add focus transition and correct boder pixel when set focus on input.
-* Add height to submit card & fit image width to post content.
+* Correction of avatar image distorsion.
 
 # Before to run this server
 

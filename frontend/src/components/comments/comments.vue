@@ -256,6 +256,7 @@ $border-card: 25px;
         border-radius: 100px;
         border: 2px solid $color-secondary;
         width: 45px;
+        height: 45px;
       }
     }
     .menu-comment {

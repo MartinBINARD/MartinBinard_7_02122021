@@ -21,7 +21,7 @@
               <label for="file-input" class="attachment-avatar">Choose a file...</label>
             </div>
             <span>
-              <strong>Chosen file:</strong>
+              <strong>Chosen file : </strong>
               <span v-if="avatar">{{ avatar.name }}</span>
               <span v-else>None</span>
             </span>
@@ -272,6 +272,7 @@ $border-card: 25px;
       border-radius: 100px;
       border: 2px solid $color-secondary;
       width: 125px;
+      height: 125px;
     }
     &__empty {
       margin: 0.5rem;

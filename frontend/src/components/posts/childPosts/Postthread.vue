@@ -182,6 +182,7 @@ $border-card: 25px;
             border-radius: 100px;
             border: 2px solid $color-secondary;
             width: 60px;
+            height: 60px;
           }
         }
         .user__name {
@@ -237,7 +238,6 @@ $border-card: 25px;
   align-items: center;
   background-color: $color-tertiary;
   height: 10rem;
-  width: 50%;
   margin: 1rem auto;
   border-radius: $border-card;
   @extend %shadow-card;
@@ -278,24 +278,6 @@ $border-card: 25px;
         cursor: pointer;
       }
     }
-  }
-}
-
-@media screen and (max-width: 375px) {
-  .thread__card {
-    padding: 0.3rem;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .message-thread {
-    width: 70%;
-  }
-}
-
-@media screen and (max-width: 425px) {
-  .message-thread {
-    width: 93%;
   }
 }
 </style>
