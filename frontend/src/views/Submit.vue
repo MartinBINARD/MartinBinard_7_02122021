@@ -3,9 +3,7 @@
     <Submit-logo />
 
     <div class="user__card">
-      <h1 v-if="mode == 'createAccount'" class="user__card__title">
-        Sign up now !
-      </h1>
+      <h1 v-if="mode == 'createAccount'" class="user__card__title">Sign up now !</h1>
       <h1 v-else class="user__card__title">Log in</h1>
       <form class="submit-form">
         <div class="submit-form__field">
@@ -16,13 +14,13 @@
             type="text"
             placeholder="Firstname"
             required
+            autofocus
+            autocomplete="false"
           />
           <div
             v-if="mode == 'createAccount' && error.firstname != null"
             class="error"
-          >
-            {{ error.firstname }}
-          </div>
+          >{{ error.firstname }}</div>
         </div>
         <div class="submit-form__field">
           <input
@@ -32,13 +30,13 @@
             type="text"
             placeholder="Lastname"
             required
+            autofocus
+            autocomplete="false"
           />
           <div
             v-if="mode == 'createAccount' && error.lastname != null"
             class="error"
-          >
-            {{ error.lastname }}
-          </div>
+          >{{ error.lastname }}</div>
         </div>
         <div class="submit-form__field">
           <input
@@ -47,13 +45,10 @@
             type="email"
             placeholder="Email"
             required
+            autofocus
+            autocomplete="false"
           />
-          <div
-            v-if="mode == 'createAccount' && error.email != null"
-            class="error"
-          >
-            {{ error.email }}
-          </div>
+          <div v-if="mode == 'createAccount' && error.email != null" class="error">{{ error.email }}</div>
         </div>
         <div class="submit-form__field">
           <input
@@ -62,19 +57,17 @@
             type="password"
             placeholder="Password"
             required
+            autofocus
+            autocomplete="false"
           />
           <div
             v-if="mode != 'createAccount' && error.password != null"
             class="error"
-          >
-            {{ error.password }}
-          </div>
+          >{{ error.password }}</div>
           <div
             v-if="mode == 'createAccount' && error.database != null"
             class="error"
-          >
-            {{ error.database }}
-          </div>
+          >{{ error.database }}</div>
         </div>
         <div v-if="mode == 'createAccount'" class="submit-form__field">
           <input
@@ -83,46 +76,36 @@
             type="password"
             placeholder="Confirm password"
             required
+            autofocus
+            autocomplete="false"
           />
           <div
             v-if="mode == 'createAccount' && error.passwordCheck != null"
             class="error"
-          >
-            {{ error.passwordCheck }}
-          </div>
+          >{{ error.passwordCheck }}</div>
         </div>
-        <div v-if="error.serverResponse != null" class="error">
-          {{ error.serverResponse }}
-        </div>
+        <div v-if="error.serverResponse != null" class="error">{{ error.serverResponse }}</div>
         <button
           v-if="mode == 'createAccount'"
           @click.prevent="signUp()"
           class="button"
           :class="{ 'button--disabled': !correctForm }"
           type="submit"
-        >
-          Sign up
-        </button>
+        >Sign up</button>
         <button
           v-else
           @click.prevent="login()"
           class="button"
           :class="{ 'button--disabled': !correctForm }"
           type="submit"
-        >
-          Log in
-        </button>
+        >Log in</button>
       </form>
       <div
         v-if="mode == 'createAccount'"
         @click.prevent="switchToLogin()"
         class="link__button"
-      >
-        Log in
-      </div>
-      <div v-else @click.prevent="switchToSignup()" class="link__button">
-        Create an account
-      </div>
+      >Log in</div>
+      <div v-else @click.prevent="switchToSignup()" class="link__button">Create an account</div>
     </div>
   </div>
 </template>
@@ -275,17 +258,27 @@ $color-warning: #f44336;
   box-shadow: 1px 5px 8px rgb(0, 0, 0, 0.1);
 }
 
+#submit {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  margin: 5%;
+}
+
 .user__card {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   background-color: $color-tertiary;
+  height: 42rem;
   margin: 1rem;
   border-radius: 1.5rem;
   padding: 1rem 0;
   @extend %shadow-card;
   &__title {
     text-align: center;
+    margin-bottom: 1rem;
   }
 }
 
@@ -299,7 +292,7 @@ $color-warning: #f44336;
   background-color: $color-warning;
   border-radius: 5px;
   padding: 0.1rem 1rem;
-  margin: 0 1rem 0.5rem;
+  margin: 0.5rem auto;
   overflow-wrap: break-all;
   max-width: 17.2rem;
 }
@@ -308,7 +301,7 @@ $color-warning: #f44336;
   background-color: $color-tertiary;
   color: $color-primary;
   width: 12rem;
-  margin: 1rem;
+  margin: 0.5rem 0 0 1rem;
   padding: 0.8rem;
   font-weight: bold;
   border: 2px black solid;
@@ -317,6 +310,21 @@ $color-warning: #f44336;
   cursor: pointer;
   &:hover {
     filter: brightness(90%);
+  }
+}
+
+@media screen and (max-height: 770px) {
+  #submit {
+    margin: 0 5%;
+    .submit__logo {
+      padding: 0.25rem;
+    }
+    .user__card {
+      margin: 0 1rem;
+      .submit-form__field {
+        padding: 4px 15px;
+      }
+    }
   }
 }
 </style>

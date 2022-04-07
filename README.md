@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #85**
+**Main branch - Commit #86**
 
 # Description
 
@@ -20,7 +20,8 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add formatDate function to time stamp in post, comment & profile & ubuntu fonts.
+* Add focus transition and correct boder pixel when set focus on input.
+* Add height to submit card & fit image width to post content.
 
 # Before to run this server
 

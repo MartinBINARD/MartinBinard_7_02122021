@@ -112,7 +112,14 @@ $border-card: 25px;
 }
 // End of styling post bar
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1024px) {
+  .postbar__card,
+  .thread__card {
+    width: 35%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
   .postbar__card,
   .thread__card {
     width: 50%;

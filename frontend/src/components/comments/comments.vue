@@ -11,6 +11,8 @@
             type="text"
             placeholder="Add a comment..."
             required
+            autofocus
+            autocomplete="false"
           />
         </form>
       </div>
@@ -246,7 +248,7 @@ $border-card: 25px;
 .comment-area {
   flex-direction: column-reverse;
   .comment__thread {
-    margin: 1rem 0;
+    margin: 0.2rem 0;
     .avatar {
       font-size: 30px;
       margin: 0 0.2rem 0 0;

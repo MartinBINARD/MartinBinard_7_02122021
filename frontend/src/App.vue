@@ -1,10 +1,10 @@
 <template>
-    <router-view/>
+  <router-view />
 </template>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@1,300&display=swap");
 
 $color-primary: #122542;
 $color-secondary: #d1515a;
@@ -18,12 +18,13 @@ $color-senary: #ffd7d7;
 }
 
 body {
-  font-family: 'Ubuntu', sans-serif, Arial, Helvetica, sans-serif;
+  font-family: "Ubuntu", sans-serif, Arial, Helvetica, sans-serif;
   background-color: $color-primary;
   max-width: 100%;
 }
 
-a, li {
+a,
+li {
   font-size: 16px;
   font-weight: bold;
   list-style: none;
@@ -32,21 +33,38 @@ a, li {
 }
 
 img {
-  max-width: 100%;
+  width: 100%;
   object-fit: cover;
 }
 
-button, input {
+button,
+input {
   font-size: 20px;
 }
 
-input, textarea {
+input,
+textarea {
   border-radius: 10px;
   padding-left: 0.5rem;
+  outline: none;
+  border: 2px solid black;
+  background-color: transparent;
+  transition: background-color ease 0.3s;
   &:focus {
-    outline: none !important;
-    border: 3px solid $color-secondary;
+    border: 2px solid $color-secondary;
+    background-color: $color-senary;
   }
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: transparent;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: grey;
+  transition: color ease 0.3s;
 }
 
 button {
@@ -55,14 +73,14 @@ button {
 }
 
 .button {
-    padding: 0.8rem 2.5rem;
-    margin-left: 1rem;
-    background-color: $color-secondary;
-    color: $color-tertiary;
-    font-weight: bold;
-    &:hover {
-      filter: brightness(90%);
-    }
+  padding: 0.8rem 2.5rem;
+  margin: 0.5rem 0 0 1rem;
+  background-color: $color-secondary;
+  color: $color-tertiary;
+  font-weight: bold;
+  &:hover {
+    filter: brightness(90%);
+  }
 }
 
 .button--disabled {
@@ -74,7 +92,8 @@ button {
   }
 }
 
-.user__time-stamp, .user__time-status {
+.user__time-stamp,
+.user__time-status {
   font-style: italic;
 }
 

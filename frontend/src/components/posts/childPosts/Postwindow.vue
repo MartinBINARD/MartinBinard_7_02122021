@@ -13,6 +13,9 @@
             class="post-form__title"
             type="text"
             placeholder="Title"
+            required
+            autofocus
+            autocomplete="false"
           />
           <textarea
             v-model="text"
@@ -20,21 +23,18 @@
             type="text"
             placeholder="What do you want to talk about ?"
             required
+            autofocus
+            autocomplete="false"
           />
           <div class="upload-image">
             <div class="upload-image__button">
-              <input
-                @change="onImageSelected()"
-                id="file-image"
-                type="file"
-                ref="image"
-              />
+              <input @change="onImageSelected()" id="file-image" type="file" ref="image" autofocus />
               <label for="file-image" class="attachment-button">
                 <i class="fas fa-paperclip"></i>
               </label>
             </div>
             <span>
-              <strong>Chosen file: </strong>
+              <strong>Chosen file : </strong>
               <span v-if="image">{{ image.name }}</span>
               <span v-else>None</span>
             </span>
@@ -47,18 +47,14 @@
             class="button"
             :class="{ 'button--disabled': !correctForm }"
             type="submit"
-          >
-            Post
-          </button>
+          >Post</button>
           <button
             v-else
             @click.prevent="modifyPost(postId)"
             class="button"
             :class="{ 'button--disabled': !correctForm }"
             type="submit"
-          >
-            Modify
-          </button>
+          >Modify</button>
         </div>
       </div>
     </div>

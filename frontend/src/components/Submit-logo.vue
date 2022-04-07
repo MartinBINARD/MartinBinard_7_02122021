@@ -14,14 +14,6 @@ export default {
 </script>
 
 <style lang="scss">
-#submit {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  padding: 10%;
-}
-
 .submit__logo {
   padding-bottom: 1rem;
 }
