@@ -85,9 +85,6 @@ async function deletePost(req, res, next) {
     if (!postObject) {
       res.status(404).send({ message: "No such Post !" });
     }
-    // if (postObject.user.user_id != req.user) {
-    //   res.status(400).send({ message: "Unauthorized request !" });
-    // }
     
     if (postObject.user.user_id == req.user || req.admin == true) {
 

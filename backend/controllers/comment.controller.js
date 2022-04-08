@@ -55,10 +55,6 @@ async function deleteComment(req, res, next) {
       res.status(404).send({ message: "No such Comment !" });
     }
 
-    // if (commentObject.user.userId !== req.auth.userId) {
-    //   res.status(400).send({ message: "Unauthorized request !" });
-    // }
-
     if (commentObject.user.user_id == req.user || req.admin == true) {
       await Comment.destroy({
         where: { comment_id: req.params.id },

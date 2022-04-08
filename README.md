@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 ***GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize***
 
-**Main branch - Commit #88**
+**Main branch - Commit #89**
 
 # Description
 
@@ -21,14 +21,14 @@ MartinBinard_7_02122021
 
 # Change done
 
-* Add youtube link to README.md image.
+* Correct line 31 of README.md & remove unnecessary comments in code.
 
 # Before to run this server
 
 * :warning: In a terminal, create your own MySQL database, named `groupomania` by default with `root` user & `azerty` password.
 * In the root of the `/backend` folder, rename the folder called `/images.example` to `/images`.
 * Rename `.env.example` into `.env` files loacted for each frontend & backend folder.
-* In the .env backend file, insert your parameters:
+* In a terminal with MySQL, insert this query:
 ```
 CREATE DATABASE groupomania;
 ```
