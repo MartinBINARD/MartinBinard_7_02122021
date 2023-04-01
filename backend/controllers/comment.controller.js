@@ -27,7 +27,7 @@ async function modifyComment(req, res, next) {
       : { ...req.body };
 
     if (commentObject.user.user_id == req.user || req.admin == true) {
-      const updateComment = await Comment.updateOne(
+      const updateComment = await Comment.update(
         { comment_id: req.params.id },
         { ...commentObject, comment_id: req.params.id }
       );
