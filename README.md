@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #90**
+**Main branch - Commit #91**
 
 # Description
 
@@ -17,12 +17,12 @@ MartinBinard_7_02122021
 
 # Main goals
 
-- Using VueJS 3 with API option architecture.
+- Using VueJS 3 with API option architecture with VueX.
 - The backend is made with NodeJS, Express with MySQL database & Sequelize as ORM.
 
 # Change done
 
-- Update frontend and backend node modules.
+- create folder modules in store folder.
 
 # Before to run this server
 
