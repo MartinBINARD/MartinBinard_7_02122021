@@ -3,13 +3,14 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #91**
+**Main branch - Commit #92**
 
 # Description
 
 - This website is a project to web developer course teached by [Openclassroom](https://openclassrooms.com/en/paths/141-web-developer)
 - Build a full-stack private social network for a company called Groupomania.
 - The entire project is made from scratch, only logos are delivered.
+- :warning: A new front-end made with Quasar is in progress. :construction:
 
 # Watch on Youtube
 
@@ -17,12 +18,12 @@ MartinBinard_7_02122021
 
 # Main goals
 
-- Using VueJS 3 with API option architecture with VueX.
+- A new frontend is being build with Quasar ( VueJS 3, VueX ). :construction:
 - The backend is made with NodeJS, Express with MySQL database & Sequelize as ORM.
 
 # Change done
 
-- create folder modules in store folder.
+- create frontend-quasar folder, add routes and login template.
 
 # Before to run this server
 
@@ -68,10 +69,15 @@ VUE_APP_API_PORT = 3001
 npm install
 ```
 
-- Launch the 2 servers in each terminal (frontend & backend):
+- Launch the 2 servers frontend (old frontend ) and backend in each terminal (frontend & backend):
 
 ```
 npm run start
+```
+
+- :warning: Launch frontend-quasar separately if you want to test the new frontend application :construction: :
+```
+quasar dev
 ```
 
 - Then open this link: [http://localhost:8080/submit](http://localhost:8080/submit) in your favorite browser.
