@@ -18,6 +18,16 @@ const routes = [
             path: 'login',
             component: () => import('pages/SubmitLogin.vue'),
           },
+          {
+            name: 'submit-recover',
+            path: 'recover',
+            component: () => import('pages/SubmitRecover.vue'),
+          },
+          {
+            name: 'submit-register',
+            path: 'register',
+            component: () => import('pages/SubmitRegister.vue'),
+          },
         ],
       },
       {

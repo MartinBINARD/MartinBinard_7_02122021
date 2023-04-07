@@ -72,7 +72,7 @@ async function login(req, res, next) {
       };
 
       if (!bcryptPassValid) {
-        res.status(401).send({ message: "Wrong password !" });
+        res.status(401).send({ message: "Wrong login or password !" });
       } else if (!userLogin.active) {
         res
           .status(403)
@@ -80,7 +80,7 @@ async function login(req, res, next) {
             message: "User account deactivate ! Please, contact administrator.",
           });
       } else {
-        res.status(200).json(userInfo);
+        res.status(201).json(userInfo);
       }
     }
   } catch (error) {

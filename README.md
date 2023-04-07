@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #92**
+**Main branch - Commit #93**
 
 # Description
 
@@ -23,7 +23,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-- create frontend-quasar folder, add routes and login template.
+- Add user register and login actions.
 
 # Before to run this server
 
@@ -69,13 +69,7 @@ VUE_APP_API_PORT = 3001
 npm install
 ```
 
-- Launch the 2 servers frontend (old frontend ) and backend in each terminal (frontend & backend):
-
-```
-npm run start
-```
-
-- :warning: Launch frontend-quasar separately if you want to test the new frontend application :construction: :
+- Launch frontend-quasar separately if you want to test the new frontend application :construction: :
 ```
 quasar dev
 ```

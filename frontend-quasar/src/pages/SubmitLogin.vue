@@ -1,14 +1,14 @@
 <template>
   <div class="row justify-evenly items-center submit-container">
     <q-img
-      src="../assets/icon-left-font-monochrome-white.png"
+      src="../assets/icon-left-font-monochrome-white.svg"
       spinner-color="white"
       class="submit-logo q-ma-xl"
       contain
     ></q-img>
     <q-card class="bg-accent my-card q-pa-xl">
       <q-card-section>
-        <div class="text-h6">Log in</div>
+        <div class="text-h4 text-center">Log in</div>
       </q-card-section>
 
       <q-card-section>
@@ -19,29 +19,29 @@
           <q-input
             filled
             type="text"
-            v-model="email"
+            v-model="user.email"
             label="Your email *"
             hint="example@email.fr"
             lazy-rules
-            :rules="[ val => val && val.length > 0 || 'Please type something']"
+            :rules= "[val => val !== null && val !== '' || 'Please type your email']"
+            class="input-width"
           />
 
           <q-input
             filled
-            type="text"
-            v-model="password"
+            type="password"
+            v-model="user.password"
             label="Your password *"
             lazy-rules
-            :rules="[
-          val => val !== null && val !== '' || 'Please type your email',
-          val => val !== null && val !== '' || 'Please type your password'
-        ]"
+            :rules="[val => val !== null && val !== '' || 'Please type your password']"
+            class="input-width"
           />
 
-          <div>
-            <q-btn label="Login" type="submit" color="primary"/>
-            <q-btn label="Sign in" color="secondary"/>
+          <div class="row justify-between q-mb-md">
+            <q-btn label="Login" type="submit" color="primary" :loading="loading"/>
+            <q-btn to="register" label="Register" color="secondary"/>
           </div>
+          <router-link class="text-primary" to="recover">Forgot password ?</router-link>
         </q-form>
       </q-card-section>
     </q-card>
@@ -49,51 +49,47 @@
 </template>
 
 <script>
+import formValidation from 'src/mixins/formValidation';
+import { mapActions } from 'vuex';
+
 export default {
   name: 'user-login',
   components: {},
-  mixins: [],
+  mixins: [formValidation],
   props: {},
-  data () {
+  data() {
     return {
-      email: null,
-      password: null,
+      user: {
+        email: null,
+        password: null,
+      },
+      loading: false,
+      token: false,
     }
   },
   computed: {},
   watch: {},
-  created() {
-  },
+  created() {},
   methods: {
-    onLogin () {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: 'red-5',
-          textColor: 'white',
-          icon: 'warning',
-          message: 'You need to accept the license and terms first'
-        })
-      }
-      else {
-        this.$q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'cloud_done',
-          message: 'Logged sucessfully'
-        })
-      }
+    ...mapActions('user', ['connectUser']),
+    onLogin() {
+      this.loading = true;
+      this.connectUser(this.user).then((res) => {
+        if (201 === res.status) {
+          this.loading= false;
+          this.$q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'cloud_done',
+            message: 'Logged sucessfully',
+          });
+        }
+      });
     },
   },
 };
 </script>
 
 <style scoped>
-.submit-logo {
-  max-width: 30rem;
-  max-height: 5rem;
-}
 
-.submit-container {
-  height: 100vh;
-}
 </style>
