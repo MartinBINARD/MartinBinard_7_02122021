@@ -69,7 +69,11 @@ export default {
   },
   computed: {},
   watch: {},
-  created() {},
+  created() {
+    if (document.cookie.match(/^(Token=)/g)) {
+      console.log(document.cookie.match(/[^Token=](\S+)/g).toString());
+    }
+  },
   methods: {
     ...mapActions('user', ['connectUser']),
     onLogin() {
@@ -83,6 +87,7 @@ export default {
             icon: 'cloud_done',
             message: 'Logged sucessfully',
           });
+          this.$router.push({ name: 'thread-posts'});
         }
       });
     },

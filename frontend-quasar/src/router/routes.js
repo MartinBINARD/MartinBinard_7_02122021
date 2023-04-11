@@ -31,26 +31,14 @@ const routes = [
         ],
       },
       {
+        name: 'thread-posts',
         path: 'thread',
         component: () => import('layouts/ThreadLayout.vue'),
-        children: [
-          {
-            name: 'thread-posts',
-            path: 'posts',
-            component: () => import('pages/ThreadPosts.vue'),
-          },
-        ],
       },
       {
+        name: 'user-profile',
         path: 'user',
         component: () => import('layouts/UserLayout.vue'),
-        children: [
-          {
-            name: 'user-profile',
-            path: 'profile',
-            component: () => import('pages/UserProfile.vue'),
-          },
-        ],
       }
     ]
   },

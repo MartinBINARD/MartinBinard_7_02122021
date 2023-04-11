@@ -1,11 +1,12 @@
+import { createCookie } from 'src/utils';
+
 export default {
   setUser: (state, item) => {
     if (null !== item) {
-      console.log('item', item.data.token);
-      state.auth = item.data.token;
-      console.log('state.auth', state.auth);
+      createCookie('Token', item.data.token);
+      state.auth = true;
     } else {
-      state.user = null;
+      state.auth = false;
     }
   },
 };
