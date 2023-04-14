@@ -34,6 +34,14 @@ const routes = [
         name: 'thread-posts',
         path: 'thread',
         component: () => import('layouts/ThreadLayout.vue'),
+        beforeEnter: (to, form, next) => {
+          if (document.cookie.match(/^(Token=)/g)) {
+            console.log(document.cookie.match(/[^Token=](\S+)/g).toString());
+            next();
+          } else {
+            next({ name: 'submit-login' })
+          }
+        },
       },
       {
         name: 'user-profile',

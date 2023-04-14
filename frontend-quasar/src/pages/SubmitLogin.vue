@@ -69,27 +69,24 @@ export default {
   },
   computed: {},
   watch: {},
-  created() {
-    if (document.cookie.match(/^(Token=)/g)) {
-      console.log(document.cookie.match(/[^Token=](\S+)/g).toString());
-    }
-  },
+  created() {},
   methods: {
     ...mapActions('user', ['connectUser']),
     onLogin() {
       this.loading = true;
-      this.connectUser(this.user).then((res) => {
-        if (201 === res.status) {
-          this.loading= false;
-          this.$q.notify({
-            color: 'green-4',
-            textColor: 'white',
-            icon: 'cloud_done',
-            message: 'Logged sucessfully',
-          });
-          this.$router.push({ name: 'thread-posts'});
-        }
-      });
+      this.connectUser(this.user)
+        .then((res) => {
+          if (201 === res.status) {
+            this.loading = false;
+            this.$q.notify({
+              color: 'green-4',
+              textColor: 'white',
+              icon: 'cloud_done',
+              message: 'Logged sucessfully',
+            });
+            this.$router.push({ name: 'thread-posts'});
+          }
+        });
     },
   },
 };
