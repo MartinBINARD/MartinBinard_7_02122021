@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #94**
+**Main branch - Commit #95**
 
 # Description
 
@@ -23,7 +23,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-- Delete old frontend folder and update packages.
+- Add jwt.config.js.
 
 # Before to run this server
 

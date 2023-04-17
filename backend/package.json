@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
@@ -18,7 +19,7 @@
     "helmet": "^6.1.5",
     "jsonwebtoken": "^9.0.0",
     "multer": "^1.4.5-lts.1",
-    "mysql2": "^3.2.1",
+    "mysql2": "^3.2.3",
     "password-validator": "^5.2.1",
     "sequelize": "^6.31.0"
   }

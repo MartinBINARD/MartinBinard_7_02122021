@@ -1,7 +1,5 @@
 const dotenv = require('dotenv').config({ path: `../.env`});
 const jwt = require('jsonwebtoken');
-// const db = require('../models');
-// const User = db.users;
 
 // CHECK GIVEN TOKEN & USER ID
 module.exports = (req, res, next) => {

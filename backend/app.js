@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 // IMPORT ROUTES
 const authRoutes = require('./routes/auth.route');
@@ -13,6 +14,8 @@ const reactCommentRoutes = require('./routes/reactComment.route');
 
 const app = express();
 
+module.exports = app;
+
 // CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -23,9 +26,14 @@ app.use((req, res, next) => {
 });
 
 app.use(helmet());
+app.use(cookieParser());
+require('./config/jwt.config');
+
 app.use(express.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
+
+
 
 // ROUTING
 app.use('/api/auth', authRoutes);
@@ -34,5 +42,3 @@ app.use('/api/post', postRoutes);
 app.use('/api/post', reactPostRoutes);
 app.use('/api/comment', commentRoutes);
 app.use('/api/comment', reactCommentRoutes);
-
-module.exports = app;
