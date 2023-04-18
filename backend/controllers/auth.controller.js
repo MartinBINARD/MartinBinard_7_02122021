@@ -1,41 +1,37 @@
 const dotenv = require("dotenv").config({ path: `../.env` });
-const cryptojs = require("crypto-js");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../models");
+const cryptoJs = require('../config/cryptoJs.config');
+const { hashPassword, comparePassword } = require("../config/bcrypt.config");
 
 // LOAD MODELS
 const User = db.users;
+const user = await User.findOne({ where: { email: cryptoMail } });
 
-async function signup(req, res, next) {
+const signup = async (req, res, next) => {
   try {
-    // ENCRYPTED SENSITIVE USER INFO IN DATABASE
-    const cryptoMail = cryptojs
-      .HmacSHA512(req.body.email, `${process.USER_CRYPTOJS_KEY}`)
-      .toString();
-
-    // ENCRYPTED PASSWORD
-    const bcryptPass = await bcrypt.hash(req.body.password, 10);
-
     // CHECK IF EMAIL IS ALREADY USED BEFORE ENCRYPTING
-    const emailTaken = await User.findOne({ where: { email: cryptoMail } });
+    const emailExists = await User.findOne({ where: { email: cryptoJs(req.body.email) } });
 
-    // USER INFO
-    let userInfo = {
-      ...req.body,
-      email: cryptoMail,
-      password: bcryptPass,
-    };
-
-    if (emailTaken) {
+    if (emailExists) {
       res
         .status(401)
         .send({
-          message: "Email already exist ! Please, contact administrator !",
+          message: "Signup error ! Please, contact administrator !",
         });
     } else {
-      const user = await User.create(userInfo);
-      res.status(201).send({ message: "User created !" });
+      // HASH PASSWORD
+      const hashPassword = await hashPassword(req.body.password);
+
+      // USER INFO
+      const userInfo = {
+        ...req.body,
+        email: cryptoJs(req.body.email),
+        password: hashPassword,
+      };
+
+      await User.create(userInfo);
+      res.status(201).send({ message: "User created" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -43,44 +39,24 @@ async function signup(req, res, next) {
   }
 }
 
-async function login(req, res, next) {
+const signin = async (req, res, next) => {
   try {
-    // CHECK IF ENCRYPTED MAIL EXIST
-    const cryptoMail = cryptojs
-      .HmacSHA512(req.body.email, `${process.USER_CRYPTOJS_KEY}`)
-      .toString();
-    const userLogin = await User.findOne({ where: { email: cryptoMail } });
-
     // CHECK PASSWORD ONLY IF USER FOUND
-    if (!userLogin) {
-      res.status(404).send({ message: "User not found !" });
-    } else {
+    if (user) {
       // CHECK PASSWORD
-      const bcryptPassValid = await bcrypt.compare(
-        req.body.password,
-        userLogin.password
-      );
-      // JWT TOKEN
-      let userInfo = {
-        userId: userLogin.user_id,
-        token: jwt.sign(
-          { userId: userLogin.user_id, admin: userLogin.admin },
-          process.env.SECRET_TOKEN,
-          { expiresIn: "24h" }
-        ),
-        admin: userLogin.admin,
-      };
-
-      if (!bcryptPassValid) {
+      const match = await comparePassword(req.body.password, user.password);
+      
+      if (!match) {
         res.status(401).send({ message: "Wrong login or password !" });
-      } else if (!userLogin.active) {
+      } else if (!user.active) {
         res
           .status(403)
           .send({
             message: "User account deactivate ! Please, contact administrator.",
           });
       } else {
-        res.status(201).json(userInfo);
+        req.login();
+        res.status(201).send({ message: 'User connected'});
       }
     }
   } catch (error) {
@@ -89,4 +65,13 @@ async function login(req, res, next) {
   }
 }
 
-module.exports = { signup, login };
+const signout = async (req, res, next) => {
+  try {
+    req.logout();
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    next();
+  }
+};
+
+module.exports = { signup, signin, signout };

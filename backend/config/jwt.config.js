@@ -7,7 +7,11 @@ const User = db.users;
 
 const createJwtToken = (user) => {
   console.log('token typeof', typeof process.env.SECRET_TOKEN);
-  return jwt.sign({ sub: user.user_id.toString() }, process.env.SECRET_TOKEN);
+  return jwt.sign(
+    { sub: user.user_id.toString(), admin: user.admin.toString() },
+    process.env.SECRET_TOKEN,
+    { expiresIn: "3s" }
+  );
 };
 
 exports.createJwtToken = createJwtToken;
@@ -46,5 +50,4 @@ const addJwtFeatures = (req, res, next) => {
 };
 
 app.use(extractUserFromToken);
-app.use(addJwtFeatures);
 app.use(addJwtFeatures);
