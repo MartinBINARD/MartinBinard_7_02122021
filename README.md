@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #96**
+**Main branch - Commit #97**
 
 # Description
 
@@ -23,7 +23,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-- add bcrypt.config.js and modify auth.controller.js.
+- Debug signup auth.coontroller.js and update frontend packages.
 
 # Before to run this server
 
@@ -71,7 +71,7 @@ npm install
 
 - Launch frontend-quasar separately if you want to test the new frontend application :construction: :
 ```
-quasar dev
+npm run dev
 ```
 
 - Then open this link: [http://localhost:8080/submit](http://localhost:8080/submit) in your favorite browser.

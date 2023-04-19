@@ -1,16 +1,15 @@
 const dotenv = require('dotenv').config({ path: `../.env`});
 const jwt = require('jsonwebtoken');
 const db = require("../models");
-const { app } = require('@/app');
+const app = require('../app');
 
 const User = db.users;
 
 const createJwtToken = (user) => {
-  console.log('token typeof', typeof process.env.SECRET_TOKEN);
   return jwt.sign(
     { sub: user.user_id.toString(), admin: user.admin.toString() },
     process.env.SECRET_TOKEN,
-    { expiresIn: "3s" }
+    { expiresIn: "10s" }
   );
 };
 

@@ -1,19 +1,22 @@
 const dotenv = require("dotenv").config({ path: `../.env` });
-const jwt = require("jsonwebtoken");
 const db = require("../models");
-const cryptoJs = require('../config/cryptoJs.config');
+const cryptojs = require("crypto-js");
+
 const { hashPassword, comparePassword } = require("../config/bcrypt.config");
 
 // LOAD MODELS
 const User = db.users;
-const user = await User.findOne({ where: { email: cryptoMail } });
 
 const signup = async (req, res, next) => {
   try {
-    // CHECK IF EMAIL IS ALREADY USED BEFORE ENCRYPTING
-    const emailExists = await User.findOne({ where: { email: cryptoJs(req.body.email) } });
+    // CHECK IF ENCRYPTED USER EMAIL IS ALREADY USED BEFORE HASH PASSWORD
+    const encryptedEmail = cryptojs
+      .HmacSHA512(req.body.email, `${process.USER_CRYPTOJS_KEY}`)
+      .toString();
 
-    if (emailExists) {
+    const user = await User.findOne({ where: { email: encryptedEmail } });
+
+    if (user) {
       res
         .status(401)
         .send({
@@ -21,13 +24,13 @@ const signup = async (req, res, next) => {
         });
     } else {
       // HASH PASSWORD
-      const hashPassword = await hashPassword(req.body.password);
+      const hash = await hashPassword(req.body.password);
 
       // USER INFO
       const userInfo = {
         ...req.body,
-        email: cryptoJs(req.body.email),
-        password: hashPassword,
+        email: encryptedEmail,
+        password: hash,
       };
 
       await User.create(userInfo);
@@ -41,6 +44,7 @@ const signup = async (req, res, next) => {
 
 const signin = async (req, res, next) => {
   try {
+    const user = await User.findOne({ where: { email: cryptoJs(req.body.email) } });
     // CHECK PASSWORD ONLY IF USER FOUND
     if (user) {
       // CHECK PASSWORD
