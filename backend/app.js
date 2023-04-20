@@ -16,6 +16,9 @@ const app = express();
 
 module.exports = app;
 
+app.use(cookieParser());
+require('./config/jwt.config');
+
 // CORS
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -26,8 +29,6 @@ app.use((req, res, next) => {
 });
 
 app.use(helmet());
-app.use(cookieParser());
-require('./config/jwt.config');
 
 app.use(express.json());
 

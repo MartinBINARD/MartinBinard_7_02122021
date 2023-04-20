@@ -1,6 +1,7 @@
 import { handleErrors } from 'src/utils';
 import { api } from 'boot/axios'
 
+
 export default {
   registerUser: ({ commit, dispatch }, item) => new Promise ((resolve) => {
     api.post('auth/signup', item)
@@ -10,7 +11,7 @@ export default {
       .catch((error) => handleErrors(dispatch, error));
   }),
   connectUser: ({ commit, dispatch }, item) => new Promise ((resolve) => {
-    api.post('auth/login', item)
+    api.post('auth/signin', item)
       .then((res) => {
         commit('setUser', res);
         resolve(res);

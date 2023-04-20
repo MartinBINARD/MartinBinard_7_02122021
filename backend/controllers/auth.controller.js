@@ -44,7 +44,11 @@ const signup = async (req, res, next) => {
 
 const signin = async (req, res, next) => {
   try {
-    const user = await User.findOne({ where: { email: cryptoJs(req.body.email) } });
+    const encryptedEmail = cryptojs
+      .HmacSHA512(req.body.email, `${process.USER_CRYPTOJS_KEY}`)
+      .toString();
+
+    const user = await User.findOne({ where: { email: encryptedEmail } });
     // CHECK PASSWORD ONLY IF USER FOUND
     if (user) {
       // CHECK PASSWORD
@@ -59,7 +63,7 @@ const signin = async (req, res, next) => {
             message: "User account deactivate ! Please, contact administrator.",
           });
       } else {
-        req.login();
+        req.login(user);
         res.status(201).send({ message: 'User connected'});
       }
     }
