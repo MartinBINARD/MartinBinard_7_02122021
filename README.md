@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #98**
+**Main branch - Commit #99**
 
 # Description
 
@@ -23,7 +23,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-- Debug signin controller.
+- Add credentails managment to axios and remove handleCookies.js.
 
 # Before to run this server
 
@@ -49,6 +49,7 @@ APP_PORT = 3001
 
 USER_CRYPTOJS_KEY = INSERT RADOM ASCII CHARACTER
 SECRET_TOKEN = INSERT RANDOM ASCII CHARACTER
+NODE_ENV = development
 ```
 
 - In the .env frontend file, insert your parameters:
@@ -70,6 +71,7 @@ npm install
 ```
 
 - Launch frontend-quasar separately if you want to test the new frontend application :construction: :
+
 ```
 npm run dev
 ```

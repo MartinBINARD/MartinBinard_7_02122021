@@ -43,7 +43,10 @@ const addJwtFeatures = (req, res, next) => {
   req.logout = () => res.clearCookie('auth');
   req.login = (user) => {
     const token = createJwtToken(user);
-    res.cookie('auth', token);
+    res.cookie('auth', token, {
+      secure: process.env.NODE_ENV !== "development",
+      httpOnly: true
+    });
   };
   next();
 };
