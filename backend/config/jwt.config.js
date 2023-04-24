@@ -9,7 +9,7 @@ const createJwtToken = (user) => {
   return jwt.sign(
     { sub: user.user_id.toString(), admin: user.admin.toString() },
     process.env.SECRET_TOKEN,
-    { expiresIn: "10h" }
+    { expiresIn: 3 }
   );
 };
 
@@ -28,10 +28,13 @@ const extractUserFromToken = async (req, res, next) => {
         next();
       } else {
         res.clearCookie('auth');
+        res.redirect('/submit/login');
       }
 
     } catch (error) {
+      console.log('error', error);
       res.clearCookie('auth');
+      res.redirect('/submit/login');
     }
   } else {
     next();
@@ -45,7 +48,8 @@ const addJwtFeatures = (req, res, next) => {
     const token = createJwtToken(user);
     res.cookie('auth', token, {
       secure: process.env.NODE_ENV !== "development",
-      httpOnly: true
+      httpOnly: process.env.NODE_ENV !== "development",
+      maxAge: 3000,
     });
   };
   next();

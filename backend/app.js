@@ -3,14 +3,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-
-// IMPORT ROUTES
-const authRoutes = require('./routes/auth.route');
-const userRoutes = require('./routes/user.route');
-const postRoutes = require('./routes/post.route');
-const reactPostRoutes = require('./routes/reactPost.route');
-const commentRoutes = require('./routes/comment.route');
-const reactCommentRoutes = require('./routes/reactComment.route');
+const router = require('./routes');
 
 const app = express();
 
@@ -34,12 +27,5 @@ app.use(express.json());
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-
-
 // ROUTING
-app.use('/api/auth', authRoutes);
-app.use('/api/user', userRoutes);
-app.use('/api/post', postRoutes);
-app.use('/api/post', reactPostRoutes);
-app.use('/api/comment', commentRoutes);
-app.use('/api/comment', reactCommentRoutes);
+app.use(router);
