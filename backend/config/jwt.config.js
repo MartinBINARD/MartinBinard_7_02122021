@@ -9,7 +9,7 @@ const createJwtToken = (user) => {
   return jwt.sign(
     { sub: user.user_id.toString(), admin: user.admin.toString() },
     process.env.SECRET_TOKEN,
-    { expiresIn: 3 }
+    { expiresIn: '5h' }
   );
 };
 
@@ -49,7 +49,7 @@ const addJwtFeatures = (req, res, next) => {
     res.cookie('auth', token, {
       secure: process.env.NODE_ENV !== "development",
       httpOnly: process.env.NODE_ENV !== "development",
-      maxAge: 3000,
+      maxAge: 1000 * 60 * 60 * 5,
     });
   };
   next();

@@ -1,17 +1,7 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header color="$accent" elevated>
-      <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-img
+    <q-header elevated>
+        <div class="row justify-between q-pa-sm bg-accent">
+          <q-img
           src="favicon.ico"
           srcset="icons/favicon-128x128.png 128w,
                   icons/favicon-96x96.png 128w,
@@ -19,42 +9,23 @@
                   icons/favicon-16x16.png, 16w"
           class="logo"
         />
-      </q-toolbar>
+
+        <account-settings/>
+        </div>
+      
     </q-header>
-
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer>
 
     <q-page-container>
       <router-view/>
     </q-page-container>
-  </q-layout>
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
+import AccountSettings from '../components/AccountSettings.vue'
 
 export default {
   name: 'ThreadLayout',
-  components: { EssentialLink },
+  components: { AccountSettings },
   mixins: [],
   props: {},
   data() {
@@ -72,22 +43,11 @@ export default {
       this.leftDrawerOpen = !this.leftDrawerOpen;
     }
   },
-  // setup () {
-  //   const leftDrawerOpen = ref(false)
-  //
-  //   return {
-  //     essentialLinks: linksList,
-  //     leftDrawerOpen,
-  //     toggleLeftDrawer () {
-  //       leftDrawerOpen.value = !leftDrawerOpen.value
-  //     }
-  //   }
-  // }
 };
 </script>
 
 <style scoped>
 .logo {
-  width: 2rem;
+  width: 3rem;
 }
 </style>

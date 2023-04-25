@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #100**
+**Main branch - Commit #101**
 
 # Description
 
@@ -23,7 +23,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-- Add index.js in router folder.
+- Add AccountSetting.vue, restrict user info sending.
 
 # Before to run this server
 

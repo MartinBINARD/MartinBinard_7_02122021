@@ -1,3 +1,12 @@
+import { Cookies } from 'quasar'
+
+const isLoggedIn = (to, form, next) => {
+  if (Cookies.has('auth')) {
+    next();
+  } else {
+    next({ name: 'submit-login' })
+  }
+};
 
 const routes = [
   {
@@ -7,7 +16,7 @@ const routes = [
       {
         name: 'home',
         path: '',
-        component: () => import('pages/IndexPage.vue')
+        component: () => import('pages/IndexPage.vue'),
       },
       {
         path: 'submit',
@@ -34,19 +43,13 @@ const routes = [
         name: 'thread-posts',
         path: 'thread',
         component: () => import('layouts/ThreadLayout.vue'),
-        beforeEnter: (to, form, next) => {
-          if (document.cookie.match(/^(auth=)/g)) {
-            console.log(document.cookie.match(/[^auth=](\S+)/g).toString());
-            next();
-          } else {
-            next({ name: 'submit-login' })
-          }
-        },
+        beforeEnter: isLoggedIn,
       },
       {
         name: 'user-profile',
         path: 'user',
         component: () => import('layouts/UserLayout.vue'),
+        beforeEnter: isLoggedIn,
       }
     ]
   },

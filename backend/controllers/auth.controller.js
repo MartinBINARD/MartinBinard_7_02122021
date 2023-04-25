@@ -34,7 +34,7 @@ const signup = async (req, res, next) => {
       };
 
       await User.create(userInfo);
-      res.status(201).send({ message: "User created" });
+      res.status(201).json({ message: "User created" });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -64,7 +64,16 @@ const signin = async (req, res, next) => {
           });
       } else {
         req.login(user);
-        res.status(201).send({ message: 'User connected'});
+        const data = JSON.parse(JSON.stringify(user));
+        res.status(201).json({
+          id: data.user_id,
+          firstName: data.firstname,
+          lastName: data.firstname,
+          avatar: data.avatar,
+          active: data.active,
+          admin: data.admin,
+          createdAt: data.createdAt,
+        });
       }
     }
   } catch (error) {
