@@ -13,7 +13,7 @@
 
       <q-card-section>
         <q-form
-          @submit="onLogin"
+          @submit="signIn"
           class="q-gutter-md"
         >
           <q-input
@@ -72,7 +72,7 @@ export default {
   created() {},
   methods: {
     ...mapActions('user', ['connectUser']),
-    onLogin() {
+    signIn() {
       this.loading = true;
       this.connectUser(this.user)
         .then((res) => {

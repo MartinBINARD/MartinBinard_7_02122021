@@ -13,7 +13,16 @@ export default {
   connectUser: ({ commit, dispatch }, item) => new Promise ((resolve) => {
     api.post('auth/signin', item)
       .then((res) => {
+        console.log('RES', res);
         commit('setUser', res);
+        resolve(res);
+      })
+      .catch((error) => handleErrors(dispatch, error));
+  }),
+  disconnectUser: ({ commit, dispatch }) => new Promise ((resolve) => {
+    api.get('auth/signout')
+      .then((res) => {
+        commit('logOut', res);
         resolve(res);
       })
       .catch((error) => handleErrors(dispatch, error));

@@ -29,20 +29,13 @@ export default {
   mixins: [],
   props: {},
   data() {
-    return {
-      leftDrawerOpen: false,
-      essentialLinks: null,
-    };
+    return {};
   },
   computed: {},
   watch: {},
   created() {
   },
-  methods: {
-    toggleLeftDrawer() {
-      this.leftDrawerOpen = !this.leftDrawerOpen;
-    }
-  },
+  methods: {},
 };
 </script>
 

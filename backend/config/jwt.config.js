@@ -43,14 +43,25 @@ const extractUserFromToken = async (req, res, next) => {
 
 const addJwtFeatures = (req, res, next) => {
   req.isAuthenticate = () => !!req.user;
-  req.logout = () => res.clearCookie('auth');
+
+  req.logout = () => res.clearCookie('auth', {
+    domain: process.env.DB_HOST,
+    path:'/',
+    secure: process.env.NODE_ENV !== "development",
+    httpOnly: process.env.NODE_ENV !== "development",
+    // maxAge: 1000 * 60 * 60 * 5,
+
+  }).send({ message: "Logout successful" });
+  
   req.login = (user) => {
     const token = createJwtToken(user);
-    res.cookie('auth', token, {
+    res.cookie('auth', token, 
+    {
       secure: process.env.NODE_ENV !== "development",
       httpOnly: process.env.NODE_ENV !== "development",
-      maxAge: 1000 * 60 * 60 * 5,
-    });
+      // maxAge: 1000 * 60 * 60 * 5,
+    }
+    );
   };
   next();
 };

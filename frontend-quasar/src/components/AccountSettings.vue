@@ -20,7 +20,7 @@
           <q-btn
             color="primary"
             label="Logout"
-            @click="signOut"
+            @click="singOut"
             v-close-popup
           ></q-btn>
         </div>
@@ -30,8 +30,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex';
-
+import { mapActions, mapMutations, mapState } from 'vuex';
 
 export default {
   name: 'AccountSettings',
@@ -41,13 +40,28 @@ export default {
   data() {
     return {};
   },
-  computed: {},
+  computed: {
+    ...mapState('user', ['user', 'auth']),
+  },
   watch: {},
   created() {
   },
   methods: {
-    ...mapMutations('user', ['setUser']),
-    signOut() {}
+    ...mapActions('user', ['disconnectUser']),
+    singOut() {
+      this.disconnectUser()
+        .then((res) => {
+          if(200 === res.status) {
+            this.$q.notify({
+              color: 'green-4',
+              textColor: 'white',
+              icon: 'cloud_done',
+              message: 'Logout successful',
+            });
+          }
+        });
+      this.$router.push({ name: 'submit-login' });
+    },
   },
 }
 </script>
