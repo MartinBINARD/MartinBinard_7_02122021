@@ -17,6 +17,7 @@ const routes = [
         name: 'home',
         path: '',
         component: () => import('pages/IndexPage.vue'),
+        redirect: { name: 'submit-login' },
       },
       {
         path: 'submit',

@@ -9,40 +9,35 @@ const createJwtToken = (user) => {
   return jwt.sign(
     { sub: user.user_id.toString(), admin: user.admin.toString() },
     process.env.SECRET_TOKEN,
-    { expiresIn: '5h' }
+    { expiresIn: '1min' }
   );
 };
 
 exports.createJwtToken = createJwtToken;
 
-const extractUserFromToken = async (req, res, next) => {
-  const token = req.cookies.jwt;
+const checkExpirationToken= async (req, res) => {
+  const token = req.cookie('auth');
+  console.log('auth', token);
+  const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN, { ignoreExpiration: true });
+  console.log('decodedToken.exp', decodedToken.exp);
+  const nowInSec = Math.floor(Date.now() / 1000);
 
-  if (token) {
-    try {
-      const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN);
-      const user = await User.findOne({ where: { user_id: decodedToken.sub } });
-      
-      if (user) {
-        req.user = user;
-        next();
-      } else {
-        res.clearCookie('auth');
-        res.redirect('/submit/login');
-      }
+  if(decodedToken.exp > nowInSec) {
+    const user = await User.findOne({ where: { user_id: decodedToken.sub } });
+    const jwtToken = jwt.sign(
+      { sub: user.user_id.toString(), admin: user.admin.toString() },
+      process.env.SECRET_TOKEN,
+      { expiresIn: '3s'}
+    );
 
-    } catch (error) {
-      console.log('error', error);
-      res.clearCookie('auth');
-      res.redirect('/submit/login');
-    }
-  } else {
-    next();
+    return jwtToken;
   }
+
+  return null;
 };
 
 const addJwtFeatures = (req, res, next) => {
-  req.isAuthenticate = () => !!req.user;
+  req.isAuthenticate = () => {};
 
   req.logout = () => res.clearCookie('auth', {
     domain: process.env.DB_HOST,
@@ -51,7 +46,7 @@ const addJwtFeatures = (req, res, next) => {
     httpOnly: process.env.NODE_ENV !== "development",
     // maxAge: 1000 * 60 * 60 * 5,
 
-  }).send({ message: "Logout successful" });
+  });
   
   req.login = (user) => {
     const token = createJwtToken(user);
@@ -66,5 +61,5 @@ const addJwtFeatures = (req, res, next) => {
   next();
 };
 
-app.use(extractUserFromToken);
+// app.use(extractUserFromToken);
 app.use(addJwtFeatures);

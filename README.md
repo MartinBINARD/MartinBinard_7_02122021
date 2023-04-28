@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #102**
+**Main branch - Commit #103**
 
 # Description
 
@@ -23,7 +23,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-- Add logOut action in store and signOut controller in server.
+- Add refresh token controller in backend.
 
 # Before to run this server
 

@@ -7,5 +7,6 @@ const passValidMiddleware = require("../middleware/passValid.middleware");
 router.post('/signup', passValidMiddleware, authCtrl.signup);
 router.post('/signin', authCtrl.signin);
 router.get('/signout', authCtrl.signout);
+// router.get('refresh-auth', auth.refreshToken);
 
 module.exports = router;

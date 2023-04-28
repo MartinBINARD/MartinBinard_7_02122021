@@ -1,6 +1,5 @@
 const dotenv = require("dotenv").config({ path: `../.env` });
 const { Sequelize, DataTypes } = require("sequelize");
-// const bcrypt = require('bcrypt');
 const path = require("path");
 const fs = require("fs");
 const basename = path.basename(__filename);

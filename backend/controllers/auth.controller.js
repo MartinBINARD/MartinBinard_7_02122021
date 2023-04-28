@@ -84,11 +84,19 @@ const signin = async (req, res, next) => {
 
 const signout = async (req, res, next) => {
   try {
-    req.logout();
+    req.logout().send({ message: "Logout successful" });
   } catch (error) {
     res.status(500).json({ message: error.message });
     next();
   }
 };
 
-module.exports = { signup, signin, signout };
+const refreshToken = async (res, req, next) => {
+  try {
+    req.isAuthenticate();
+  } catch (error) {
+    res.status(403).json({ message: error.message });
+  }
+};
+
+module.exports = { signup, signin, signout, refreshToken };
