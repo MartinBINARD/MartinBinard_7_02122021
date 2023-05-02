@@ -27,4 +27,18 @@ export default {
       })
       .catch((error) => handleErrors(dispatch, error));
   }),
+  refreshUserAuth: ({ commit, dispatch }) => new Promsie ((resolve) => {
+    api.get('auth/refresh')
+      .then((res) =>{
+        setTimeout(() => {
+          commit('refreshAuthSuccess', res);
+          console.log('Refresh Autth !');
+        }, 5 * 1000);
+        resolve(res);
+      })
+      .catch((error) => {
+        commit('refreshAuthError');
+        handleErrors(dispatch, error);
+      });
+  }),
 };

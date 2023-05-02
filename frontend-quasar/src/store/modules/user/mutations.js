@@ -1,5 +1,3 @@
-import { Cookies } from "quasar";
-
 export default {
   setUser: (state, item) => {
     if (null !== item) {
@@ -13,5 +11,13 @@ export default {
   logOut: (state) => {
     state.user = null;
     state.auth = false;
+  },
+  refreshAuthSuccess: (state) => {
+    state.auth = true;
+    state.user = null;
+  },
+  refreshAuthError: (state, item) => {
+    state.auth = false;
+    state.user = item.data;
   },
 };

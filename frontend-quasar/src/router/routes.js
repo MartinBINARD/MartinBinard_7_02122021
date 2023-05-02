@@ -1,7 +1,11 @@
 import { Cookies } from 'quasar'
+import store from 'src/store';
 
 const isLoggedIn = (to, form, next) => {
-  if (Cookies.has('auth')) {
+  const isLoggedIn = store().getters['user/isLoggedIn'];
+
+  if (isLoggedIn) {
+    // TODO
     next();
   } else {
     next({ name: 'submit-login' })

@@ -68,7 +68,7 @@ const signin = async (req, res, next) => {
         res.status(201).json({
           id: data.user_id,
           firstName: data.firstname,
-          lastName: data.firstname,
+          lastName: data.lastname,
           avatar: data.avatar,
           active: data.active,
           admin: data.admin,
@@ -93,9 +93,11 @@ const signout = async (req, res, next) => {
 
 const refreshToken = async (res, req, next) => {
   try {
-    req.isAuthenticate();
+    req.isAuthenticate().send({ message: "Refresh auth success"})
   } catch (error) {
     res.status(403).json({ message: error.message });
+    req.logout().send({ message: "Authentication error" });
+    next();
   }
 };
 

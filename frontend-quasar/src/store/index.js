@@ -1,5 +1,6 @@
 import { store } from 'quasar/wrappers'
 import { createStore } from 'vuex'
+import VuexPersist from 'vuex-persist';
 
 import user from './modules/user';
 
@@ -12,6 +13,11 @@ import user from './modules/user';
  * with the Store instance.
  */
 
+const vuexSessionStorage = new VuexPersist({
+  key: 'vuex',
+  storage: window.sessionStorage,
+});
+
 export default store(function (/* { ssrContext } */) {
   const Store = createStore({
     modules: {
@@ -20,7 +26,8 @@ export default store(function (/* { ssrContext } */) {
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
-    strict: process.env.DEBUGGING
+    strict: process.env.DEBUGGING,
+    plugins: [vuexSessionStorage.plugin],
   })
 
   return Store

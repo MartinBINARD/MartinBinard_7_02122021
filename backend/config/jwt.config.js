@@ -2,6 +2,7 @@ const dotenv = require('dotenv').config({ path: `../.env`});
 const jwt = require('jsonwebtoken');
 const db = require("../models");
 const app = require('../app');
+require('cookie-parser');
 
 const User = db.users;
 
@@ -37,7 +38,19 @@ const checkExpirationToken= async (req, res) => {
 };
 
 const addJwtFeatures = (req, res, next) => {
-  req.isAuthenticate = () => {};
+  req.isAuthenticate = () => {
+    const newToken = checkExpirationToken();
+    console.log(newToken);
+
+    if(null !== newToken) {
+      res.cookie('auth', newToken, {
+        secure: process.env.NODE_ENV !== "development",
+        httpOnly: process.env.NODE_ENV !== "development",
+        // maxAge: 1000 * 60 * 60 * 5,
+        overwrite: true,  
+      });
+    }
+  };
 
   req.logout = () => res.clearCookie('auth', {
     domain: process.env.DB_HOST,
@@ -45,7 +58,7 @@ const addJwtFeatures = (req, res, next) => {
     secure: process.env.NODE_ENV !== "development",
     httpOnly: process.env.NODE_ENV !== "development",
     // maxAge: 1000 * 60 * 60 * 5,
-
+    overwrite: true,
   });
   
   req.login = (user) => {
@@ -55,6 +68,7 @@ const addJwtFeatures = (req, res, next) => {
       secure: process.env.NODE_ENV !== "development",
       httpOnly: process.env.NODE_ENV !== "development",
       // maxAge: 1000 * 60 * 60 * 5,
+      overwrite: true,
     }
     );
   };
