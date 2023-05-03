@@ -2,10 +2,11 @@ import { Cookies } from 'quasar'
 import store from 'src/store';
 
 const isLoggedIn = (to, form, next) => {
-  const isLoggedIn = store().getters['user/isLoggedIn'];
+  // const isLoggedIn = store().getters['user/isLoggedIn'];
 
-  if (isLoggedIn) {
-    // TODO
+  if (Cookies.has('auth')) {
+    const authCookie = Cookies.get('auth');
+    store().dispatch('user/refreshUserAuth', authCookie);
     next();
   } else {
     next({ name: 'submit-login' })
@@ -48,13 +49,13 @@ const routes = [
         name: 'thread-posts',
         path: 'thread',
         component: () => import('layouts/ThreadLayout.vue'),
-        beforeEnter: isLoggedIn,
+        beforeMount: isLoggedIn,
       },
       {
         name: 'user-profile',
         path: 'user',
         component: () => import('layouts/UserLayout.vue'),
-        beforeEnter: isLoggedIn,
+        beforeMount: isLoggedIn,
       }
     ]
   },

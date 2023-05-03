@@ -6,6 +6,7 @@ export default {
   registerUser: ({ commit, dispatch }, item) => new Promise ((resolve) => {
     api.post('auth/signup', item)
       .then((res) => {
+        commit('setUser', res);
         resolve(res);
       })
       .catch((error) => handleErrors(dispatch, error));
@@ -23,6 +24,7 @@ export default {
     api.get('auth/signout')
       .then((res) => {
         commit('logOut', res);
+        window.sessionStorage.removeItem('vuex');
         resolve(res);
       })
       .catch((error) => handleErrors(dispatch, error));
@@ -30,14 +32,15 @@ export default {
   refreshUserAuth: ({ commit, dispatch }) => new Promsie ((resolve) => {
     api.get('auth/refresh')
       .then((res) =>{
-        setTimeout(() => {
-          commit('refreshAuthSuccess', res);
-          console.log('Refresh Autth !');
-        }, 5 * 1000);
+        setTimeout(() =>  {
+          dispatch('refreshUserAuth');
+        }, 3 * 1000);
+        commit('refreshAuthSuccess', res);
         resolve(res);
       })
       .catch((error) => {
         commit('refreshAuthError');
+        window.sessionStorage.removeItem('vuex');
         handleErrors(dispatch, error);
       });
   }),

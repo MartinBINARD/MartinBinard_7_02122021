@@ -12,12 +12,12 @@ export default {
     state.user = null;
     state.auth = false;
   },
-  refreshAuthSuccess: (state) => {
+  refreshAuthSuccess: (state, item) => {
     state.auth = true;
-    state.user = null;
-  },
-  refreshAuthError: (state, item) => {
-    state.auth = false;
     state.user = item.data;
+  },
+  refreshAuthError: (state) => {
+    state.auth = false;
+    state.user = null;
   },
 };

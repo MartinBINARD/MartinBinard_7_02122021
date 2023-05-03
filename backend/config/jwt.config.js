@@ -17,9 +17,8 @@ const createJwtToken = (user) => {
 exports.createJwtToken = createJwtToken;
 
 const checkExpirationToken= async (req, res) => {
-  const token = req.cookie('auth');
-  console.log('auth', token);
-  const decodedToken = jwt.verify(token, process.env.SECRET_TOKEN, { ignoreExpiration: true });
+  console.log('checkExpToken', req);
+  const decodedToken = jwt.verify(req, process.env.SECRET_TOKEN, { ignoreExpiration: true });
   console.log('decodedToken.exp', decodedToken.exp);
   const nowInSec = Math.floor(Date.now() / 1000);
 
@@ -38,9 +37,9 @@ const checkExpirationToken= async (req, res) => {
 };
 
 const addJwtFeatures = (req, res, next) => {
-  req.isAuthenticate = () => {
-    const newToken = checkExpirationToken();
-    console.log(newToken);
+  req.isAuthenticate = (token) => {
+    const newToken = checkExpirationToken(token);
+    console.log('----newToken--------', newToken);
 
     if(null !== newToken) {
       res.cookie('auth', newToken, {

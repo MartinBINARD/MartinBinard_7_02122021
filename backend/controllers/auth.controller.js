@@ -93,7 +93,9 @@ const signout = async (req, res, next) => {
 
 const refreshToken = async (res, req, next) => {
   try {
-    req.isAuthenticate().send({ message: "Refresh auth success"})
+    console.log('-----REQ----');
+    console.log(req);
+    // req.isAuthenticate().send({ message: "Refresh auth success"})
   } catch (error) {
     res.status(403).json({ message: error.message });
     req.logout().send({ message: "Authentication error" });
