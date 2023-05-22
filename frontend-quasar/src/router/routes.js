@@ -1,4 +1,4 @@
-import { Cookies } from 'quasar'
+import { Cookies } from 'quasar';
 import store from 'src/store';
 
 const isLoggedIn = (to, form, next) => {

@@ -39,7 +39,6 @@ const checkExpirationToken= async (req, res) => {
 const addJwtFeatures = (req, res, next) => {
   req.isAuthenticate = (token) => {
     const newToken = checkExpirationToken(token);
-    console.log('----newToken--------', newToken);
 
     if(null !== newToken) {
       res.cookie('auth', newToken, {
