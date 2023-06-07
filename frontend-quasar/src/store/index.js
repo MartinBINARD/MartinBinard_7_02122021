@@ -1,8 +1,8 @@
-import { store } from 'quasar/wrappers'
-import { createStore } from 'vuex'
-import VuexPersist from 'vuex-persist';
+import { store } from "quasar/wrappers";
+import { createStore } from "vuex";
+import VuexPersist from "vuex-persist";
 
-import user from './modules/user';
+import user from "./modules/user";
 
 /*
  * If not building with SSR mode, you can
@@ -14,7 +14,7 @@ import user from './modules/user';
  */
 
 const vuexSessionStorage = new VuexPersist({
-  key: 'vuex',
+  key: "vuex",
   storage: window.sessionStorage,
 });
 
@@ -28,7 +28,7 @@ export default store(function (/* { ssrContext } */) {
     // for dev mode and --debug builds only
     strict: process.env.DEBUGGING,
     plugins: [vuexSessionStorage.plugin],
-  })
+  });
 
-  return Store
-})
+  return Store;
+});

@@ -47,18 +47,16 @@ db.users.hasMany(db.posts);
 db.posts.belongsTo(db.users);
 
 // POST/COMMENT FOREIGN KEY
-db.posts.hasMany(db.comments, {foreignKey : 'post_id'});
-db.comments.belongsTo(db.posts, {foreignKey : 'post_id'});
+db.posts.hasMany(db.comments, { foreignKey: "post_id" });
+db.comments.belongsTo(db.posts, { foreignKey: "post_id" });
 
 // USER/COMMENT FOREIGN KEY
-db.users.hasMany(db.comments, {foreignKey : 'user_id'});
-db.comments.belongsTo(db.users, {foreignKey : 'user_id'});
+db.users.hasMany(db.comments, { foreignKey: "user_id" });
+db.comments.belongsTo(db.users, { foreignKey: "user_id" });
 
 // SYNCHRONIZE DATA
-sequelize
-  .sync()
-  .catch((error) => {
-    console.log(error);
-  });
+sequelize.sync().catch((error) => {
+  console.log(error);
+});
 
 module.exports = db;

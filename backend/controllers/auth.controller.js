@@ -17,11 +17,9 @@ const signup = async (req, res, next) => {
     const user = await User.findOne({ where: { email: encryptedEmail } });
 
     if (user) {
-      res
-        .status(401)
-        .send({
-          message: "Signup error ! Please, contact administrator !",
-        });
+      res.status(401).send({
+        message: "Signup error ! Please, contact administrator !",
+      });
     } else {
       // HASH PASSWORD
       const hash = await hashPassword(req.body.password);
@@ -40,7 +38,7 @@ const signup = async (req, res, next) => {
     res.status(500).json({ message: error.message });
     next();
   }
-}
+};
 
 const signin = async (req, res, next) => {
   try {
@@ -53,15 +51,13 @@ const signin = async (req, res, next) => {
     if (user) {
       // CHECK PASSWORD
       const match = await comparePassword(req.body.password, user.password);
-      
+
       if (!match) {
         res.status(401).send({ message: "Wrong login or password !" });
       } else if (!user.active) {
-        res
-          .status(403)
-          .send({
-            message: "User account deactivate ! Please, contact administrator.",
-          });
+        res.status(403).send({
+          message: "User account deactivate ! Please, contact administrator.",
+        });
       } else {
         req.login(user);
         const data = JSON.parse(JSON.stringify(user));
@@ -80,7 +76,7 @@ const signin = async (req, res, next) => {
     res.status(500).json({ message: error.message });
     next();
   }
-}
+};
 
 const signout = async (req, res, next) => {
   try {
@@ -93,9 +89,9 @@ const signout = async (req, res, next) => {
 
 const refreshToken = async (res, req, next) => {
   try {
-    console.log('-----REQ----');
+    console.log("-----REQ----");
     console.log(req);
-    // req.isAuthenticate().send({ message: "Refresh auth success"})
+    // req.isAuthenticate().send({ message: "Refresh auth success" });
   } catch (error) {
     res.status(403).json({ message: error.message });
     req.logout().send({ message: "Authentication error" });
