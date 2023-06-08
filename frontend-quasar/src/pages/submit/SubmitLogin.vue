@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-evenly items-center submit-container">
     <q-img
-      src="../assets/icon-left-font-monochrome-white.svg"
+      src="../../assets/icon-left-font-monochrome-white.svg"
       spinner-color="white"
       class="submit-logo q-ma-xl"
       contain
@@ -12,10 +12,7 @@
       </q-card-section>
 
       <q-card-section>
-        <q-form
-          @submit="signIn"
-          class="q-gutter-md"
-        >
+        <q-form @submit="signIn" class="q-gutter-md">
           <q-input
             filled
             type="text"
@@ -23,7 +20,9 @@
             label="Your email *"
             hint="example@email.fr"
             lazy-rules
-            :rules= "[val => val !== null && val !== '' || 'Please type your email']"
+            :rules="[
+              (val) => (val !== null && val !== '') || 'Please type your email',
+            ]"
             class="input-width"
           />
 
@@ -33,15 +32,25 @@
             v-model="user.password"
             label="Your password *"
             lazy-rules
-            :rules="[val => val !== null && val !== '' || 'Please type your password']"
+            :rules="[
+              (val) =>
+                (val !== null && val !== '') || 'Please type your password',
+            ]"
             class="input-width"
           />
 
           <div class="row justify-between q-mb-md">
-            <q-btn label="Login" type="submit" color="primary" :loading="loading"/>
-            <q-btn to="register" label="Register" color="secondary"/>
+            <q-btn
+              label="Login"
+              type="submit"
+              color="primary"
+              :loading="loading"
+            />
+            <q-btn to="register" label="Register" color="secondary" />
           </div>
-          <router-link class="text-primary" to="recover">Forgot password ?</router-link>
+          <router-link class="text-primary" to="recover"
+            >Forgot password ?</router-link
+          >
         </q-form>
       </q-card-section>
     </q-card>
@@ -49,11 +58,11 @@
 </template>
 
 <script>
-import formValidation from 'src/mixins/formValidation';
-import { mapActions } from 'vuex';
+import formValidation from "src/mixins/formValidation";
+import { mapActions } from "vuex";
 
 export default {
-  name: 'user-login',
+  name: "user-login",
   components: {},
   mixins: [formValidation],
   props: {},
@@ -65,33 +74,30 @@ export default {
       },
       loading: false,
       token: false,
-    }
+    };
   },
   computed: {},
   watch: {},
   created() {},
   methods: {
-    ...mapActions('user', ['connectUser']),
+    ...mapActions("user", ["connectUser"]),
     signIn() {
       this.loading = true;
-      this.connectUser(this.user)
-        .then((res) => {
-          if (201 === res.status) {
-            this.loading = false;
-            this.$q.notify({
-              color: 'green-4',
-              textColor: 'white',
-              icon: 'cloud_done',
-              message: 'Logged sucessfully',
-            });
-            this.$router.push({ name: 'thread-posts'});
-          }
-        });
+      this.connectUser(this.user).then((res) => {
+        if (201 === res.status) {
+          this.loading = false;
+          this.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "Logged sucessfully",
+          });
+          this.$router.push({ name: "thread-posts" });
+        }
+      });
     },
   },
 };
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

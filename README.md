@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #107**
+**Main branch - Commit #108**
 
 # Description
 
@@ -23,7 +23,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-- Add auth.guards.js and edit button in user menu.
+- Add new thread pages and user form page.
 
 # Before to run this server
 

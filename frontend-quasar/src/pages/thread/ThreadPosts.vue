@@ -1,17 +1,13 @@
 <template>
-  <header-bar />
-
-  <q-page-container>
-    <user-form />
-  </q-page-container>
+  <q-card class="q-ma-xl q-pa-xl secondary">
+    <title>LATEST POSTS</title>
+  </q-card>
 </template>
 
 <script>
-import UserForm from "../components/UserForm.vue";
-
 export default {
-  name: "UserLayout",
-  components: { UserForm },
+  name: "ThreadPosts",
+  components: {},
   mixins: [],
   props: {},
   data() {

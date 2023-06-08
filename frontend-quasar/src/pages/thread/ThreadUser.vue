@@ -1,16 +1,12 @@
 <template>
-  <header-bar />
-
-  <q-page-container>
-    <user-form />
-  </q-page-container>
+  <user-form />
 </template>
 
 <script>
-import UserForm from "../components/UserForm.vue";
+import UserForm from "src/components/UserForm.vue";
 
 export default {
-  name: "UserLayout",
+  name: "ThreadUser",
   components: { UserForm },
   mixins: [],
   props: {},

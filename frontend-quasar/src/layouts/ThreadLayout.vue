@@ -1,18 +1,5 @@
 <template>
-  <q-header elevated>
-    <div class="row justify-between q-pa-sm bg-accent">
-      <q-img
-        src="favicon.ico"
-        srcset="icons/favicon-128x128.png 128w,
-                  icons/favicon-96x96.png 128w,
-                  icons/favicon-32x32.png 32w,
-                  icons/favicon-16x16.png, 16w"
-        class="logo"
-      />
-
-      <profile-menu />
-    </div>
-  </q-header>
+  <header-bar />
 
   <q-page-container>
     <router-view />
@@ -20,11 +7,11 @@
 </template>
 
 <script>
-import ProfileMenu from "../components/ProfileMenu.vue";
+import HeaderBar from "../components/HeaderBar.vue";
 
 export default {
   name: "ThreadLayout",
-  components: { ProfileMenu },
+  components: { HeaderBar },
   mixins: [],
   props: {},
   data() {
