@@ -61,14 +61,17 @@ const signin = async (req, res, next) => {
       } else {
         req.login(user);
         const data = JSON.parse(JSON.stringify(user));
+
         res.status(201).json({
           id: data.user_id,
           firstName: data.firstname,
           lastName: data.lastname,
           avatar: data.avatar,
+          bio: data.bio,
           active: data.active,
           admin: data.admin,
           createdAt: data.createdAt,
+          updatedAt: data.updatedAt,
         });
       }
     }

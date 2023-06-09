@@ -12,31 +12,57 @@
 
       <q-item-section>
         <q-item-label>My Profile</q-item-label>
-        <q-item-label caption> Subhead </q-item-label>
+        <q-item-label caption>
+          <div>Complete your profile</div>
+          <div>Created at : {{ formatDate(userData.createdAt) }}</div>
+          <div>Update at : {{ formatDate(userData.updatedAt) }}</div>
+        </q-item-label>
       </q-item-section>
     </q-item>
 
     <q-separator />
 
-    <q-card-section horizontal>
-      <q-card-section>
-        {{ lorem }}
-      </q-card-section>
+    <q-card-section class="q-mx-md">
+      <q-form>
+        <div class="row items-center">
+          <q-input
+            v-model="userData.firstName"
+            label="Firstname"
+            class="q-pr-md"
+          />
+          <q-input
+            v-model="userData.lastName"
+            label="Lastname"
+            class="q-pr-md"
+          />
+        </div>
+        <q-input label="About" type="textarea"></q-input>
 
-      <q-separator vertical></q-separator>
+        <div>{{ userData }}</div>
 
-      <q-card-section class="col-4">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      </q-card-section>
+        <div class="q-mt-md">
+          <q-btn label="Save" type="submit" color="secondary"></q-btn>
+          <q-btn
+            label="Cancel"
+            type="reset"
+            color="primary"
+            flat
+            class="q-ml-sm"
+            :to="{ name: 'thread-posts' }"
+          ></q-btn>
+        </div>
+      </q-form>
     </q-card-section>
   </q-card>
 </template>
 
 <script>
+import { userData } from "../mixins";
+
 export default {
   name: "UserForm",
   components: {},
-  mixins: [],
+  mixins: [userData],
   props: {},
   data() {
     return {};

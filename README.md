@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #108**
+**Main branch - Commit #109**
 
 # Description
 
@@ -23,7 +23,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-- Add new thread pages and user form page.
+- Add userData mixin and update user profile form.
 
 # Before to run this server
 

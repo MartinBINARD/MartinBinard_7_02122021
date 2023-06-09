@@ -1,13 +1,13 @@
 <template>
   <q-btn round>
-    <q-avatar v-if="userData.avatar">
+    <!-- <q-avatar v-if="userData.avatar">
       <img src="https://cdn.quasar.dev/img/avatar4.jpg" />
-    </q-avatar>
-    <q-avatar v-else>
+    </q-avatar> -->
+    <q-avatar>
       <img src="../assets/default-tux-avatar.png" />
     </q-avatar>
 
-    <q-menu v-if="userData">
+    <q-menu>
       <div class="row no-wrap q-pa-md">
         <div class="column">
           <div class="text-h6 q-mb-md">User informations</div>
@@ -16,16 +16,16 @@
             <div v-if="userData.admin">Admin</div>
             <div v-if="!userData.active">Deactivated account</div>
             <div v-if="userData.createdAt">
-              Registered since {{ formatDate }}
+              Registered since {{ formatDate(userData.createdAt) }}
             </div>
           </div>
         </div>
         <q-separator vertical inset class="q-mx-lg" />
         <div class="column items-center">
-          <q-avatar v-if="userData.avatar" class="avatar">
+          <!-- <q-avatar v-if="userData.avatar" class="avatar">
             <img src="https://cdn.quasar.dev/img/avatar4.jpg" />
-          </q-avatar>
-          <q-avatar v-else>
+          </q-avatar> -->
+          <q-avatar>
             <img src="../assets/default-tux-avatar.png" />
           </q-avatar>
           <div class="text-subtitle1 q-mt-md q-mb-xs">
@@ -51,29 +51,19 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
-import { date } from "quasar";
+import { userData } from "../mixins";
 
 export default {
   name: "AccountSettings",
   components: {},
-  mixins: [],
+  mixins: [userData],
   props: {},
   data() {
     return {};
   },
-  computed: {
-    ...mapState("user", ["user", "auth"]),
-    userData() {
-      return this.$store.state.user.user;
-    },
-    formatDate() {
-      return date.formatDate(this.userData.createdAt, "MMMM d YYYY");
-    },
-  },
+  computed: {},
   watch: {},
-  created() {
-    console.log("store user", this.$store.state.user);
-  },
+  created() {},
   methods: {
     ...mapActions("user", ["disconnectUser"]),
     singOut() {
