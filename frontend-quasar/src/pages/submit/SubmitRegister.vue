@@ -90,7 +90,7 @@
 </template>
 
 <script>
-import formValidation from "src/mixins/formValidation";
+import { formValidation } from "../../mixins/index";
 import { mapActions } from "vuex";
 export default {
   name: "SubmitRegister",

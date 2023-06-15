@@ -11,11 +11,18 @@
       </q-item-section>
 
       <q-item-section>
-        <q-item-label>My Profile</q-item-label>
+        <q-item-label
+          >My Profile : {{ userData.firstName }}
+          {{ userData.lastName }}</q-item-label
+        >
         <q-item-label caption>
-          <div>Complete your profile</div>
           <div>Created at : {{ formatDate(userData.createdAt) }}</div>
           <div>Update at : {{ formatDate(userData.updatedAt) }}</div>
+        </q-item-label>
+
+        <q-item-label>
+          <div v-if="!userData.bio" class="q-my-md">Complete your profile</div>
+          <div v-else class="q-my-md">Update your profile</div>
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -23,25 +30,44 @@
     <q-separator />
 
     <q-card-section class="q-mx-md">
-      <q-form>
+      <div v-if="userData.bio">About me : {{ userData.bio }}</div>
+
+      <q-form @submit="onUpdateProfile">
         <div class="row items-center">
           <q-input
-            v-model="userData.firstName"
+            v-model="form.firstName"
+            type="text"
             label="Firstname"
+            :rules="rules.checkName"
+            lazy-rules
             class="q-pr-md"
           />
           <q-input
-            v-model="userData.lastName"
+            v-model="form.lastName"
+            type="text"
             label="Lastname"
+            :rules="rules.checkName"
+            lazy-rules
             class="q-pr-md"
           />
         </div>
-        <q-input label="About" type="textarea"></q-input>
+        <q-input
+          v-model="form.bio"
+          label="About"
+          type="textarea"
+          lazy-rules
+          :rules="rules.checkBio"
+        />
 
         <div>{{ userData }}</div>
 
         <div class="q-mt-md">
-          <q-btn label="Save" type="submit" color="secondary"></q-btn>
+          <q-btn
+            label="Update"
+            type="submit"
+            :loading="loading"
+            color="secondary"
+          />
           <q-btn
             label="Cancel"
             type="reset"
@@ -49,7 +75,7 @@
             flat
             class="q-ml-sm"
             :to="{ name: 'thread-posts' }"
-          ></q-btn>
+          />
         </div>
       </q-form>
     </q-card-section>
@@ -57,20 +83,45 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import { formValidation } from "../mixins/index";
 import { userData } from "../mixins";
 
 export default {
   name: "UserForm",
   components: {},
-  mixins: [userData],
+  mixins: [userData, formValidation],
   props: {},
   data() {
-    return {};
+    return {
+      form: {
+        firstName: null,
+        lastName: null,
+        bio: null,
+      },
+      loading: false,
+    };
   },
   computed: {},
   watch: {},
   created() {},
-  methods: {},
+  methods: {
+    ...mapActions("user", ["updateUser"]),
+    onUpdateProfile() {
+      this.loading = true;
+      this.updateUser(this.form).then((res) => {
+        if (201 === res.status) {
+          this.loading = false;
+          this.$q.notify({
+            color: "green-4",
+            textColor: "white",
+            icon: "cloud_done",
+            message: "Updated sucessfully",
+          });
+        }
+      });
+    },
+  },
 };
 </script>
 

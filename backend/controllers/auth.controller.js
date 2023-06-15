@@ -3,12 +3,22 @@ const db = require("../models");
 const cryptojs = require("crypto-js");
 
 const { hashPassword, comparePassword } = require("../config/bcrypt.config");
+const { checkInput } = require("../utils/checkInput");
 
 // LOAD MODELS
 const User = db.users;
 
+const signupKeys = ["firstname", "lastname", "email", "password"];
+const loginKeys = ["email", "password"];
+
 const signup = async (req, res, next) => {
   try {
+    const userData = checkInput(req.body, signupKeys, "string");
+
+    if (!userData) {
+      res.status(400).send({ message: "Bad inputs !" });
+    }
+
     // CHECK IF ENCRYPTED USER EMAIL IS ALREADY USED BEFORE HASH PASSWORD
     const encryptedEmail = cryptojs
       .HmacSHA512(req.body.email, `${process.USER_CRYPTOJS_KEY}`)
@@ -26,7 +36,8 @@ const signup = async (req, res, next) => {
 
       // USER INFO
       const userInfo = {
-        ...req.body,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
         email: encryptedEmail,
         password: hash,
       };
@@ -42,6 +53,12 @@ const signup = async (req, res, next) => {
 
 const signin = async (req, res, next) => {
   try {
+    const userData = checkInput(req.body, loginKeys, "string");
+
+    if (!userData) {
+      res.status(400).send({ message: "Bad inputs !" });
+    }
+
     const encryptedEmail = cryptojs
       .HmacSHA512(req.body.email, `${process.USER_CRYPTOJS_KEY}`)
       .toString();

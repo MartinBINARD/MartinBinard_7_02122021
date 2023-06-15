@@ -20,9 +20,7 @@
             label="Your email *"
             hint="example@email.fr"
             lazy-rules
-            :rules="[
-              (val) => (val !== null && val !== '') || 'Please type your email',
-            ]"
+            :rules="rules.email"
             class="input-width"
           />
 
@@ -32,10 +30,7 @@
             v-model="user.password"
             label="Your password *"
             lazy-rules
-            :rules="[
-              (val) =>
-                (val !== null && val !== '') || 'Please type your password',
-            ]"
+            :rules="rules.password"
             class="input-width"
           />
 

@@ -8,6 +8,9 @@ export default {
       state.user = null;
     }
   },
+  updateUser: (state, item) => {
+    state.user = item;
+  },
   logOut: (state) => {
     state.user = null;
     state.auth = false;

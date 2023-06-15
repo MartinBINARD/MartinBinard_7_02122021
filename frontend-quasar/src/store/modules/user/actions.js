@@ -33,6 +33,16 @@ export default {
         })
         .catch((error) => handleErrors(dispatch, error));
     }),
+  updateUser: ({ commit, dispatch }, item) =>
+    new Promise((resolve) => {
+      api
+        .put(`user/${item.id}`, { ...state.user.id, item })
+        .then((res) => {
+          commit("updateUser", res);
+          resolve(res);
+        })
+        .catch((error) => handleErrors(dispatch, error));
+    }),
   refreshUserAuth: ({ commit, dispatch }) =>
     new Promsie((resolve) => {
       api
