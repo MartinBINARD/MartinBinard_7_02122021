@@ -13,7 +13,7 @@ const userData = {
   },
   methods: {
     formatDate(value) {
-      return date.formatDate(value, "MMMM d YYYY");
+      return date.formatDate(value, "MMMM Do YYYY");
     },
   },
 };

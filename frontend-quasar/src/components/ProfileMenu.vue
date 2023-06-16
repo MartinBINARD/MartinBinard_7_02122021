@@ -70,6 +70,7 @@ export default {
       this.disconnectUser().then((res) => {
         if (200 === res.status) {
           this.$q.notify({
+            position: "top",
             color: "green-4",
             textColor: "white",
             icon: "cloud_done",

@@ -1,18 +1,12 @@
 const db = require("../models");
 const fs = require("fs");
 const { checkInput } = require("../utils/checkInput");
-const { log } = require("console");
 
 //LOAD MODELS
 const User = db.users;
 const Post = db.posts;
 
-const modifyKeys = [
-  "firstname",
-  "lastname",
-  "bio",
-  // "avatar",
-];
+const modifyKeys = ["firstName", "lastName", "bio"];
 
 async function getOneUser(req, res, next) {
   try {
@@ -37,15 +31,15 @@ async function getAllUser(req, res, next) {
 // MODIFY AVATAR ONLY
 async function modifyUser(req, res, next) {
   try {
-    console.log("REQ BODY", req.body);
     const userData = checkInput(req.body, modifyKeys, "string");
+    let modifiedAvater;
 
     if (!userData) {
       res.status(400).send({ message: "Bad inputs !" });
     }
 
     const userObject = await User.findOne({
-      where: { user_id: req.params.id },
+      where: { user_id: parseInt(req.params.id) },
     });
 
     if (userObject.avatar != null) {
@@ -56,23 +50,36 @@ async function modifyUser(req, res, next) {
     }
 
     if (req.file) {
-      let modifiedAvater = `${req.protocol}://${req.get("host")}/images/${
+      modifiedAvater = `${req.protocol}://${req.get("host")}/images/${
         req.file.filename
       }`;
+    }
+
+    if (userObject) {
       let updateObject = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         bio: req.body.bio,
-        avatar: modifiedAvater,
+        avatar: modifiedAvater ?? null,
       };
 
-      console.log("UPDATE OBJECT", updateObject);
-
-      await User.update(
+      const updateUser = await User.update(
         { ...updateObject },
-        { where: { user_id: req.params.id } }
+        { where: { user_id: parseInt(req.params.id) } }
       );
-      res.status(201).send({ message: "User avatar modified !" });
+
+      const getUpdatedUser = await User.findOne({
+        where: { user_id: updateUser[0] },
+        raw: true,
+        nest: true,
+        attributes: {
+          exclude: ["user_id", "email", "password", "admin", "active"],
+        },
+      });
+
+      res
+        .status(201)
+        .send({ message: "User avatar modified !", user: getUpdatedUser });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });

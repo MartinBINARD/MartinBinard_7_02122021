@@ -6,11 +6,11 @@ module.exports = (sequelize, Datatypes) => {
       allowNull: false,
       primaryKey: true,
     },
-    firstname: {
+    firstName: {
       type: Datatypes.STRING(500),
       allowNull: false,
     },
-    lastname: {
+    lastName: {
       type: Datatypes.STRING(500),
       allowNull: false,
     },

@@ -8,7 +8,7 @@ const { checkInput } = require("../utils/checkInput");
 // LOAD MODELS
 const User = db.users;
 
-const signupKeys = ["firstname", "lastname", "email", "password"];
+const signupKeys = ["firstName", "lastName", "email", "password"];
 const loginKeys = ["email", "password"];
 
 const signup = async (req, res, next) => {
@@ -36,8 +36,8 @@ const signup = async (req, res, next) => {
 
       // USER INFO
       const userInfo = {
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email: encryptedEmail,
         password: hash,
       };
@@ -81,8 +81,8 @@ const signin = async (req, res, next) => {
 
         res.status(201).json({
           id: data.user_id,
-          firstName: data.firstname,
-          lastName: data.lastname,
+          firstName: data.firstName,
+          lastName: data.lastName,
           avatar: data.avatar,
           bio: data.bio,
           active: data.active,

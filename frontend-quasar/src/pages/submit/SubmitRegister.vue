@@ -16,7 +16,7 @@
           <div class="row justify-between items-center">
             <q-input
               filled
-              v-model="form.firstname"
+              v-model="form.firstName"
               type="text"
               label="Your firstname *"
               lazy-rules
@@ -27,7 +27,7 @@
             <q-input
               filled
               type="text"
-              v-model="form.lastname"
+              v-model="form.lastName"
               label="Your lastname *"
               lazy-rules
               :rules="rules.lastname"
@@ -100,8 +100,8 @@ export default {
   data() {
     return {
       form: {
-        firstname: null,
-        lastname: null,
+        firstName: null,
+        lastName: null,
         email: null,
         password: null,
       },
@@ -117,6 +117,7 @@ export default {
     onRegister() {
       if (this.accept !== true) {
         this.$q.notify({
+          position: "top",
           color: "red-5",
           textColor: "white",
           icon: "warning",
@@ -126,6 +127,7 @@ export default {
         this.registerUser(this.form).then((res) => {
           if (201 === res.status) {
             this.$q.notify({
+              position: "top",
               color: "green-4",
               textColor: "white",
               icon: "cloud_done",

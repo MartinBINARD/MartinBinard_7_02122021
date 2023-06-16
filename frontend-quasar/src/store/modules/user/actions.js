@@ -35,8 +35,10 @@ export default {
     }),
   updateUser: ({ commit, dispatch }, item) =>
     new Promise((resolve) => {
+      const userId = JSON.parse(window.sessionStorage.getItem("vuex")).user.user
+        .id;
       api
-        .put(`user/${item.id}`, { ...state.user.id, item })
+        .put(`user/${userId}`, item)
         .then((res) => {
           commit("updateUser", res);
           resolve(res);

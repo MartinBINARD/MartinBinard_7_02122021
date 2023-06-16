@@ -9,7 +9,7 @@ export default {
     }
   },
   updateUser: (state, item) => {
-    state.user = item;
+    state.user = { ...state.user, ...item.data.user };
   },
   logOut: (state) => {
     state.user = null;

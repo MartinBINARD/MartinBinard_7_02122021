@@ -32,7 +32,7 @@
     <q-card-section class="q-mx-md">
       <div v-if="userData.bio">About me : {{ userData.bio }}</div>
 
-      <q-form @submit="onUpdateProfile">
+      <q-form ref="userform" @submit.stop="onUpdateProfile" @reset="onReset">
         <div class="row items-center">
           <q-input
             v-model="form.firstName"
@@ -113,13 +113,20 @@ export default {
         if (201 === res.status) {
           this.loading = false;
           this.$q.notify({
+            position: "top",
             color: "green-4",
             textColor: "white",
             icon: "cloud_done",
             message: "Updated sucessfully",
           });
         }
+        this.onReset();
       });
+    },
+    onReset() {
+      this.form.firstName = null;
+      this.form.lastName = null;
+      this.form.bio = null;
     },
   },
 };
