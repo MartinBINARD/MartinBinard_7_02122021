@@ -1,13 +1,14 @@
 <template>
-  <q-card class="q-ma-sm q-pa-xl secondary" flat bordered>
-    <q-item>
-      <q-item-section avatar>
+  <q-card class="q-ma-sm q-pa-sm secondary" flat bordered>
+    <div class="row wrap">
+      <q-item-section class="q-my-sm q-ml-md" avatar>
         <!-- <q-avatar v-if="userData.avatar" class="avatar">
           <img src="https://cdn.quasar.dev/img/avatar4.jpg" />
         </q-avatar> -->
-        <q-avatar class="avatar-size">
-          <img src="../assets/default-tux-avatar.png" />
+        <q-avatar class="avatar" rounded-borders>
+          <q-img src="../assets/default-tux-avatar.png" />
         </q-avatar>
+        <user-avatar-dialog />
       </q-item-section>
 
       <q-item-section>
@@ -22,15 +23,17 @@
 
         <q-item-label>
           <div v-if="!userData.bio" class="q-my-md">Complete your profile</div>
-          <div v-else class="q-my-md">Update your profile</div>
         </q-item-label>
       </q-item-section>
-    </q-item>
+    </div>
 
     <q-separator />
 
     <q-card-section class="q-mx-md">
-      <div v-if="userData.bio">About me : {{ userData.bio }}</div>
+      <div class="q-my-md text-h5" v-if="userData.bio">About me :</div>
+      <div class="q-my-md text-h6">{{ userData.bio }}</div>
+
+      <q-separator />
 
       <q-form ref="userform" @submit.stop="onUpdateProfile" @reset="onReset">
         <div class="row items-center">
@@ -83,13 +86,14 @@
 </template>
 
 <script>
+import UserAvatarDialog from "./UserAvatarDialog";
 import { mapActions } from "vuex";
 import { formValidation } from "../mixins/index";
 import { userData } from "../mixins";
 
 export default {
   name: "UserForm",
-  components: {},
+  components: { UserAvatarDialog },
   mixins: [userData, formValidation],
   props: {},
   data() {
@@ -120,7 +124,6 @@ export default {
             message: "Updated sucessfully",
           });
         }
-        this.onReset();
       });
     },
     onReset() {
@@ -133,8 +136,9 @@ export default {
 </script>
 
 <style scoped>
-.avatar-size {
-  height: 100px;
-  width: auto;
+.avatar {
+  height: 7rem;
+  width: 7rem;
+  border: 1px solid black;
 }
 </style>

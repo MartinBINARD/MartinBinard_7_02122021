@@ -50,11 +50,11 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions } from "vuex";
 import { userData } from "../mixins";
 
 export default {
-  name: "AccountSettings",
+  name: "ProfileMenu",
   components: {},
   mixins: [userData],
   props: {},
