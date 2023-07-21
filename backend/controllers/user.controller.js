@@ -7,6 +7,7 @@ const User = db.users;
 const Post = db.posts;
 
 const modifyKeys = ["firstName", "lastName", "bio"];
+const modifyAvatarKey = ["avatar"];
 
 async function getOneUser(req, res, next) {
   try {
@@ -28,13 +29,11 @@ async function getAllUser(req, res, next) {
   }
 }
 
-// MODIFY AVATAR ONLY
 async function modifyUser(req, res, next) {
   try {
-    const userData = checkInput(req.body, modifyKeys, "string");
-    let modifiedAvater;
+    const userCheck = checkInput(req.body, modifyKeys, "string");
 
-    if (!userData) {
+    if (!userCheck) {
       res.status(400).send({ message: "Bad inputs !" });
     }
 
@@ -49,22 +48,63 @@ async function modifyUser(req, res, next) {
       });
     }
 
-    if (req.file) {
-      modifiedAvater = `${req.protocol}://${req.get("host")}/images/${
-        req.file.filename
-      }`;
-    }
-
     if (userObject) {
       let updateObject = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         bio: req.body.bio,
-        avatar: modifiedAvater ?? null,
       };
 
       const updateUser = await User.update(
         { ...updateObject },
+        { where: { user_id: parseInt(req.params.id) } }
+      );
+
+      const getUpdatedUser = await User.findOne({
+        where: { user_id: updateUser[0] },
+        raw: true,
+        nest: true,
+        attributes: {
+          exclude: ["user_id", "email", "password", "admin", "active"],
+        },
+      });
+
+      res
+        .status(201)
+        .send({ message: "User data modified !", user: getUpdatedUser });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    next();
+  }
+}
+
+async function modifyAvatar(req, res, next) {
+  try {
+    const userCheck = checkInput(req.body, modifyAvatarKey, "string");
+
+    if (!userCheck) {
+      res.status(400).send({ message: "No avatar sent !" });
+    }
+
+    const userObject = await User.findOne({
+      where: { user_id: parseInt(req.params.id) },
+    });
+
+    if (userObject.avatar != null) {
+      const filename = userObject.avatar.split("/images")[1];
+      fs.unlink(`images/${filename}`, (error) => {
+        console.log(error);
+      });
+    }
+
+    if (userObject && req.file) {
+      const updateUser = await User.update(
+        {
+          avatar: `${req.protocol}://${req.get("host")}/images/${
+            req.file.filename
+          }`,
+        },
         { where: { user_id: parseInt(req.params.id) } }
       );
 
@@ -108,5 +148,6 @@ module.exports = {
   getOneUser,
   getAllUser,
   modifyUser,
+  modifyAvatar,
   deactivateUser,
 };

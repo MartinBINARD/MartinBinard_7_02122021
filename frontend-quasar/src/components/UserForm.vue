@@ -30,10 +30,12 @@
     <q-separator />
 
     <q-card-section class="q-mx-md">
-      <div class="q-my-md text-h5" v-if="userData.bio">About me :</div>
-      <div class="q-my-md text-h6">{{ userData.bio }}</div>
+      <div v-if="userData.bio">
+        <div class="q-my-md text-h5">About me :</div>
+        <div class="q-my-md text-h6">{{ userData.bio }}</div>
 
-      <q-separator />
+        <q-separator />
+      </div>
 
       <q-form ref="userform" @submit.stop="onUpdateProfile" @reset="onReset">
         <div class="row items-center">

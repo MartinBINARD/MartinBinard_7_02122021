@@ -3,7 +3,7 @@ MartinBinard_7_02122021
 
 **_GROUPOMANIA - A private social network using VueJS 3, nodeJS, express, MySQL & Sequelize_**
 
-**Main branch - Commit #112**
+**Main branch - Commit #113**
 
 # Description
 
@@ -23,7 +23,7 @@ MartinBinard_7_02122021
 
 # Change done
 
-- Add UserAvatarDialogue.vue.
+- Add q-uploader for avatar user and modifyAvatar controller in backend.
 
 # Before to run this server
 

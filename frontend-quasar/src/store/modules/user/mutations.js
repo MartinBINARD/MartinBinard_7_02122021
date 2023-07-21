@@ -11,6 +11,9 @@ export default {
   updateUser: (state, item) => {
     state.user = { ...state.user, ...item.data.user };
   },
+  uploadAvatar: (state, item) => {
+    state.user = { ...state.user, ...item.data.user.avatar };
+  },
   logOut: (state) => {
     state.user = null;
     state.auth = false;

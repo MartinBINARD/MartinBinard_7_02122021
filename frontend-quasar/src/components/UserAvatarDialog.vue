@@ -9,35 +9,24 @@
   <q-dialog v-model="card" class="q-pa-xl">
     <q-card class="my-card">
       <q-card-section class="row items-center q-pb-md">
-        <div class="text-h6">Modify my avatar</div>
+        <div class="text-h6">Upload my avatar</div>
         <q-space />
         <q-btn icon="close" flat round dense v-close-popup />
       </q-card-section>
 
-      <q-img src="../assets/default-tux-avatar.png" />
-
       <q-separator />
 
-      <q-form class="q-pa-md">
-        <q-file
-          name="poster_file"
-          v-model="file"
-          filled
-          label="Select poster image"
-          class="q-pb-md"
+      <q-card-section class="text-subitle2">
+        <q-uploader
+          :factory="upload"
+          label="Max total upload size (4 Mb)"
+          max-total-size="4194304"
+          max-files="1"
+          accept=".png, .jpeg, .jpg, image/*"
+          @rejected="onRejected"
+          class="uploader"
         />
-
-        <div class="row justify-between">
-          <q-btn type="submit" label="Save" color="secondary" v-close-popup />
-          <q-btn
-            flat
-            type="reset"
-            label="Cancel"
-            color="primary"
-            v-close-popup
-          />
-        </div>
-      </q-form>
+      </q-card-section>
     </q-card>
   </q-dialog>
 </template>
@@ -51,13 +40,27 @@ export default {
   data() {
     return {
       card: false,
-      file: null,
+      mapErrors: {
+        accept: "Only images with jpg and png format please !",
+        "max-total-size": "Exceeded max file size of 4 Mb",
+      },
     };
   },
   computed: {},
   watch: {},
   created() {},
-  methods: {},
+  methods: {
+    upload() {},
+    onRejected(rejectedEntries) {
+      rejectedEntries.forEach((entry) => {
+        this.$q.notify({
+          type: "negative",
+          position: "top",
+          message: this.mapErrors[entry.failedPropValidation],
+        });
+      });
+    },
+  },
 };
 </script>
 

@@ -45,6 +45,18 @@ export default {
         })
         .catch((error) => handleErrors(dispatch, error));
     }),
+  uploadAvatar: ({ commit, dispatch }, item) =>
+    new Promise((resolve) => {
+      const userId = JSON.parse(window.sessionStorage.getItem("vuex")).user.user
+        .id;
+      api
+        .put(`user/${userId}`, item)
+        .then((res) => {
+          commit("uploadAvatar", res);
+          resolve(res);
+        })
+        .catch((error) => handleErrors(dispatch, error));
+    }),
   refreshUserAuth: ({ commit, dispatch }) =>
     new Promsie((resolve) => {
       api
